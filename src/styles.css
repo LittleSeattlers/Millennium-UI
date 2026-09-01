@@ -130,7 +130,7 @@ h2 { margin-bottom: 0; font-size: 20px; }
 .problem-gem.gem-large::before { inset: 4px; }
 .problem-gem.gem-large::after { inset: 8px; }
 .problem-gem.gem-amethyst::before { inset: 13% 12% 9%; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
-.problem-gem.gem-amethyst::after { inset: 42% 26% 12%; background: linear-gradient(135deg, rgba(255, 255, 255, .58), transparent 52%); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.problem-gem.gem-amethyst::after { inset: 50% 26% 8%; background: linear-gradient(135deg, rgba(255, 255, 255, .58), transparent 52%); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
 
 .workspace { display: grid; gap: 14px; }
 .problem-hero { padding: 23px 24px 19px; }
