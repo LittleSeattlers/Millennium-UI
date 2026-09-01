@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "attempt_id": "navier-stokes-2026-09-01-05dc0da4-3027-4047-9cbf-eb88b07d4e50",
+  "problem": "navier-stokes",
+  "problem_id": "ns",
+  "direction": "blowup",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-01T02:51:22.713Z",
+  "finished_at": "2026-09-01T02:56:00.632Z",
+  "research_task": {
+    "task_id": "ns.blowup.fourier-closure",
+    "branch_id": "structured-ansatz",
+    "mode": "recommended",
+    "kind": "counterexample-search",
+    "title": "Test closure of a structured blow-up ansatz"
+  },
+  "summary": "An exact hand calculation gives a reusable non-closure obstruction for one concrete two-wave divergence-free periodic Navier--Stokes ansatz: mixed interactions generate vertical sum and difference modes. Independent executable verification was prepared but not completed.",
+  "claims": [
+    {
+      "statement": "For unforced Navier--Stokes on the three-torus, the family u=B(1,0,0) cos y + A(0,1,1) cos x has Leray-projected quadratic term -(AB/2)(0,0,1)[sin(x+y)+sin(x-y)]. Hence the Navier--Stokes vector field is tangent to this family exactly when AB=0; on either invariant axis the nonzero amplitude obeys scalar heat decay.",
+      "confidence": "partial-proof",
+      "evidence_summary": "Direct exact Fourier convolution gives projected coefficient AB(0,0,1)/4 at each of the sum and difference wavevectors and their conjugates. The generated polarization is divergence-free and lies outside the original support. The argument depends on the unforced periodic equation, the stated Fourier convention, and the specified ansatz. A known objection is that the independent executable check remains unrun.",
+      "verification_method": "Enumerate every ordered pair of the four input Fourier modes with exact arithmetic, apply the Leray projector, verify zero divergence of each output, and independently reproduce the physical-space projected nonlinearity."
+    }
+  ],
+  "limitations": [
+    "The result applies only to the specified two-wave family on the unforced three-torus.",
+    "It does not exclude closure of an enlarged sparse support or another structured ansatz.",
+    "It does not establish finite-time breakdown or resolve global regularity.",
+    "Independent executable verification was prepared but not completed."
+  ],
+  "failed_approaches": [
+    "The rational-arithmetic Python verifier could not execute because the environment had no python command."
+  ],
+  "next_actions": [
+    "Run and inspect the prepared exact-integer convolution enumeration and independently check the physical-space projection."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Verify the two-wave closure obstruction",
+      "objective": "Independently certify the complete projected convolution for the four input Fourier modes using exact arithmetic.",
+      "rationale": "The hand calculation is short and exact, but an independently executed enumeration would satisfy the requested verification standard and detect sign or convention errors.",
+      "success_criteria": "All ordered pairs are enumerated; precisely the four mixed sum and difference modes survive; each output is divergence-free; and the result agrees with a separate physical-space calculation.",
+      "useful_failure_criteria": "Record the first coefficient, sign, omitted mode, or projection discrepancy and correct the scoped claim.",
+      "verification_method": "Execute an exact-integer mode enumeration and compare its complete output against an independent symbolic physical-space expansion.",
+      "suggested_minutes": 5,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [],
+  "review_status": "unreviewed"
+}
