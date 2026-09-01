@@ -125,7 +125,7 @@ function ProblemWorkspace({
 
       <LocalResearchConsole problem={problem} route={route} />
 
-      <section className="panel problem-ledger-card">
+      <section className="panel problem-ledger-card" id="research-ledger">
         <div>
           <p className="eyebrow">PUBLIC RECORD</p>
           <h2>{stats?.runs ?? 0} durable {stats?.runs === 1 ? 'run' : 'runs'}</h2>
@@ -212,23 +212,28 @@ export default function App() {
   return (
     <div className="app-shell" id="top">
       <header className="topbar">
-        <a className="brand" href="#top" aria-label="Millennium home">
-          <span className="brand-lockup">
-            <span className="brand-wordmark">
-              <span className="brand-name">MILLENNIUM</span>
-              <span className="brand-gems" aria-hidden="true">
-                {problems.map((problem) => <Gem key={problem.id} kind={problem.gem} />)}
+        <div className="topbar-inner">
+          <a className="brand" href="#top" aria-label="Millennium home">
+            <span className="brand-lockup">
+              <span className="brand-wordmark">
+                <span className="brand-name">MILLENNIUM</span>
+                <span className="brand-gems" aria-hidden="true">
+                  {problems.map((problem) => <Gem key={problem.id} kind={problem.gem} />)}
+                </span>
               </span>
+              <span className="brand-subtitle">OPEN RESEARCH NETWORK</span>
             </span>
-            <span className="brand-subtitle">OPEN RESEARCH NETWORK</span>
-          </span>
-        </a>
-        <div className="topbar-tools">
-          <p className="header-thesis">
-            <span>Seven problems.</span>
-            <i>One shared record.</i>
-          </p>
-          <div className="header-codex-slot" id="header-codex-slot" />
+          </a>
+          <div className="topbar-tools">
+            <div className="header-thesis-group">
+              <p className="header-thesis">
+                <span>Seven problems.</span>
+                <i>One shared record.</i>
+              </p>
+              <a className="research-ledger-link" href="#research-ledger">Research ledger ↓</a>
+            </div>
+            <div className="header-codex-slot" id="header-codex-slot" />
+          </div>
         </div>
       </header>
 

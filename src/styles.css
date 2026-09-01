@@ -43,15 +43,13 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 700; letter-spacing: -.026e
   position: sticky;
   top: 0;
   z-index: 20;
-  display: flex;
-  align-items: center;
   height: 92px;
-  padding: 0 clamp(20px, 3vw, 48px);
   border-bottom: 1px solid rgba(187, 182, 169, .72);
   background: rgba(249, 247, 240, .9);
   box-shadow: 0 4px 20px rgba(30, 44, 55, .025);
   backdrop-filter: blur(16px);
 }
+.topbar-inner { display: flex; align-items: center; width: 100%; max-width: 1660px; height: 100%; margin: 0 auto; padding: 0 clamp(14px, 2vw, 30px); }
 
 .brand { display: inline-block; text-decoration: none; }
 .brand-lockup { display: inline-flex; flex-direction: column; align-items: flex-start; }
@@ -63,10 +61,13 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 700; letter-spacing: -.026e
 .brand-gems .problem-gem::after { inset: 3px; }
 .brand-subtitle { display: block; color: #77818a; font-size: 9px; letter-spacing: .16em; line-height: 1.1; }
 .topbar-tools { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 38px); min-width: 0; margin-left: auto; }
+.header-thesis-group { display: grid; justify-items: end; gap: 7px; }
 .header-thesis { margin: 0; text-align: right; font: 700 18px/1.05 var(--serif); letter-spacing: -.012em; }
 .header-thesis span, .header-thesis i { display: block; }
 .header-thesis span { color: var(--navy); }
 .header-thesis i { margin-top: 2px; color: var(--red); font-weight: 500; }
+.research-ledger-link { padding-bottom: 2px; border-bottom: 1px solid #9aabb8; color: #647787; font-size: 7px; font-weight: 850; letter-spacing: .13em; text-decoration: none; text-transform: uppercase; }
+.research-ledger-link:hover { color: var(--navy); border-color: var(--navy); }
 .header-codex-slot { min-width: 200px; flex: none; }
 .header-codex-control { width: 100%; }
 .header-connect-action, .header-codex-summary { box-sizing: border-box; min-height: 48px; border: 1px solid #c9c5ba; border-radius: 11px; background: rgba(255, 253, 248, .9); color: var(--navy); text-decoration: none; box-shadow: 0 7px 20px rgba(27, 40, 52, .055); }
@@ -128,6 +129,8 @@ h2 { margin-bottom: 0; font-size: 20px; }
 .problem-gem.gem-large { width: var(--gem-large-width); height: var(--gem-large-height); margin-top: 6px; filter: drop-shadow(0 4px 4px rgba(14, 31, 48, .18)); }
 .problem-gem.gem-large::before { inset: 4px; }
 .problem-gem.gem-large::after { inset: 8px; }
+.problem-gem.gem-amethyst::before { inset: 13% 12% 9%; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.problem-gem.gem-amethyst::after { inset: 29% 26% 17%; background: linear-gradient(135deg, rgba(255, 255, 255, .58), transparent 52%); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
 
 .workspace { display: grid; gap: 14px; }
 .problem-hero { padding: 23px 24px 19px; }
@@ -300,7 +303,7 @@ h2 { margin-bottom: 0; font-size: 20px; }
 .local-boundary-note { margin: 0; padding: 10px 22px 12px; border-top: 1px solid #dedbd2; background: #efede6; color: #7b848b; font-size: 7px; line-height: 1.5; }
 .local-boundary-note code { color: #465e70; font-family: var(--mono); }
 
-.problem-ledger-card { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 30px; padding: 20px 22px; }
+.problem-ledger-card { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 30px; padding: 20px 22px; scroll-margin-top: 108px; }
 .problem-ledger-card h2 { margin-bottom: 8px; }
 .problem-ledger-card p:not(.eyebrow) { max-width: 580px; margin-bottom: 0; color: #6c7780; font-size: 9px; line-height: 1.55; }
 .state-grid { display: grid; grid-template-columns: repeat(3, 1fr); overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: #f3f1ea; }
@@ -328,7 +331,7 @@ footer p { margin: 0; }
 footer a { justify-self: end; text-decoration: none; }
 
 @media (max-width: 1180px) {
-  .header-thesis { display: none; }
+  .header-thesis-group { display: none; }
   .mission-grid { grid-template-columns: 230px minmax(0, 1fr); }
   .composer-controls { grid-template-columns: 1fr 1fr; }
   .risk-control { grid-column: 1 / -1; }
@@ -336,7 +339,8 @@ footer a { justify-self: end; text-decoration: none; }
 }
 
 @media (max-width: 760px) {
-  .topbar { height: 79px; padding: 0 14px; }
+  .topbar { height: 79px; }
+  .topbar-inner { padding: 0 10px; }
   .topbar-tools { gap: 0; }
   .brand-wordmark { font-size: 13px; }
   .brand-gems { margin: 5px 0 4px; }
@@ -352,9 +356,22 @@ footer a { justify-self: end; text-decoration: none; }
   .header-quota-meter b { font-size: 12px; }
   .mission-grid { display: block; padding: 10px; }
   .problem-panel { position: static; }
-  .problem-panel { margin-bottom: 10px; }
-  .problem-list { display: flex; overflow-x: auto; padding-bottom: 5px; }
-  .problem-card { min-width: 205px; }
+  .problem-panel { margin-bottom: 10px; padding: 14px 9px 11px; }
+  .problem-panel .panel-heading { padding: 0 4px 12px; }
+  .problem-list { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 6px; overflow: visible; padding: 0; }
+  .problem-card { grid-column: span 2; grid-template-columns: 1fr; align-content: start; justify-items: center; gap: 5px; min-width: 0; min-height: 102px; padding: 9px 4px 7px; text-align: center; }
+  .problem-card:nth-child(5) { grid-column: 2 / span 2; }
+  .problem-card:nth-child(6) { grid-column: 4 / span 2; }
+  .problem-card:nth-child(7) { grid-column: 6 / span 2; }
+  .problem-card:hover { transform: none; }
+  .problem-number { justify-content: center; gap: 5px; }
+  .problem-copy strong { min-height: 29px; font-size: clamp(8px, 2.45vw, 10px); line-height: 1.14; }
+  .problem-copy small { display: none; }
+  .problem-stat { min-width: 0; text-align: center; }
+  .problem-stat b { display: block; font-size: 11px; }
+  .problem-stat small { margin-top: 2px; font-size: 7px; text-transform: uppercase; }
+  .solved-label { margin: 3px auto 0; }
+  .rail-note { margin-top: 11px; padding-top: 10px; font-size: 8px; text-align: center; }
   .workspace { gap: 10px; }
   .problem-hero { padding: 18px; }
   .hero-row { display: block; }
@@ -379,7 +396,6 @@ footer a { justify-self: end; text-decoration: none; }
 }
 
 @media (max-width: 480px) {
-  .topbar { padding: 0 10px; }
   .brand-subtitle { display: none; }
   .brand-gems { margin-bottom: 0; }
   .header-connect-action { gap: 7px; padding: 0 9px; }
