@@ -59,7 +59,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 700; letter-spacing: -.026e
 .brand-gems .problem-gem { width: 11px; height: 11px; filter: drop-shadow(0 1px 1px rgba(14, 31, 48, .2)); }
 .brand-gems .problem-gem::before { inset: 1px; }
 .brand-gems .problem-gem::after { inset: 3px; }
-.brand-subtitle { display: block; color: #77818a; font-size: 9px; letter-spacing: .16em; line-height: 1.1; }
+.brand-subtitle { display: block; color: #77818a; font-size: 9px; letter-spacing: .13em; line-height: 1.1; white-space: nowrap; }
 .topbar-tools { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 38px); min-width: 0; margin-left: auto; }
 .header-thesis-group { display: grid; justify-items: end; gap: 7px; }
 .header-thesis { margin: 0; text-align: right; font: 700 18px/1.05 var(--serif); letter-spacing: -.012em; }
@@ -343,14 +343,17 @@ footer a { justify-self: end; text-decoration: none; }
 }
 
 @media (max-width: 760px) {
-  .topbar { height: 79px; }
+  .topbar { height: 88px; }
   .topbar-inner { padding: 0 10px; }
-  .topbar-tools { gap: 0; }
+  .topbar-tools { display: grid; justify-items: end; gap: 5px; }
+  .header-thesis-group { display: grid; grid-row: 2; gap: 0; }
+  .header-thesis { display: none; }
+  .research-ledger-link { font-size: 6px; }
   .brand-wordmark { font-size: 13px; }
   .brand-gems { margin: 5px 0 4px; }
   .brand-gems .problem-gem { width: 10px; height: 10px; }
   .brand-subtitle { font-size: 7px; }
-  .header-codex-slot { min-width: 0; }
+  .header-codex-slot { grid-row: 1; min-width: 0; }
   .header-connect-action { min-height: 40px; padding: 0 10px; }
   .header-connect-action b { font-size: 9px; }
   .header-codex-summary { grid-template-columns: 23px repeat(2, minmax(64px, 1fr)) 10px; width: 186px; min-height: 44px; }
@@ -401,8 +404,8 @@ footer a { justify-self: end; text-decoration: none; }
 }
 
 @media (max-width: 480px) {
-  .brand-subtitle { display: none; }
-  .brand-gems { margin-bottom: 0; }
+  .brand-subtitle { font-size: 6px; letter-spacing: .1em; }
+  .brand-gems { margin-bottom: 3px; }
   .header-connect-action { gap: 7px; padding: 0 9px; }
   .header-codex-summary { grid-template-columns: 18px repeat(2, minmax(56px, 1fr)); width: 150px; }
   .header-codex-arrow { display: none; }

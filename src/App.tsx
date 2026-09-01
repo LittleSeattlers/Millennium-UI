@@ -217,7 +217,7 @@ export default function App() {
     <div className="app-shell" id="top">
       <header className="topbar">
         <div className="topbar-inner">
-          <a className="brand" href="#top" aria-label="Millennium home">
+          <a className="brand" href="#top" aria-label="Millennium — Open Mathematics Research home">
             <span className="brand-lockup">
               <span className="brand-wordmark">
                 <span className="brand-name">MILLENNIUM</span>
@@ -225,7 +225,7 @@ export default function App() {
                   {problems.map((problem) => <Gem key={problem.id} kind={problem.gem} />)}
                 </span>
               </span>
-              <span className="brand-subtitle">OPEN RESEARCH NETWORK</span>
+              <span className="brand-subtitle">OPEN MATHEMATICS RESEARCH</span>
             </span>
           </a>
           <div className="topbar-tools">
