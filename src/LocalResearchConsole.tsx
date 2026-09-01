@@ -674,7 +674,7 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
                   >
                     {availableModels.map((candidate) => (
                       <option key={candidate.id} value={candidate.model}>
-                        {candidate.displayName}{candidate.isDefault ? ' · default' : ''}
+                        {candidate.displayName}
                       </option>
                     ))}
                   </select>
