@@ -78,6 +78,18 @@ export type CodexProvider = {
   version?: string | null;
   authKind?: string | null;
   reason?: string | null;
+  models?: CodexModel[];
+  defaultModel?: string | null;
+};
+
+export type CodexModel = {
+  id: string;
+  model: string;
+  displayName: string;
+  description?: string;
+  isDefault: boolean;
+  defaultReasoningEffort: CodexEffort;
+  supportedReasoningEfforts: CodexEffort[];
 };
 
 export type QuotaWindowEstimate = {
@@ -113,6 +125,7 @@ export type AttemptRecord = {
   status: AttemptStatus;
   terminalDisposition?: TerminalDisposition | null;
   riskMode?: RiskMode;
+  model?: string;
   effort?: string;
   allowedMinutes?: number;
   elapsedSeconds?: number;
@@ -152,6 +165,7 @@ export type StartAttemptRequest = {
   direction: string;
   riskMode: RiskMode;
   requestedMinutes: number;
+  model: string;
   effort: CodexEffort;
   objective: string;
   taskMode: ResearchMode;

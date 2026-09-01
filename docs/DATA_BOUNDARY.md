@@ -30,6 +30,8 @@ Do not publish:
 
 These fields remain forbidden even when a text sanitizer appears to remove obvious secrets. The raw attempt workspace is never staged, unsupported keys fail validation, and known credential formats are rejected across the complete serialized record. No deterministic filter can prove arbitrary model prose contains no creatively encoded secret, so Start is the publication authorization boundary and unreviewed community prose is quarantined from future executable prompts.
 
+The paired hosted control may transiently display an allowlisted model catalog returned by the local connector: model ID, display name, short description, default marker, and supported reasoning levels. This catalog is used only to choose the local run configuration. It excludes account and service-tier data and is never copied into a public contribution record.
+
 ## Counting rules
 
 - Discover only `contributions/attempts/<problem>/<year>/<attempt-id>.json`.

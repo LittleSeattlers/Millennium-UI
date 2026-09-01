@@ -6,6 +6,7 @@ import {
   prepareConnectorLaunch,
   type AttemptRecord,
   type CodexEffort,
+  type CodexModel,
   type CodexProvider,
   type ConnectorLaunch,
   type QuotaEstimate,
@@ -22,6 +23,21 @@ const durationOptions = [5, 15, 30, 60] as const;
 const minimumSafeMinutes = 5;
 const terminalStatuses = new Set(['completed', 'interrupted', 'aborted', 'failed']);
 const pendingConnectorKey = 'millennium.connector.pending.v1';
+const effortLabels: Record<CodexEffort, string> = {
+  low: 'Low',
+  medium: 'Medium',
+  high: 'High',
+  xhigh: 'Extra high',
+};
+const fallbackModel: CodexModel = {
+  id: 'default',
+  model: 'default',
+  displayName: 'Local default',
+  description: 'The model configured by this local Codex installation.',
+  isDefault: true,
+  defaultReasoningEffort: 'high',
+  supportedReasoningEfforts: ['low', 'medium', 'high', 'xhigh'],
+};
 const researchModes: Array<{ id: ResearchMode; label: string; note: string }> = [
   { id: 'recommended', label: 'Recommended', note: 'Best available fit' },
   { id: 'frontier', label: 'Browse frontier', note: 'Choose a branch' },
@@ -40,6 +56,7 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
   const [provider, setProvider] = useState<CodexProvider | null>(null);
   const [coordination, setCoordination] = useState<{ ready: boolean; syncedAt?: string | null; error?: string | null } | null>(null);
   const [riskMode, setRiskMode] = useState<RiskMode>('balanced');
+  const [model, setModel] = useState('');
   const [effort, setEffort] = useState<CodexEffort>('high');
   const [durationCap, setDurationCap] = useState<'safe' | number>('safe');
   const [estimate, setEstimate] = useState<QuotaEstimate | null>(null);
@@ -59,6 +76,17 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
   const [now, setNow] = useState(Date.now());
 
   const isRunning = Boolean(activeAttempt && !terminalStatuses.has(activeAttempt.status));
+  const availableModels = useMemo(() => {
+    if (provider?.models?.length) return provider.models;
+    return provider?.ready ? [fallbackModel] : [];
+  }, [provider]);
+  const selectedModel = useMemo(
+    () => availableModels.find((candidate) => candidate.model === model) ?? null,
+    [availableModels, model],
+  );
+  const effortOptions = selectedModel?.supportedReasoningEfforts?.length
+    ? selectedModel.supportedReasoningEfforts
+    : fallbackModel.supportedReasoningEfforts;
   const selectedMinutes = useMemo(() => {
     const safe = Math.max(0, Math.floor(estimate?.allowedMinutes ?? 0));
     const requested = durationCap === 'safe' ? safe : Math.min(durationCap, safe);
@@ -87,6 +115,9 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
   const terminalResult = activeAttempt && terminalStatuses.has(activeAttempt.status)
     ? describeTerminalResult(activeAttempt)
     : null;
+  const activeModelName = activeAttempt?.model
+    ? availableModels.find((candidate) => candidate.model === activeAttempt.model)?.displayName ?? activeAttempt.model
+    : null;
 
   const connect = useCallback(async (ticket: ConnectorLaunch) => {
     if (connectInFlight.current) return;
@@ -105,7 +136,7 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
       setClient(paired.client);
       setSessionExpiresAt(paired.expiresAt);
       setNow(Date.now());
-      setNotice('Local companion paired. Reading your current Codex allowance…');
+      setNotice('Local companion paired. Reading your available models and current Codex allowance…');
       const state = await retryTransientLocalRequest(() => paired.client.state());
       const refreshed = await retryTransientLocalRequest(() => paired.client.refresh());
       const refreshedState = await retryTransientLocalRequest(() => paired.client.state());
@@ -150,6 +181,23 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
   useLayoutEffect(() => {
     setHeaderTarget(document.getElementById('header-codex-slot'));
   }, []);
+
+  useEffect(() => {
+    const currentIsAvailable = availableModels.some((candidate) => candidate.model === model);
+    if (currentIsAvailable) return;
+    const next = availableModels.find((candidate) => candidate.model === provider?.defaultModel)
+      ?? availableModels.find((candidate) => candidate.isDefault)
+      ?? availableModels[0];
+    setModel(next?.model ?? '');
+  }, [availableModels, model, provider?.defaultModel]);
+
+  useEffect(() => {
+    if (!selectedModel || selectedModel.supportedReasoningEfforts.includes(effort)) return;
+    const next = selectedModel.supportedReasoningEfforts.includes(selectedModel.defaultReasoningEffort)
+      ? selectedModel.defaultReasoningEffort
+      : selectedModel.supportedReasoningEfforts[0];
+    if (next) setEffort(next);
+  }, [effort, selectedModel]);
 
   useEffect(() => {
     const decision = takeConnectorDecision();
@@ -358,7 +406,7 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
   }
 
   async function startWork() {
-    if (!client || !provider?.ready || !estimate || estimate.status !== 'ready' || startInFlight.current) return;
+    if (!client || !provider?.ready || !estimate || estimate.status !== 'ready' || !model || startInFlight.current) return;
     if (!selectionReady || objective.trim().length < 20) {
       setError(researchMode === 'explore'
         ? 'Describe a distinct research direction in at least 20 characters.'
@@ -381,6 +429,7 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
         direction: route.id,
         riskMode,
         requestedMinutes: selectedMinutes,
+        model,
         effort,
         objective: objective.trim(),
         taskMode: researchMode,
@@ -616,12 +665,26 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
                   </div>
                 </div>
                 <label className="control-group">
+                  <span>MODEL</span>
+                  <select
+                    disabled={availableModels.length === 0}
+                    onChange={(event) => setModel(event.target.value)}
+                    title={selectedModel?.description}
+                    value={model}
+                  >
+                    {availableModels.map((candidate) => (
+                      <option key={candidate.id} value={candidate.model}>
+                        {candidate.displayName}{candidate.isDefault ? ' · default' : ''}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="control-group">
                   <span>REASONING EFFORT</span>
                   <select onChange={(event) => setEffort(event.target.value as CodexEffort)} value={effort}>
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                    <option value="xhigh">Extra high</option>
+                    {effortOptions.map((option) => (
+                      <option key={option} value={option}>{effortLabels[option]}</option>
+                    ))}
                   </select>
                 </label>
                 <label className="control-group">
@@ -776,7 +839,7 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
                   </div>
                   <button
                     className="start-work-button"
-                    disabled={busy !== null || !provider?.ready || !coordination?.ready || estimate?.status !== 'ready' || selectedMinutes < minimumSafeMinutes || !selectionReady || objective.trim().length < 20}
+                    disabled={busy !== null || !provider?.ready || !coordination?.ready || !model || estimate?.status !== 'ready' || selectedMinutes < minimumSafeMinutes || !selectionReady || objective.trim().length < 20}
                     onClick={() => void startWork()}
                     type="button"
                   >
@@ -798,6 +861,7 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
                 <div>
                   <p className="eyebrow">{terminalStatuses.has(activeAttempt.status) ? 'LOCAL RESULT' : 'LIVE LOCAL ATTEMPT'}</p>
                   <h3>{activeAttempt.researchTask?.title ?? `${activeAttempt.problemName ?? problem.name} · ${activeAttempt.routeLabel ?? route.label}`}</h3>
+                  {activeModelName && <small className="active-model">{activeModelName} · {effortLabels[(activeAttempt.effort as CodexEffort) ?? effort] ?? activeAttempt.effort}</small>}
                 </div>
                 <span className={`attempt-status status-${terminalResult?.tone ?? 'running'}`}>
                   {terminalResult?.label ?? activeAttempt.status.toUpperCase()}
@@ -863,7 +927,7 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
         </p>
       )}
       <p className="local-boundary-note">
-        This console talks only to <code>127.0.0.1</code>. The connector reads merged contribution summaries privately for Codex context; the hosted page receives readiness, sanitized window percentages, safe minutes, task text, opaque task states, and status-only events—not raw research files, commands, account details, provider events, or prior-attempt prose.
+        This console talks only to <code>127.0.0.1</code>. The connector reads merged contribution summaries privately for Codex context; the hosted page receives readiness, available model names, sanitized window percentages, safe minutes, task text, opaque task states, and status-only events—not raw research files, commands, account details, provider events, or prior-attempt prose.
       </p>
       </section>
     </>

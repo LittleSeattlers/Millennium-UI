@@ -1,4 +1,5 @@
 import { labelForWindow, makeSnapshot } from '../quota.mjs';
+import { CODEX_EFFORTS } from '../constants.mjs';
 import { sanitizePublicText, subscriptionEnvironment } from '../security.mjs';
 import { JsonRpcChild } from './json-rpc-child.mjs';
 import { resolveCodexExecutable, runCapture } from './process.mjs';
@@ -15,6 +16,61 @@ export function codexWorkspaceWritePolicy(codePath, networkAccess) {
     networkAccess: Boolean(networkAccess),
   };
 }
+
+export async function listCodexModels(rpc) {
+  const models = new Map();
+  let cursor = null;
+  for (let page = 0; page < 10; page += 1) {
+    const result = await rpc.request('model/list', {
+      cursor,
+      limit: 100,
+      includeHidden: false,
+    }, 20_000);
+    for (const candidate of Array.isArray(result?.data) ? result.data : []) {
+      const model = normalizeCodexModel(candidate);
+      if (model && !models.has(model.model)) models.set(model.model, model);
+    }
+    const nextCursor = typeof result?.nextCursor === 'string' && result.nextCursor.trim()
+      ? result.nextCursor.trim()
+      : null;
+    if (!nextCursor) return [...models.values()];
+    if (nextCursor === cursor) throw new Error('Codex returned a repeated model catalog cursor.');
+    cursor = nextCursor;
+  }
+  throw new Error('Codex model catalog exceeded the pagination limit.');
+}
+
+export function normalizeCodexModel(candidate) {
+  if (!candidate || typeof candidate !== 'object' || candidate.hidden === true) return null;
+  const id = cleanModelIdentifier(candidate.id);
+  const model = cleanModelIdentifier(candidate.model);
+  if (!id || !model) return null;
+  const supportedReasoningEfforts = [...new Set(
+    (Array.isArray(candidate.supportedReasoningEfforts) ? candidate.supportedReasoningEfforts : [])
+      .map((option) => option?.reasoningEffort)
+      .filter((effort) => CODEX_EFFORTS.includes(effort)),
+  )];
+  if (supportedReasoningEfforts.length === 0) return null;
+  const defaultReasoningEffort = supportedReasoningEfforts.includes(candidate.defaultReasoningEffort)
+    ? candidate.defaultReasoningEffort
+    : supportedReasoningEfforts[0];
+  return {
+    id,
+    model,
+    displayName: sanitizePublicText(String(candidate.displayName ?? model)).trim().slice(0, 80) || model,
+    description: sanitizePublicText(String(candidate.description ?? '')).trim().slice(0, 240),
+    isDefault: candidate.isDefault === true,
+    defaultReasoningEffort,
+    supportedReasoningEfforts,
+  };
+}
+
+function cleanModelIdentifier(value) {
+  if (typeof value !== 'string') return null;
+  const normalized = value.trim();
+  return /^[A-Za-z0-9][A-Za-z0-9._:-]{0,159}$/.test(normalized) ? normalized : null;
+}
+
 export async function probeCodex({ onSnapshot } = {}) {
   const resolved = await resolveCodexExecutable(CODEX_OVERRIDE);
   if (!resolved.path) {
@@ -53,9 +109,13 @@ export async function probeCodex({ onSnapshot } = {}) {
         reason: account.type === 'apiKey'
           ? 'Codex is signed in with an API key. Sign in with ChatGPT for a subscription-only run.'
           : 'Codex subscription authentication could not be verified.',
+        models: [],
+        defaultModel: null,
         snapshot: null,
       };
     }
+    const models = await listCodexModels(rpc);
+    const defaultModel = models.find((model) => model.isDefault)?.model ?? models[0]?.model ?? null;
     const limits = await rpc.request('account/rateLimits/read', {});
     const snapshot = snapshotFromRateLimits(limits, account);
     await onSnapshot?.(snapshot);
@@ -65,10 +125,15 @@ export async function probeCodex({ onSnapshot } = {}) {
       installed: true,
       executable: resolved.path,
       version,
-      ready: snapshot.windows.length > 0 && !billingRisk,
+      ready: models.length > 0 && snapshot.windows.length > 0 && !billingRisk,
       authKind: 'subscription',
       planType: account.planType,
-      reason: billingRisk ?? (snapshot.windows.length > 0 ? null : 'Codex returned no active ChatGPT rate-limit windows.'),
+      reason: billingRisk
+        ?? (models.length === 0
+          ? 'Codex returned no models available to this account.'
+          : snapshot.windows.length > 0 ? null : 'Codex returned no active ChatGPT rate-limit windows.'),
+      models,
+      defaultModel,
       snapshot,
     };
   } catch (error) {
@@ -81,6 +146,8 @@ export async function probeCodex({ onSnapshot } = {}) {
       authKind: 'unknown',
       planType: null,
       reason: `Codex could not be started: ${safeError(error)}`,
+      models: [],
+      defaultModel: null,
       snapshot: null,
     };
   } finally {
@@ -92,6 +159,7 @@ export async function startCodexRun({
   attempt,
   prompt,
   effort,
+  model,
   networkAccess,
   onEvent,
   onRaw,
@@ -101,6 +169,7 @@ export async function startCodexRun({
 }) {
   const resolved = await resolveExecutable();
   if (!resolved.path) throw new Error(resolved.reason);
+  const selectedModel = typeof model === 'string' && model !== 'default' ? model : null;
 
   let threadId = null;
   let turnId = null;
@@ -210,6 +279,7 @@ export async function startCodexRun({
       approvalPolicy: 'never',
       sandbox: CODEX_THREAD_SANDBOX_MODE,
       serviceName: 'millennium',
+      model: selectedModel,
     }, 20_000);
     threadId = threadResult?.thread?.id;
     if (!threadId) throw new Error('Codex did not return a thread id.');
@@ -220,6 +290,7 @@ export async function startCodexRun({
       cwd: attempt.codePath,
       approvalPolicy: 'never',
       sandboxPolicy: codexWorkspaceWritePolicy(attempt.codePath, networkAccess),
+      model: selectedModel,
       effort,
       summary: 'concise',
     }, 30_000);
@@ -227,6 +298,7 @@ export async function startCodexRun({
 
     return {
       provider: 'codex',
+      model: selectedModel,
       threadId,
       turnId,
       completion,
@@ -402,7 +474,7 @@ function normalizeAccount(account) {
 }
 
 function providerUnavailable(id, reason, discoveredPath = null) {
-  return { id, installed: Boolean(discoveredPath), executable: discoveredPath, version: null, ready: false, authKind: 'unknown', planType: null, reason, snapshot: null };
+  return { id, installed: Boolean(discoveredPath), executable: discoveredPath, version: null, ready: false, authKind: 'unknown', planType: null, reason, models: [], defaultModel: null, snapshot: null };
 }
 
 function safeError(error) {

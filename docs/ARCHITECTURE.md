@@ -23,7 +23,7 @@ GitHub project pages share an origin across an account and cannot set an enforce
 
 ## Private local plane
 
-The installed connector owns quota calculation, Codex subscription authentication, managed Git clones, local task files, provider event streams, checkpoints, and contribution reconstruction. All live work is written under `.millennium/private/`, which is gitignored. The hosted page displays a sanitized estimate but never calculates it or persists its inputs.
+The installed connector owns quota calculation, Codex subscription authentication, account-aware model discovery, managed Git clones, local task files, provider event streams, checkpoints, and contribution reconstruction. All live work is written under `.millennium/private/`, which is gitignored. The hosted page displays a sanitized estimate and an allowlisted model catalog but never calculates the estimate, persists its inputs, or receives account and service-tier details.
 
 Before starting, the connector refreshes `main`, imports up to ten relevant local or maintainer-trusted excerpts into the Codex prompt, checks active claim PRs, and creates its own expiring claim. Static seed tasks plus trusted successor and verification tasks form the executable frontier. All other merged contribution records remain quarantined evidence: visible and countable, but unable to inject instructions into a local Codex run.
 

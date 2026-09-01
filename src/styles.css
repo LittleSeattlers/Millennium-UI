@@ -184,7 +184,7 @@ h2 { margin-bottom: 0; font-size: 20px; }
 .connected-actions button:disabled, .attempt-actions button:disabled { opacity: .5; cursor: not-allowed; }
 
 .research-composer { padding: 20px 22px 22px; }
-.composer-controls { display: grid; grid-template-columns: 1.5fr .7fr .7fr; align-items: end; gap: 10px; }
+.composer-controls { display: grid; grid-template-columns: 1.35fr 1fr .7fr .7fr; align-items: end; gap: 10px; }
 .control-group { min-width: 0; }
 .control-group select { width: 100%; height: 35px; padding: 0 10px; border: 1px solid #d1ccbf; border-radius: 7px; outline: none; background: #f7f5ef; color: #354a5a; font-size: 9px; }
 .segmented-control { display: grid; grid-template-columns: repeat(3, 1fr); padding: 3px; border: 1px solid #d1ccbf; border-radius: 8px; background: #efede6; }
@@ -259,6 +259,7 @@ h2 { margin-bottom: 0; font-size: 20px; }
 .live-attempt { padding: 20px 22px 22px; border-top: 1px solid var(--line); background: #f8f6f0; }
 .live-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
 .live-heading h3 { margin: 5px 0 0; font-size: 18px; }
+.active-model { display: block; margin-top: 5px; color: #7c8890; font-size: 7px; font-weight: 750; letter-spacing: .04em; }
 .attempt-status { padding: 5px 7px; border: 1px solid #e4c47d; border-radius: 5px; background: #fff0cf; color: #80520f; font-size: 7px; font-weight: 850; letter-spacing: .08em; }
 .attempt-status.status-completed, .attempt-status.status-preserved { border-color: #b9d5ca; background: #e5f2ed; color: #2c6a55; }
 .attempt-status.status-caution { border-color: #e4c47d; background: #fff0cf; color: #80520f; }
@@ -333,7 +334,7 @@ footer a { justify-self: end; text-decoration: none; }
 @media (max-width: 1180px) {
   .header-thesis-group { display: none; }
   .mission-grid { grid-template-columns: 230px minmax(0, 1fr); }
-  .composer-controls { grid-template-columns: 1fr 1fr; }
+  .composer-controls { grid-template-columns: 1.2fr .8fr .8fr; }
   .risk-control { grid-column: 1 / -1; }
   .research-mode-tabs { grid-template-columns: repeat(2, 1fr); }
 }

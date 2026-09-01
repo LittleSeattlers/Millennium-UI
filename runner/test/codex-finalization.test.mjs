@@ -36,6 +36,7 @@ test('Codex finalization steer is same-turn, exact, and idempotent', async () =>
     attempt: { codePath: 'C:\\attempt' },
     prompt: 'Research this bounded objective.',
     effort: 'high',
+    model: 'gpt-5.6-sol',
     networkAccess: false,
     onEvent: async () => {},
     onRaw: async () => {},
@@ -61,6 +62,15 @@ test('Codex finalization steer is same-turn, exact, and idempotent', async () =>
       expectedTurnId: 'turn-1',
     },
   }]);
+
+  assert.equal(
+    rpc.requests.find(({ method }) => method === 'thread/start')?.params.model,
+    'gpt-5.6-sol',
+  );
+  assert.equal(
+    rpc.requests.find(({ method }) => method === 'turn/start')?.params.model,
+    'gpt-5.6-sol',
+  );
 
   await handle.stop();
   assert.equal((await handle.completion).status, 'interrupted');

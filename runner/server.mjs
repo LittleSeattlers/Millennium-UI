@@ -618,6 +618,7 @@ async function routePublicRequest({ req, res, manager, url, pathname, headers, s
     const riskMode = requireChoice(body?.riskMode ?? 'balanced', Object.keys(RISK_MODES), 'riskMode');
     const requestedMinutes = Math.floor(requireNumber(body?.requestedMinutes, 'requestedMinutes', { min: 1, max: 120 }));
     const effort = requireChoice(body?.effort ?? 'high', CODEX_EFFORTS, 'effort');
+    const model = requireString(body?.model ?? 'default', 'model', { min: 1, max: 160 });
     const taskMode = requireChoice(body?.taskMode ?? 'explore', RESEARCH_MODES, 'taskMode');
     const taskId = body?.taskId == null
       ? null
@@ -641,6 +642,7 @@ async function routePublicRequest({ req, res, manager, url, pathname, headers, s
       keepPercent: KEEP_PERCENT[riskMode] ?? 10,
       requestedMinutes,
       effort,
+      model,
       networkAccess: false,
       objective: preparedResearchTask.objective,
       taskMode,
@@ -778,6 +780,19 @@ function publicHealth(health, ownedAttemptId) {
 
 function publicProvider(provider) {
   if (!provider) return null;
+  const models = Array.isArray(provider.models)
+    ? provider.models.slice(0, 100).map((model) => ({
+      id: String(model.id).slice(0, 160),
+      model: String(model.model).slice(0, 160),
+      displayName: sanitizePublicText(String(model.displayName ?? model.model)).slice(0, 80),
+      description: sanitizePublicText(String(model.description ?? '')).slice(0, 240),
+      isDefault: model.isDefault === true,
+      defaultReasoningEffort: String(model.defaultReasoningEffort ?? 'medium'),
+      supportedReasoningEfforts: Array.isArray(model.supportedReasoningEfforts)
+        ? model.supportedReasoningEfforts.filter((effort) => CODEX_EFFORTS.includes(effort))
+        : [],
+    }))
+    : [];
   return {
     id: 'codex',
     installed: provider.installed === true,
@@ -785,6 +800,10 @@ function publicProvider(provider) {
     version: provider.version == null ? null : String(provider.version),
     authKind: provider.authKind == null ? null : String(provider.authKind),
     reason: provider.reason == null ? null : sanitizePublicText(String(provider.reason)),
+    models,
+    defaultModel: models.some((model) => model.model === provider.defaultModel)
+      ? String(provider.defaultModel)
+      : models.find((model) => model.isDefault)?.model ?? models[0]?.model ?? null,
   };
 }
 
@@ -839,6 +858,7 @@ function publicAttempt(attempt) {
     status: String(attempt.status ?? 'planned'),
     terminalDisposition,
     riskMode: attempt.riskMode == null ? undefined : String(attempt.riskMode),
+    model: attempt.model == null ? undefined : String(attempt.model),
     effort: attempt.effort == null ? undefined : String(attempt.effort),
     allowedMinutes: Number.isFinite(allowedMinutes) ? allowedMinutes : 0,
     elapsedSeconds,

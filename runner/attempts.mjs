@@ -61,6 +61,8 @@ function unavailableProvider(id) {
     version: null,
     planType: null,
     reason: 'Provider status has not been checked yet.',
+    models: [],
+    defaultModel: null,
     snapshot: null,
     installCommand: null,
   };
@@ -314,6 +316,7 @@ export class AttemptManager {
       if (!providerStatus?.ready || providerStatus.authKind !== 'subscription') {
         throw new HttpError(409, providerStatus?.reason ?? 'Subscription authentication is not ready.', 'provider_not_ready');
       }
+      config.model = resolveCodexModel(providerStatus, config.model, config.effort);
 
       const quota = await this.estimate(config);
       if (quota.estimate.status !== 'ready') {
@@ -572,7 +575,10 @@ export class AttemptManager {
     const keepPercent = requireNumber(body?.keepPercent ?? 10, 'keepPercent', { min: 0, max: 95 });
     const requestedMinutes = Math.floor(requireNumber(body?.requestedMinutes ?? 30, 'requestedMinutes', { min: 1, max: 120 }));
     const effort = requireChoice(body?.effort ?? 'high', CODEX_EFFORTS, 'effort');
-    const model = 'default';
+    const model = requireString(body?.model ?? 'default', 'model', { min: 1, max: 160 });
+    if (!/^[A-Za-z0-9][A-Za-z0-9._:-]{0,159}$/.test(model)) {
+      throw new HttpError(400, 'model contains invalid characters.', 'validation');
+    }
     const objective = requireString(body?.objective, 'objective', { min: 20, max: 2000 });
     const taskMode = requireChoice(body?.taskMode ?? 'explore', RESEARCH_MODES, 'taskMode');
     const taskId = body?.taskId == null
@@ -876,6 +882,30 @@ export function requireUsefulRunMinutes(minutes) {
     `At least ${MIN_USEFUL_RUN_MINUTES} safe minutes are required to research and preserve a durable contribution. No Codex research run was started.`,
     'insufficient_safe_time',
   );
+}
+
+export function resolveCodexModel(providerStatus, requestedModel, effort) {
+  const models = Array.isArray(providerStatus?.models) ? providerStatus.models : [];
+  const desired = requestedModel === 'default'
+    ? providerStatus?.defaultModel ?? models.find((model) => model.isDefault)?.model ?? models[0]?.model
+    : requestedModel;
+  const selected = models.find((model) => model.model === desired);
+  if (!selected) {
+    throw new HttpError(
+      409,
+      'The selected Codex model is no longer available. Refresh Codex and choose another model.',
+      'model_unavailable',
+    );
+  }
+  if (!Array.isArray(selected.supportedReasoningEfforts)
+    || !selected.supportedReasoningEfforts.includes(effort)) {
+    throw new HttpError(
+      409,
+      'The selected reasoning effort is not supported by this model. Refresh Codex and choose another effort.',
+      'effort_unavailable',
+    );
+  }
+  return selected.model;
 }
 
 export function finalizationDelayMs(deadlineMs, nowMs = Date.now()) {

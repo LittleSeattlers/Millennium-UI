@@ -6,6 +6,8 @@ This repository is the whole public coordination surface. It contains the static
 
 Raw Codex workspaces, provider events, commands, paths, and quota telemetry stay under the contributor's gitignored `.millennium/private/` directory. Only one reconstructed, allowlisted JSON record can be proposed for publication after a run; credentials are forbidden and screened for known formats, but this is not a formal data-loss-prevention guarantee for arbitrary model prose.
 
+After pairing, the connector reads the authenticated local Codex model catalog and exposes only safe model IDs, display names, descriptions, default markers, and supported reasoning levels to the hosted selector. Account data, service tiers, provider events, and the selected model's private run artifacts remain local; model details are not added to public contribution records.
+
 ## Connect local Codex
 
 The GitHub Pages site cannot install native software silently. Clone this public repository and install the per-user Windows connector once:
