@@ -129,8 +129,8 @@ h2 { margin-bottom: 0; font-size: 20px; }
 .problem-gem.gem-large { width: var(--gem-large-width); height: var(--gem-large-height); margin-top: 6px; filter: drop-shadow(0 4px 4px rgba(14, 31, 48, .18)); }
 .problem-gem.gem-large::before { inset: 4px; }
 .problem-gem.gem-large::after { inset: 8px; }
-.problem-gem.gem-amethyst::before { inset: 13% 12% 9%; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
-.problem-gem.gem-amethyst::after { inset: 50% 26% 8%; background: linear-gradient(135deg, rgba(255, 255, 255, .58), transparent 52%); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.problem-gem.gem-amethyst::before { inset: 12%; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.problem-gem.gem-amethyst::after { inset: auto; left: 50%; top: 50%; width: 36%; height: 36%; transform: translate(-50%, -50%); background: linear-gradient(135deg, rgba(255, 255, 255, .58), transparent 52%); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
 
 .workspace { display: grid; gap: 14px; }
 .problem-hero { padding: 23px 24px 19px; }
