@@ -6,8 +6,6 @@ import { problems, type Problem } from './problems';
 
 const repositoryUrl = 'https://github.com/LittleSeattlers/Millennium-UI';
 
-type ProblemBriefTab = 'context' | 'history' | 'method';
-
 function Gem({ kind, large = false }: { kind: string; large?: boolean }) {
   return <span aria-hidden="true" className={`problem-gem gem-${kind}${large ? ' gem-large' : ''}`} />;
 }
@@ -70,90 +68,6 @@ function ProblemRail({
   );
 }
 
-function ProblemBrief({ problem }: { problem: Problem }) {
-  const [tab, setTab] = useState<ProblemBriefTab>('context');
-  const tabs: Array<{ id: ProblemBriefTab; label: string }> = [
-    { id: 'context', label: 'Context' },
-    { id: 'history', label: 'History' },
-    { id: 'method', label: 'Method' },
-  ];
-
-  return (
-    <section className="problem-brief" aria-label={`Research brief for ${problem.name}`}>
-      <div className="problem-brief-tabs" role="group" aria-label="Research brief section">
-        {tabs.map((item) => (
-          <button
-            aria-controls={`problem-brief-${item.id}`}
-            aria-pressed={tab === item.id}
-            className={tab === item.id ? 'active' : ''}
-            key={item.id}
-            onClick={() => setTab(item.id)}
-            type="button"
-          >
-            {item.label}
-          </button>
-        ))}
-      </div>
-
-      <div className="problem-brief-body">
-      <section
-        className="problem-brief-section brief-context"
-        hidden={tab !== 'context'}
-        id="problem-brief-context"
-      >
-        <p className="eyebrow">WHAT WOULD SETTLE IT</p>
-        <h2>{problem.settlementTitle}</h2>
-        <p>{problem.settlementCopy}</p>
-        <dl className="truth-grid">
-          <div className="truth-card">
-            <dt>COMPUTATION CAN</dt>
-            <dd>{problem.computeCan}</dd>
-          </div>
-          <div className="truth-card muted">
-            <dt>COMPUTATION CANNOT</dt>
-            <dd>{problem.computeCannot}</dd>
-          </div>
-        </dl>
-      </section>
-
-      <section
-        className="problem-brief-section brief-method"
-        hidden={tab !== 'method'}
-        id="problem-brief-method"
-      >
-        <p className="eyebrow">RESEARCH FIT</p>
-        <h2>Where computation helps</h2>
-        <p>{problem.frontier}</p>
-        <div className="task-pills" aria-label="Research requirements">
-          <span>BOUNDED</span><span>CHECKABLE</span><span>REUSABLE</span><span>CRITIQUE-READY</span>
-        </div>
-      </section>
-
-      <section
-        className="problem-brief-section brief-history"
-        hidden={tab !== 'history'}
-        id="problem-brief-history"
-      >
-        <p className="eyebrow">SELECTED HISTORY</p>
-        <h2>A long human relay</h2>
-        <ol className="history-list">
-          {problem.history.map((item) => (
-            <li className="timeline-item" key={`${item.year}-${item.title}`}>
-              <span>{item.year}</span><p>{item.title}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-      </div>
-
-      <p className="brief-boundary">
-        <span>PUBLIC BOUNDARY</span>
-        Counts show durable activity—not truth, novelty, independent review, or prize eligibility.
-      </p>
-    </section>
-  );
-}
-
 function ProblemWorkspace({
   problem,
   routeId,
@@ -186,7 +100,6 @@ function ProblemWorkspace({
             CLAY REFERENCE ↗
           </a>
         </div>
-        <ProblemBrief problem={problem} />
         <div className="route-heading">
           <span>RESEARCH DIRECTIONS</span>
           <small>Choose a route to inspect its settlement condition</small>
