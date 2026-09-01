@@ -31,7 +31,10 @@ function ProblemRail({
           <p className="eyebrow">THE SEVEN</p>
           <h2>Problem index</h2>
         </div>
-        <span className="count-badge">6 OPEN</span>
+        <div className="count-badges" aria-label="Six open problems and one solved problem">
+          <span className="count-badge">6 OPEN</span>
+          <span className="count-badge solved">1 SOLVED</span>
+        </div>
       </div>
       <div className="problem-list">
         {problems.map((problem) => {

@@ -98,7 +98,9 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 700; letter-spacing: -.026e
 .panel { border: 1px solid var(--line); border-radius: 15px; background: rgba(251, 250, 246, .93); box-shadow: 0 8px 28px rgba(27, 40, 52, .045); }
 .panel-heading, .protocol-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
 h2 { margin-bottom: 0; font-size: 20px; }
+.count-badges { display: flex; align-items: center; gap: 5px; }
 .count-badge { padding: 5px 8px; border: 1px solid #eccfc7; border-radius: 5px; background: #fae9e4; color: var(--red); font-size: 9px; font-weight: 800; }
+.count-badge.solved { border-color: #b9d5ca; background: #e5f2ed; color: #2c6a55; }
 
 .problem-panel { position: sticky; top: 108px; padding: 18px 12px 14px; }
 .problem-panel .panel-heading { padding: 2px 6px 15px; }
@@ -334,6 +336,7 @@ footer a { justify-self: end; text-decoration: none; }
 @media (max-width: 1180px) {
   .header-thesis-group { display: none; }
   .mission-grid { grid-template-columns: 230px minmax(0, 1fr); }
+  .count-badges { flex-direction: column; align-items: flex-end; gap: 3px; }
   .composer-controls { grid-template-columns: 1.2fr .8fr .8fr; }
   .risk-control { grid-column: 1 / -1; }
   .research-mode-tabs { grid-template-columns: repeat(2, 1fr); }
@@ -356,6 +359,7 @@ footer a { justify-self: end; text-decoration: none; }
   .header-quota-meter { padding: 6px 7px; }
   .header-quota-meter b { font-size: 12px; }
   .mission-grid { display: block; padding: 10px; }
+  .count-badges { flex-direction: row; align-items: center; gap: 5px; }
   .problem-panel { position: static; }
   .problem-panel { margin-bottom: 10px; padding: 14px 9px 11px; }
   .problem-panel .panel-heading { padding: 0 4px 12px; }
