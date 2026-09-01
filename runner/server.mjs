@@ -437,7 +437,12 @@ async function pairPublicSession({ req, res, origin, headers, manager, publicCon
       sendPublicSession(res, existing, manager, headers);
       return;
     }
-    const session = createPublicSession(publicControl, origin, now);
+    const session = createPublicSession(
+      publicControl,
+      origin,
+      now,
+      protectedPublicSessionIds(manager, publicControl),
+    );
     ticket.sessionToken = session.id;
     sendPublicSession(res, session, manager, headers, 201);
     return;
@@ -451,13 +456,30 @@ async function pairPublicSession({ req, res, origin, headers, manager, publicCon
     throw new HttpError(401, 'The pairing code is incorrect.', 'pairing_rejected');
   }
   publicControl.pairingCode = null;
-  const session = createPublicSession(publicControl, origin, now);
+  const session = createPublicSession(
+    publicControl,
+    origin,
+    now,
+    protectedPublicSessionIds(manager, publicControl),
+  );
   sendPublicSession(res, session, manager, headers, 201);
 }
 
-function createPublicSession(publicControl, origin, now = Date.now()) {
+export function createPublicSession(
+  publicControl,
+  origin,
+  now = Date.now(),
+  protectedSessionIds = new Set(),
+) {
   if (publicControl.sessions.size >= PUBLIC_SESSION_LIMIT) {
-    throw new HttpError(429, 'Too many hosted control sessions are active. Disconnect an existing tab and try again.', 'session_capacity');
+    evictOldestPublicSession(publicControl, protectedSessionIds);
+  }
+  if (publicControl.sessions.size >= PUBLIC_SESSION_LIMIT) {
+    throw new HttpError(
+      429,
+      'All hosted control sessions are protecting active work. Stop that work or disconnect its tab, then try again.',
+      'session_capacity',
+    );
   }
   const sessionToken = crypto.randomBytes(32).toString('base64url');
   const expiresAtMs = now + PUBLIC_SESSION_TTL_MS;
@@ -465,10 +487,34 @@ function createPublicSession(publicControl, origin, now = Date.now()) {
     id: sessionToken,
     origin,
     expiresAtMs,
+    lastSeenAtMs: now,
     attemptIds: new Set(),
   };
   publicControl.sessions.set(sessionToken, session);
   return session;
+}
+
+function protectedPublicSessionIds(manager, publicControl) {
+  const protectedIds = new Set();
+  const activeAttemptId = manager.health().activeAttemptId;
+  const activeSessionId = activeAttemptId
+    ? publicControl.attemptOwners.get(activeAttemptId)
+    : null;
+  if (activeSessionId) protectedIds.add(activeSessionId);
+  for (const startRequest of publicControl.startRequests.values()) {
+    if (startRequest.status === 'starting') protectedIds.add(startRequest.sessionId);
+  }
+  return protectedIds;
+}
+
+function evictOldestPublicSession(publicControl, protectedSessionIds) {
+  let oldest = null;
+  for (const [token, session] of publicControl.sessions) {
+    if (protectedSessionIds.has(token)) continue;
+    const lastSeenAtMs = Number.isFinite(session.lastSeenAtMs) ? session.lastSeenAtMs : 0;
+    if (!oldest || lastSeenAtMs < oldest.lastSeenAtMs) oldest = { token, lastSeenAtMs };
+  }
+  if (oldest) deletePublicSession(publicControl, oldest.token);
 }
 
 function sendPublicSession(res, session, manager, headers, status = 200) {
@@ -482,13 +528,17 @@ function sendPublicSession(res, session, manager, headers, status = 200) {
 function purgePublicSessions(publicControl, now = Date.now()) {
   for (const [token, session] of publicControl.sessions) {
     if (session.expiresAtMs > now) continue;
-    publicControl.sessions.delete(token);
-    for (const [attemptId, owner] of publicControl.attemptOwners) {
-      if (owner === token) publicControl.attemptOwners.delete(attemptId);
-    }
-    for (const [key, startRequest] of publicControl.startRequests) {
-      if (startRequest.sessionId === token) publicControl.startRequests.delete(key);
-    }
+    deletePublicSession(publicControl, token);
+  }
+}
+
+function deletePublicSession(publicControl, token) {
+  publicControl.sessions.delete(token);
+  for (const [attemptId, owner] of publicControl.attemptOwners) {
+    if (owner === token) publicControl.attemptOwners.delete(attemptId);
+  }
+  for (const [key, startRequest] of publicControl.startRequests) {
+    if (startRequest.sessionId === token) publicControl.startRequests.delete(key);
   }
 }
 
@@ -510,6 +560,7 @@ function assertPublicSession(req, origin, publicControl) {
   for (const [expected, session] of publicControl.sessions) {
     if (!tokensEqual(actual, expected)) continue;
     if (session.origin !== origin) break;
+    session.lastSeenAtMs = Date.now();
     return session;
   }
   throw new HttpError(401, 'The hosted control session is missing, expired, or invalid.', 'unauthorized');
@@ -522,10 +573,7 @@ async function routePublicRequest({ req, res, manager, url, pathname, headers, s
     if (activeId && publicControl.attemptOwners.get(activeId) === session.id) {
       throw new HttpError(409, 'Stop the active attempt before disconnecting this control session.', 'attempt_active');
     }
-    publicControl.sessions.delete(readBearerToken(req));
-    for (const [key, startRequest] of publicControl.startRequests) {
-      if (startRequest.sessionId === session.id) publicControl.startRequests.delete(key);
-    }
+    deletePublicSession(publicControl, readBearerToken(req));
     sendJson(res, 200, { revoked: true }, headers);
     return;
   }

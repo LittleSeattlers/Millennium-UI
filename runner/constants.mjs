@@ -1,7 +1,7 @@
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
-export const RUNNER_VERSION = '0.5.6';
+export const RUNNER_VERSION = '0.5.7';
 export const RUNNER_HOST = '127.0.0.1';
 // This port is intentionally fixed and distinct from the retired private runner.
 // The static hosted page must know the exact loopback address before pairing.
