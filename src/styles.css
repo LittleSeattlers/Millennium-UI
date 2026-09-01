@@ -122,15 +122,15 @@ h2 { margin-bottom: 0; font-size: 20px; }
 .gem-citrine { --gem-deep: #a84208; --gem-mid: #ed8616; --gem-light: #ffd36a; clip-path: polygon(50% 0, 78% 20%, 96% 51%, 88% 81%, 50% 100%, 12% 81%, 4% 51%, 22% 20%); }
 .gem-emerald { --gem-deep: #07572f; --gem-mid: #159653; --gem-light: #8be099; --gem-large-width: 27px; --gem-large-height: 33px; --gem-mobile-width: 21px; --gem-mobile-height: 26px; width: 14px; height: 17px; clip-path: polygon(22% 0, 78% 0, 100% 18%, 100% 82%, 78% 100%, 22% 100%, 0 82%, 0 18%); }
 .gem-aquamarine { --gem-deep: #08708b; --gem-mid: #15b7cc; --gem-light: #a6f2f3; --gem-large-width: 22px; --gem-large-height: 33px; --gem-mobile-width: 17px; --gem-mobile-height: 26px; width: 12px; height: 18px; transform: rotate(20deg); clip-path: polygon(50% 0, 82% 18%, 100% 50%, 82% 82%, 50% 100%, 18% 82%, 0 50%, 18% 18%); }
-.gem-amethyst { --gem-deep: #4f147b; --gem-mid: #8f2dcc; --gem-light: #d796ff; --gem-large-width: 33px; --gem-large-height: 29px; --gem-mobile-width: 26px; --gem-mobile-height: 23px; width: 17px; height: 15px; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.gem-amethyst { --gem-deep: #4f147b; --gem-mid: #8f2dcc; --gem-light: #d796ff; --gem-large-width: 33px; --gem-large-height: 28.5788px; --gem-mobile-width: 26px; --gem-mobile-height: 22.5167px; --triangle-center-y: 66.6667%; width: 17px; height: 14.7224px; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
 .gem-sapphire { --gem-deep: #124ca3; --gem-mid: #237ce3; --gem-light: #9ed4ff; --gem-large-width: 25px; --gem-large-height: 33px; --gem-mobile-width: 20px; --gem-mobile-height: 26px; width: 13px; height: 17px; border-radius: 50%; clip-path: none; }
 .gem-sapphire::before { border-radius: 50%; clip-path: none; }
 .gem-moonstone { --gem-deep: #9c875e; --gem-mid: #e3d4af; --gem-light: #fffdf0; clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%); }
 .problem-gem.gem-large { width: var(--gem-large-width); height: var(--gem-large-height); margin-top: 6px; filter: drop-shadow(0 4px 4px rgba(14, 31, 48, .18)); }
 .problem-gem.gem-large::before { inset: 4px; }
 .problem-gem.gem-large::after { inset: 8px; }
-.problem-gem.gem-amethyst::before { inset: 12%; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
-.problem-gem.gem-amethyst::after { inset: auto; left: 50%; top: 50%; width: 36%; height: 36%; transform: translate(-50%, -50%); background: linear-gradient(135deg, rgba(255, 255, 255, .58), transparent 52%); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.problem-gem.gem-amethyst::before { inset: auto; left: 50%; top: var(--triangle-center-y); width: 76%; height: 76%; transform: translate(-50%, -66.6667%); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.problem-gem.gem-amethyst::after { inset: auto; left: 50%; top: var(--triangle-center-y); width: 36%; height: 36%; transform: translate(-50%, -66.6667%); background: linear-gradient(135deg, rgba(255, 255, 255, .58), transparent 52%); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
 
 .workspace { display: grid; gap: 14px; }
 .problem-hero { padding: 23px 24px 19px; }
