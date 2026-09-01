@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "attempt_id": "riemann-hypothesis-2026-09-01-2bdb80b7-a84e-4951-8c68-3ae17349b62c",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-01T21:06:45.821Z",
+  "finished_at": "2026-09-01T21:12:07.714Z",
+  "research_task": {
+    "task_id": "rh.refute.certificate-design",
+    "branch_id": "zero-certification",
+    "mode": "recommended",
+    "kind": "counterexample-search",
+    "title": "Design an off-line zero certificate"
+  },
+  "summary": "Designed a rational-disk Taylor/Rouche certificate and deterministic interval-verifier contract. The order-one certificate proves a unique simple zero; the order-m form counts total multiplicity. No zeta candidate or accepted certificate is supplied.",
+  "claims": [
+    {
+      "statement": "For an analytic function on a neighborhood of a closed disk, the specified strict order-m Taylor/Rouche inequality proves that the disk contains exactly m zeros counted with multiplicity.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "On the disk boundary, certified lower Taylor terms plus the integral remainder are strictly smaller than the leading order-m monomial, so Rouche's theorem gives zero count m.",
+      "verification_method": "Audit the Taylor remainder bound and replay the strict rational inequality before applying Rouche's theorem."
+    },
+    {
+      "statement": "The specified strict rational geometry checks make any accepted xi zero a nontrivial zeta zero lying strictly off the critical line.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "The whole disk is inside the open critical strip, avoids the real axis, and lies strictly in one half-plane bounded by the critical line.",
+      "verification_method": "Replay the five exact rational geometry comparisons and check the nonvanishing xi completion factors on the disk."
+    }
+  ],
+  "limitations": [
+    "No candidate zero, actual xi enclosure transcript, or accepted zeta certificate was supplied.",
+    "The xi enclosure engine is specified but was not implemented or independently audited in this attempt.",
+    "Synthetic tests cover the semantic inequality and geometry, not the xi integral evaluator.",
+    "A non-accepting certificate or an empty bounded search has no implication beyond that computation."
+  ],
+  "failed_approaches": [
+    "The Python synthetic test could not be executed because no Python runtime was available in the environment.",
+    "The first PowerShell fallback used an unavailable decimal power method; repeated exact multiplication corrected the runner defect."
+  ],
+  "next_actions": [
+    "Implement and independently audit the proof-replaying xi interval-enclosure engine.",
+    "Unit-test the omitted-index and infinite-integration tail bounds, then reproduce a complete transcript with a separate checker."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Implement the xi enclosure transcript verifier",
+      "objective": "Build an exact-rational checker for the integral, derivative, quadrature, transcendental, and tail-bound nodes in the certificate contract.",
+      "rationale": "This is the missing step between the proved abstract certificate lemma and an independently checkable zeta witness.",
+      "success_criteria": "Two independent implementations accept the same complete synthetic transcript and reject deliberately corrupted nodes.",
+      "useful_failure_criteria": "Identify the first enclosure or tail formula that cannot be made both rigorous and computationally usable, with the missing bound stated exactly.",
+      "verification_method": "Cross-check node enclosures, mutation-test rejection paths, and replay the full transcript using only unbounded integer arithmetic.",
+      "suggested_minutes": 120,
+      "relationship": "child"
+    },
+    {
+      "title": "Independent audit of the xi tail bounds",
+      "objective": "Verify the omitted-index and infinite-time estimates and their derivative-order generalization.",
+      "rationale": "A sign, factor, or domain error in a tail estimate would invalidate an otherwise correct certificate.",
+      "success_criteria": "A separate derivation confirms every inequality and required positivity condition in the evaluator contract.",
+      "useful_failure_criteria": "Produce a counterexample to a stated tail inequality or state a corrected replacement bound.",
+      "verification_method": "Symbolically rederive the geometric-series and exponential-integral bounds and test rational parameter edge cases.",
+      "suggested_minutes": 45,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [],
+  "review_status": "unreviewed"
+}
