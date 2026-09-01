@@ -5,6 +5,7 @@ import { LocalResearchConsole } from './LocalResearchConsole';
 import { problems, type Problem } from './problems';
 
 const repositoryUrl = 'https://github.com/LittleSeattlers/Millennium-UI';
+const researchLedgerUrl = `${repositoryUrl}/tree/main/contributions/attempts`;
 
 function Gem({ kind, large = false }: { kind: string; large?: boolean }) {
   return <span aria-hidden="true" className={`problem-gem gem-${kind}${large ? ' gem-large' : ''}`} />;
@@ -230,7 +231,7 @@ export default function App() {
                 <span>Seven problems.</span>
                 <i>One shared record.</i>
               </p>
-              <a className="research-ledger-link" href="#research-ledger">Research ledger ↓</a>
+              <a className="research-ledger-link" href={researchLedgerUrl} rel="noreferrer" target="_blank">Research ledger ↗</a>
             </div>
             <div className="header-codex-slot" id="header-codex-slot" />
           </div>
