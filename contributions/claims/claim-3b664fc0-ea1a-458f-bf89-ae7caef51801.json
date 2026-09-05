@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "claim_id": "claim-3b664fc0-ea1a-458f-bf89-ae7caef51801",
+  "task_id": "auto.slice.v1.f6a6a02241b5d194ef82f244500ca8a1",
+  "problem": "navier-stokes",
+  "problem_id": "ns",
+  "direction": "blowup",
+  "claimed_at": "2026-09-05T14:55:18.236Z",
+  "expires_at": "2026-09-05T15:40:18.236Z"
+}
