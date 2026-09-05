@@ -1,0 +1,44 @@
+{
+  "name": "millennium-ui",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Public, privacy-preserving dashboard for the Millennium open research network.",
+  "type": "module",
+  "packageManager": "pnpm@11.19.0",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "connect:public": "node runner/public.mjs",
+    "connector:install": "node runner/install-connector.mjs",
+    "connector:start": "node runner/protocol.mjs --start",
+    "connector:uninstall": "node runner/install-connector.mjs --uninstall",
+    "runner": "node runner/server.mjs",
+    "lint": "eslint .",
+    "test": "node --test scripts/*.test.mjs runner/test/*.test.mjs",
+    "validate": "pnpm lint && pnpm test && pnpm build",
+    "export:stats": "node scripts/export-public-stats.mjs"
+  },
+  "dependencies": {
+    "@openai/codex": "0.150.1",
+    "react": "19.2.6",
+    "react-dom": "19.2.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.39.4",
+    "@types/node": "22.19.19",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.2",
+    "eslint": "9.39.4",
+    "eslint-plugin-react-hooks": "7.0.1",
+    "eslint-plugin-react-refresh": "0.5.2",
+    "globals": "17.3.0",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.57.0",
+    "vite": "8.0.13"
+  }
+}

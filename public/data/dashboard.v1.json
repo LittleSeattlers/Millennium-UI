@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-01T02:43:06.287Z",
+  "data_scope": "validated canonical contribution records on public main",
+  "totals": {
+    "runs": 0,
+    "completed": 0,
+    "checkpointed": 0,
+    "aborted": 0
+  },
+  "problems": [
+    {
+      "id": "riemann-hypothesis",
+      "ui_slug": "rh",
+      "runs": 0,
+      "completed": 0,
+      "checkpointed": 0,
+      "aborted": 0
+    },
+    {
+      "id": "p-vs-np",
+      "ui_slug": "pnp",
+      "runs": 0,
+      "completed": 0,
+      "checkpointed": 0,
+      "aborted": 0
+    },
+    {
+      "id": "navier-stokes",
+      "ui_slug": "ns",
+      "runs": 0,
+      "completed": 0,
+      "checkpointed": 0,
+      "aborted": 0
+    },
+    {
+      "id": "hodge-conjecture",
+      "ui_slug": "hodge",
+      "runs": 0,
+      "completed": 0,
+      "checkpointed": 0,
+      "aborted": 0
+    },
+    {
+      "id": "birch-swinnerton-dyer",
+      "ui_slug": "bsd",
+      "runs": 0,
+      "completed": 0,
+      "checkpointed": 0,
+      "aborted": 0
+    },
+    {
+      "id": "yang-mills",
+      "ui_slug": "ym",
+      "runs": 0,
+      "completed": 0,
+      "checkpointed": 0,
+      "aborted": 0
+    },
+    {
+      "id": "poincare-conjecture",
+      "ui_slug": "pc",
+      "runs": 0,
+      "completed": 0,
+      "checkpointed": 0,
+      "aborted": 0
+    }
+  ]
+}

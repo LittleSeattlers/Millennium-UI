@@ -1,0 +1,149 @@
+name: Accept canonical contribution
+
+on:
+  pull_request_target:
+    types: [ready_for_review, reopened, synchronize]
+
+permissions:
+  actions: write
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: contribution-merge
+  cancel-in-progress: false
+
+jobs:
+  validate-and-merge:
+    if: >-
+      github.event.pull_request.draft == false &&
+      github.event.pull_request.base.ref == github.event.repository.default_branch &&
+      github.event.pull_request.base.repo.full_name == github.repository &&
+      startsWith(github.event.pull_request.title, 'Research contribution:')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out trusted validator from main
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 22
+
+      - name: Read pull request blobs without checking out contributor code
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        env:
+          PAYLOAD_FILE: ${{ runner.temp }}/millennium-contribution.json
+        with:
+          script: |
+            const fs = require('fs');
+            const listed = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              per_page: 2,
+            });
+            const files = listed.data;
+            if (files.length !== 1) throw new Error('A contribution pull request must change exactly one file.');
+            const file = files[0];
+            if (file.status !== 'added' || !/^contributions\/attempts\/[a-z0-9-]+\/\d{4}\/[a-z0-9._-]+\.json$/.test(file.filename)) {
+              throw new Error('The only changed file must be a newly added contribution record.');
+            }
+
+            const headSha = context.payload.pull_request.head.sha;
+            const headRepository = context.payload.pull_request.head.repo;
+            if (!headRepository) throw new Error('The pull request head repository is unavailable.');
+            const sourceOwner = headRepository.owner.login;
+            const sourceRepository = headRepository.name;
+            const commit = await github.rest.git.getCommit({
+              owner: sourceOwner,
+              repo: sourceRepository,
+              commit_sha: headSha,
+            });
+            let treeSha = commit.data.tree.sha;
+            const parts = file.filename.split('/');
+            for (let index = 0; index < parts.length; index += 1) {
+              const tree = await github.rest.git.getTree({
+                owner: sourceOwner,
+                repo: sourceRepository,
+                tree_sha: treeSha,
+              });
+              const entry = tree.data.tree.find((item) => item.path === parts[index]);
+              if (!entry) throw new Error('The contribution path is missing from the pull request tree.');
+              if (index === parts.length - 1) {
+                if (entry.type !== 'blob' || entry.mode !== '100644' || entry.sha !== file.sha) {
+                  throw new Error('The contribution must be a regular 100644 JSON blob.');
+                }
+              } else {
+                if (entry.type !== 'tree') throw new Error('The contribution path contains a non-directory entry.');
+                treeSha = entry.sha;
+              }
+            }
+
+            const blob = await github.rest.git.getBlob({
+              owner: sourceOwner,
+              repo: sourceRepository,
+              file_sha: file.sha,
+            });
+            const payload = {
+              draft: context.payload.pull_request.draft,
+              headSha,
+              files: [{
+                filename: file.filename,
+                status: file.status,
+                encoding: blob.data.encoding,
+                content: blob.data.content,
+              }],
+            };
+            fs.writeFileSync(process.env.PAYLOAD_FILE, JSON.stringify(payload), { encoding: 'utf8', mode: 0o600 });
+
+      - name: Validate strict contribution envelope and complete ledger
+        run: |
+          node scripts/validate-contribution-pr.mjs "$RUNNER_TEMP/millennium-contribution.json" --materialize-root .
+          node scripts/export-public-stats.mjs --source contributions/attempts --output "$RUNNER_TEMP/millennium-dashboard.json"
+
+      - name: Squash-merge the validated data record
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        with:
+          script: |
+            const number = context.payload.pull_request.number;
+            const expected = context.payload.pull_request.head.sha;
+            const defaultBranch = context.payload.repository.default_branch;
+            const expectedRepository = `${context.repo.owner}/${context.repo.repo}`.toLowerCase();
+            const current = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: number,
+            });
+            if (current.data.draft
+              || current.data.state !== 'open'
+              || current.data.head.sha !== expected
+              || current.data.base.ref !== defaultBranch
+              || current.data.base.repo.full_name.toLowerCase() !== expectedRepository
+              || current.data.changed_files !== 1
+              || !current.data.title.startsWith('Research contribution:')) {
+              core.setFailed('The pull request changed after validation; a fresh run is required.');
+              return;
+            }
+            const merged = await github.rest.pulls.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: number,
+              sha: expected,
+              merge_method: 'squash',
+              commit_title: `Research contribution #${number}`,
+            });
+            if (!merged.data.merged) {
+              core.setFailed(merged.data.message || 'GitHub did not merge the validated contribution.');
+              return;
+            }
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'pages.yml',
+              ref: defaultBranch,
+            });

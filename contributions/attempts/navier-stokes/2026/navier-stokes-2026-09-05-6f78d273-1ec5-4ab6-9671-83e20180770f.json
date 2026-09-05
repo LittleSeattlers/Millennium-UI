@@ -1,0 +1,76 @@
+{
+  "schema_version": 2,
+  "attempt_id": "navier-stokes-2026-09-05-6f78d273-1ec5-4ab6-9671-83e20180770f",
+  "problem": "navier-stokes",
+  "problem_id": "ns",
+  "direction": "blowup",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-05T14:55:27.040Z",
+  "finished_at": "2026-09-05T15:02:30.813Z",
+  "research_task": {
+    "task_id": "auto.slice.v1.f6a6a02241b5d194ef82f244500ca8a1",
+    "branch_id": "blowup-certification",
+    "mode": "recommended",
+    "kind": "formalization",
+    "title": "Scope a runnable slice of Design a rigorous breakdown certificate"
+  },
+  "summary": "For periodic unforced Navier--Stokes with smooth mean-zero divergence-free data, finitely many finite H3 lower bounds at times strictly before T cannot alone imply breakdown by T uniformly over admissible data; an explicit global shear solution satisfies any prescribed finite family.",
+  "value_assessment": {
+    "outcome": "bounded-negative",
+    "novelty": "The supplied Fourier-closure artifact noted one-mode heat decay but did not test certificate sufficiency; this run converts an independently derived shear solution into a quantified obstruction to snapshot-only certificates and completes an exact executable instance. The supplied enstrophy artifact addresses a different closure gap.",
+    "evidence": "The derivation verifies the PDE pointwise and computes the normalized Fourier H3 norm exactly; a final clean run of the integer-only executable check independently verified support transversality, zero nonlinear factors, the norm factor, and three sample inequalities.",
+    "falsifier": "An error in the shear-flow PDE identity, the normalized Fourier H3 norm calculation, the amplitude maximization argument, or the exact sample inequalities would overturn the scoped claim."
+  },
+  "claims": [
+    {
+      "statement": "On the three-dimensional periodic torus with any positive viscosity and normalized Fourier H3 norm, for every proposed terminal time T, every finite set of sample times strictly below T, and every finite set of nonnegative thresholds, some smooth mean-zero divergence-free datum has a global shear solution meeting all the stated H3 lower bounds; hence those scalar lower-bound snapshots alone are not a universal breakdown certificate.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Scope: unforced periodic equations, unrestricted smooth mean-zero data, H3, and snapshot lower bounds only. Dependencies: the explicit shear-flow PDE identity and stated Fourier norm convention. Evidence: u=A exp(-nu t)(sin y,0,0) has zero nonlinearity, solves globally, has H3 norm 2|A|exp(-nu t), and a finite-maximum amplitude meets every bound. Known objections: fixed-data restrictions, initial-size caps, endpoint premises, and continuum-time bounds lie outside the claim.",
+      "verification_method": "Audit the pointwise divergence, nonlinear, Laplacian, and time-derivative identities; recompute the two Fourier coefficients and H3 weight; verify the finite-maximum inequality; rerun the integer-only sample checker."
+    }
+  ],
+  "limitations": [
+    "The result excludes only universal implications based solely on finitely many scalar lower-bound snapshots.",
+    "It does not address certificates for separately fixed data, data classes with incompatible initial-size caps, endpoint obstructions, or finitely described inequalities holding over a continuum of times.",
+    "The exact executable check covers one instance; the general claim relies on the elementary analytic derivation and is not formally verified.",
+    "This result neither supplies a breakdown certificate nor completes or weakens the parent task."
+  ],
+  "failed_approaches": [
+    "A broader claim about every finite collection of bounds was rejected because a finite description may encode a continuum-in-time inequality or additional fixed-data constraints that the shear counterexample does not satisfy."
+  ],
+  "next_actions": [
+    "Prove and audit a narrowly stated endpoint-rate implication to H3 nonextendibility.",
+    "Design a finite interval-certified format for verifying a terminal continuum-in-time lower bound, or isolate its exact coverage obstruction."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Prove an endpoint-rate sufficiency lemma",
+      "objective": "In the same periodic H3 setting, prove that a positive power-law lower bound holding at every time in a terminal interval contradicts H3 continuation through the proposed endpoint.",
+      "rationale": "The snapshot counterexample shows that endpoint-approaching information is a necessary next analytic ingredient for this certificate route.",
+      "success_criteria": "A quantified implication with domain, solution class, continuation definition, constants, and all endpoint limits explicit, plus an independent rederivation.",
+      "useful_failure_criteria": "Identify the exact continuity, norm, or quantifier assumption missing from the implication and give a counterexample under the weaker assumptions.",
+      "verification_method": "Audit the contradiction with H3 continuity at the endpoint and test zero exponent, zero coefficient, and nonuniform-time boundary cases.",
+      "suggested_minutes": 30,
+      "relationship": "child"
+    },
+    {
+      "title": "Certify a terminal continuum bound finitely",
+      "objective": "Specify interval-arithmetic coverage and analytic remainder conditions that reduce verification of a lower bound on a half-open terminal interval to finite checkable data.",
+      "rationale": "Analytic sufficiency alone does not meet the parent's requirement that every numerical premise be interval-certified.",
+      "success_criteria": "A finite certificate schema with explicit interval enclosures, truncation and rounding bounds, terminal coverage, and a reproducible verifier specification.",
+      "useful_failure_criteria": "A precise proof that the proposed finite cover or remainder model cannot control the terminal limit, naming the smallest additional asymptotic datum required.",
+      "verification_method": "Independently check every interval inclusion and attempt a boundary case concentrated arbitrarily close to the terminal time.",
+      "suggested_minutes": 60,
+      "relationship": "child"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "navier-stokes-2026-09-01-05dc0da4-3027-4047-9cbf-eb88b07d4e50",
+    "navier-stokes-2026-08-31-6d0fb167-9a7d-4147-934f-873a37fd77fe",
+    "navier-stokes-2026-08-31-3dd7a053-c068-437c-9700-d7bfbd0415e5",
+    "navier-stokes-2026-09-01-6ab9399b-9200-4621-ac80-f1a1db0df8b5"
+  ],
+  "review_status": "unreviewed"
+}
