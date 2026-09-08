@@ -1,0 +1,79 @@
+{
+  "schema_version": 2,
+  "attempt_id": "navier-stokes-2026-09-08-f325901f-7e0e-4430-9c04-25d3051a3207",
+  "problem": "navier-stokes",
+  "problem_id": "ns",
+  "direction": "blowup",
+  "route": "refute-or-search-witness",
+  "status": "interrupted",
+  "started_at": "2026-09-08T15:28:07.004Z",
+  "finished_at": "2026-09-08T15:43:11.301Z",
+  "research_task": {
+    "task_id": "auto.slice.v1.d5d5a2d864db0d274b8e5406ee60d09d",
+    "branch_id": "explore-837471d77d92a684",
+    "mode": "frontier",
+    "kind": "formalization",
+    "title": "Scope a runnable slice of Certify compact-localization residual"
+  },
+  "summary": "For one explicitly fixed product-cutoff gauge on R3, a compactly supported curl field exactly localizes the transported shear on a core and has a certified three-component residual under affine strain. This is only an algebraic prerequisite for the unchanged parent task.",
+  "value_assessment": {
+    "outcome": "scoped-advance",
+    "novelty": "The linked prior contribution established the unlocalized affine-strain shear and amplification law. This result adds an explicit compact vector-potential localization and residual identity, while reproducing the prior shear in the unit-cutoff boundary case; the other supplied artifacts address unrelated questions.",
+    "evidence": "A classical componentwise derivation is supported by an independent exact-integer polynomial coefficient certificate with 48 and 47 nonzero monomials in the first two residual components, zero in the third, and passing divergence, transport, and boundary checks.",
+    "falsifier": "Any smooth admissible example with a nonzero difference between direct Euler expansion and the stated component formula, or failure of divergence or exact plateau agreement, overturns the scoped claim."
+  },
+  "claims": [
+    {
+      "statement": "On R3, for the stated transported primitive, smooth compact product cutoffs, and gauge A=(0,0,phi), the curl field is compactly supported, divergence-free, equals the shear on a cutoff plateau, and has residual F1=Q_y+phi_y phi_xy-phi_x phi_yy, F2=-2 lambda phi_x-Q_x-phi_y phi_xx+phi_x phi_xy, F3=0, where Q=D phi-lambda phi.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "The pointwise derivation is reproduced by exact BigInteger polynomial coefficient comparison on a nontrivial profile, including an adversarial unit-cutoff boundary case.",
+      "verification_method": "Expand the residual directly, compare every polynomial coefficient, and separately check divergence, primitive transport, and plateau reduction."
+    }
+  ],
+  "limitations": [
+    "The executable polynomial factors test the differential identity but are not compactly supported; compact support is established analytically.",
+    "The shear perturbation is localized but the affine background is not.",
+    "No localization scale, amplification schedule, all-derivative bound, or force-smoothness result is supplied.",
+    "The result does not meet the parent's requirement for two full independent derivations and does not imply finite-time breakdown."
+  ],
+  "failed_approaches": [
+    "The JavaScript checker could not run because its runtime command is unavailable; a detected derivative typo was corrected, but no evidence is attributed to that route.",
+    "A universal schedule-dependent statement could not be formed because localization scales and an amplification schedule were not supplied."
+  ],
+  "next_actions": [
+    "Introduce spatial localization scales and an amplification schedule, then derive sharp bounds for arbitrary spatial and time derivatives of the residual.",
+    "Independently rederive the residual and check compactly supported polynomial-piece cutoff interiors and joins."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Derive scale-explicit force derivative bounds",
+      "objective": "For the fixed product-cutoff localization, introduce explicit localization and amplification schedules and bound every spatial and time derivative of the full residual with all scale factors shown.",
+      "rationale": "The present slice certifies residual algebra but leaves the parent's schedule-dependent estimates untouched.",
+      "success_criteria": "For every stated spatial multi-index and time-derivative order, give a proved residual bound with explicit cutoff, primitive, strain, and scale dependence sufficient to audit force smoothness.",
+      "useful_failure_criteria": "A proved derivative lower bound incompatible with force smoothness for fully specified amplification and localization schedules.",
+      "verification_method": "Differentiate the certified formula, audit product and chain-rule scale powers term by term, and test sharpness on explicit profiles.",
+      "suggested_minutes": 60,
+      "relationship": "child"
+    },
+    {
+      "title": "Independently audit the compact-localization residual",
+      "objective": "Produce a second componentwise derivation from direct coordinates and exact checks using compactly supported polynomial-piece cutoff profiles, including join regularity.",
+      "rationale": "This addresses the parent's independent-derivation and cutoff-check dependency without duplicating the derivative-bound task.",
+      "success_criteria": "A second derivation agrees in every component, exact checks pass on each polynomial piece, and claimed regularity across joins is verified.",
+      "useful_failure_criteria": "An explicit component mismatch, missing join regularity, or gauge-dependent term absent from the current formula.",
+      "verification_method": "Compare direct coordinate expansion against the saved formula coefficientwise on all pieces and audit one-sided derivatives at every join.",
+      "suggested_minutes": 30,
+      "relationship": "child"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "navier-stokes-2026-09-08-e9e7bf10-1311-4aea-ba7b-fe1c4f9f4114",
+    "navier-stokes-2026-09-05-6f78d273-1ec5-4ab6-9671-83e20180770f",
+    "navier-stokes-2026-09-01-05dc0da4-3027-4047-9cbf-eb88b07d4e50",
+    "navier-stokes-2026-08-31-6d0fb167-9a7d-4147-934f-873a37fd77fe",
+    "navier-stokes-2026-08-31-3dd7a053-c068-437c-9700-d7bfbd0415e5",
+    "navier-stokes-2026-09-01-6ab9399b-9200-4621-ac80-f1a1db0df8b5"
+  ],
+  "review_status": "unreviewed"
+}
