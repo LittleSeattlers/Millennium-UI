@@ -1,0 +1,85 @@
+{
+  "schema_version": 2,
+  "attempt_id": "navier-stokes-2026-09-08-e9e7bf10-1311-4aea-ba7b-fe1c4f9f4114",
+  "problem": "navier-stokes",
+  "problem_id": "ns",
+  "direction": "blowup",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-08T15:09:27.807Z",
+  "finished_at": "2026-09-08T15:21:28.727Z",
+  "research_task": {
+    "task_id": "ns.blowup.explore.837471d77d92a684",
+    "branch_id": "explore-837471d77d92a684",
+    "mode": "explore",
+    "kind": "exploration",
+    "title": "Explore: Reconstruct finite-time blowup for 3D forced Euler equations via an iterative scheme. Formulate…"
+  },
+  "summary": "An exact affine-strain Euler family gives triangular one-way exponential amplification of a transverse shear, while a variation-of-constants bound shows that a fixed correction cannot blow up at finite time under integrable accumulated strain and integrable projected forcing.",
+  "value_assessment": {
+    "outcome": "scoped-advance",
+    "novelty": "Unlike the supplied snapshot-certificate, periodic two-wave closure, and Navier--Stokes enstrophy records, this branch baseline isolates an exact forced-amplitude ODE inside a three-dimensional Euler solution and identifies its finite-time integrability threshold.",
+    "evidence": "A componentwise Euler derivation, characteristic formula, variation-of-constants estimate, independent hand expansion, and an exact-integer sparse-polynomial special-case certificate support the bounded claim.",
+    "falsifier": "The result would be overturned by a nonzero residual in the displayed general ansatz, a failure of the characteristic formula, or an example with integrable strain and projected forcing but an unbounded solution of the stated scalar amplitude equation."
+  },
+  "claims": [
+    {
+      "statement": "For the stated affine-strain and transverse-shear ansatz on three-dimensional Euclidean space, the incompressible unforced Euler equations reduce exactly to a scalar transport-amplification equation whose solution has amplitude factor equal to the exponential of accumulated strain.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Direct componentwise differentiation proves the general identity, and an exact-integer sparse-polynomial calculation verifies a nontrivial special case independently.",
+      "verification_method": "Recompute divergence, affine pressure cancellation, all cross terms, and the characteristic solution; then run the exact special-case coefficient check."
+    },
+    {
+      "statement": "A fixed scalar correction satisfying a prime equals strain times a plus projected forcing cannot diverge at a finite endpoint when both strain and projected forcing are integrable in time.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Variation of constants gives an explicit finite uniform bound depending only on the initial amplitude and the two time-integral norms.",
+      "verification_method": "Differentiate the variation-of-constants formula and apply the triangle inequality with the accumulated-strain bound."
+    }
+  ],
+  "limitations": [
+    "The affine background and polarization-independent shear are neither periodic nor finite-energy on the full space.",
+    "The correction is localized only in transverse variables, not in all three spatial directions.",
+    "The projected-forcing lemma does not establish smoothness of a full Reynolds-stress absorbing force after compact localization.",
+    "The fixed-amplitude obstruction does not exclude frequency-driven norm growth or loss of uniform estimates across infinitely many scales.",
+    "No finite-time breakdown or Millennium-problem conclusion is claimed."
+  ],
+  "failed_approaches": [
+    "Finite-time blowup from a single correction under a bounded smooth strain fails because its exponential factor has finite accumulated exponent.",
+    "Allowing an unbounded but integrable strain still does not force amplitude blowup; a nonintegrable example makes the affine background singular already."
+  ],
+  "next_actions": [
+    "Compute the full residual of a compactly supported divergence-free localization and test scale-uniform smoothness of any absorbing force.",
+    "Track amplitude, frequency, support size, and forcing derivatives separately in an accumulating multi-scale schedule."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Certify compact-localization residual",
+      "objective": "Localize the exact shear with a compactly supported vector potential and derive every component of the resulting Euler residual under affine strain.",
+      "rationale": "The exact baseline is infinite-energy and does not yet justify the claim that a smooth external force can absorb localization errors.",
+      "success_criteria": "An exact divergence-free localized field, a complete residual formula, and scale-explicit bounds for every spatial and time derivative of the proposed force.",
+      "useful_failure_criteria": "A proved derivative lower bound incompatible with force smoothness for a specified amplification and scale schedule.",
+      "verification_method": "Two independent componentwise derivations plus exact symbolic checks on polynomial-cutoff test profiles.",
+      "suggested_minutes": 60,
+      "relationship": "child"
+    },
+    {
+      "title": "Audit infinite-scale ODE schedule",
+      "objective": "Specify an accumulating sequence of correction intervals and test whether derivative-norm growth can coexist with summable strain exposure and smooth forcing projections.",
+      "rationale": "The fixed-amplitude obstruction leaves frequency growth and loss of scale-uniform projection bounds as the main unresolved escape routes.",
+      "success_criteria": "A scale-indexed recurrence with explicit summability inequalities that simultaneously imply norm divergence and finite forcing seminorms.",
+      "useful_failure_criteria": "An explicit incompatible pair of necessary summability inequalities for the chosen schedule.",
+      "verification_method": "Exact recurrence algebra and a reproducible bounded parameter search followed by analytic verification of any candidate inequalities.",
+      "suggested_minutes": 90,
+      "relationship": "child"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "navier-stokes-2026-09-05-6f78d273-1ec5-4ab6-9671-83e20180770f",
+    "navier-stokes-2026-09-01-05dc0da4-3027-4047-9cbf-eb88b07d4e50",
+    "navier-stokes-2026-08-31-6d0fb167-9a7d-4147-934f-873a37fd77fe",
+    "navier-stokes-2026-08-31-3dd7a053-c068-437c-9700-d7bfbd0415e5",
+    "navier-stokes-2026-09-01-6ab9399b-9200-4621-ac80-f1a1db0df8b5"
+  ],
+  "review_status": "unreviewed"
+}

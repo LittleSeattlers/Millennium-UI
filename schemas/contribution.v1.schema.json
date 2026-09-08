@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://littleseattlers.github.io/Millennium-UI/schemas/contribution.v1.schema.json",
+  "title": "Millennium sanitized contribution v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "attempt_id", "problem", "problem_id", "direction", "route", "status",
+    "started_at", "finished_at", "research_task", "summary", "claims", "limitations",
+    "failed_approaches", "next_actions", "proposed_tasks", "citations", "prior_attempt_ids", "review_status"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "attempt_id": { "$ref": "#/$defs/attemptId" },
+    "problem": {
+      "enum": [
+        "riemann-hypothesis", "p-vs-np", "navier-stokes", "hodge-conjecture",
+        "birch-swinnerton-dyer", "yang-mills-mass-gap", "poincare-conjecture"
+      ]
+    },
+    "problem_id": { "$ref": "#/$defs/shortId" },
+    "direction": { "$ref": "#/$defs/id" },
+    "route": { "type": "string", "minLength": 2, "maxLength": 120 },
+    "status": { "enum": ["completed", "interrupted", "aborted", "failed"] },
+    "started_at": { "type": "string", "format": "date-time" },
+    "finished_at": { "type": "string", "format": "date-time" },
+    "research_task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "branch_id", "mode", "kind", "title"],
+      "properties": {
+        "task_id": { "$ref": "#/$defs/id" },
+        "branch_id": { "$ref": "#/$defs/id" },
+        "mode": { "enum": ["recommended", "frontier", "explore", "verify"] },
+        "kind": { "enum": ["proof", "counterexample-search", "computation", "formalization", "review", "synthesis", "exploration"] },
+        "title": { "type": "string", "minLength": 8, "maxLength": 180 }
+      }
+    },
+    "summary": { "type": "string", "minLength": 20, "maxLength": 4000 },
+    "claims": { "type": "array", "maxItems": 12, "items": { "$ref": "#/$defs/claim" } },
+    "limitations": { "$ref": "#/$defs/textList" },
+    "failed_approaches": { "$ref": "#/$defs/textList" },
+    "next_actions": { "$ref": "#/$defs/textList" },
+    "proposed_tasks": { "type": "array", "maxItems": 3, "items": { "$ref": "#/$defs/taskProposal" } },
+    "citations": { "type": "array", "maxItems": 20, "items": { "$ref": "#/$defs/citation" } },
+    "prior_attempt_ids": { "type": "array", "maxItems": 10, "uniqueItems": true, "items": { "$ref": "#/$defs/attemptId" } },
+    "review_status": { "const": "unreviewed" }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,179}$" },
+    "shortId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,39}$" },
+    "attemptId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{7,179}$" },
+    "textList": { "type": "array", "maxItems": 12, "items": { "type": "string", "minLength": 20, "maxLength": 900 } },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["statement", "confidence", "evidence_summary", "verification_method"],
+      "properties": {
+        "statement": { "type": "string", "minLength": 20, "maxLength": 1200 },
+        "confidence": { "enum": ["conjectural", "heuristic", "computational", "partial-proof", "rigorous-within-scope"] },
+        "evidence_summary": { "type": "string", "minLength": 20, "maxLength": 1500 },
+        "verification_method": { "type": "string", "minLength": 20, "maxLength": 1500 }
+      }
+    },
+    "taskProposal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title", "objective", "rationale", "success_criteria", "useful_failure_criteria",
+        "verification_method", "suggested_minutes", "relationship"
+      ],
+      "properties": {
+        "title": { "type": "string", "minLength": 8, "maxLength": 180 },
+        "objective": { "type": "string", "minLength": 20, "maxLength": 2000 },
+        "rationale": { "type": "string", "minLength": 20, "maxLength": 1000 },
+        "success_criteria": { "type": "string", "minLength": 20, "maxLength": 1000 },
+        "useful_failure_criteria": { "type": "string", "minLength": 20, "maxLength": 1000 },
+        "verification_method": { "type": "string", "minLength": 20, "maxLength": 1000 },
+        "suggested_minutes": { "type": "integer", "minimum": 5, "maximum": 120 },
+        "relationship": { "enum": ["child", "alternative", "verification"] }
+      }
+    },
+    "citation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "url"],
+      "properties": {
+        "title": { "type": "string", "minLength": 2, "maxLength": 300 },
+        "url": { "type": "string", "format": "uri", "maxLength": 2000 }
+      }
+    }
+  }
+}
