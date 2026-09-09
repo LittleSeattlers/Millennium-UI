@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://littleseattlers.github.io/Millennium-UI/data/dashboard.v1.schema.json",
+  "title": "Millennium public dashboard snapshot v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "generated_at", "data_scope", "totals", "problems"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "data_scope": { "const": "validated canonical contribution records on public main" },
+    "totals": { "$ref": "#/$defs/counts" },
+    "problems": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "ui_slug", "runs", "completed", "checkpointed", "aborted"],
+        "properties": {
+          "id": {
+            "enum": [
+              "riemann-hypothesis",
+              "p-vs-np",
+              "navier-stokes",
+              "hodge-conjecture",
+              "birch-swinnerton-dyer",
+              "yang-mills",
+              "poincare-conjecture"
+            ]
+          },
+          "ui_slug": { "enum": ["rh", "pnp", "ns", "hodge", "bsd", "ym", "pc"] },
+          "runs": { "$ref": "#/$defs/count" },
+          "completed": { "$ref": "#/$defs/count" },
+          "checkpointed": { "$ref": "#/$defs/count" },
+          "aborted": { "$ref": "#/$defs/count" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "count": { "type": "integer", "minimum": 0 },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runs", "completed", "checkpointed", "aborted"],
+      "properties": {
+        "runs": { "$ref": "#/$defs/count" },
+        "completed": { "$ref": "#/$defs/count" },
+        "checkpointed": { "$ref": "#/$defs/count" },
+        "aborted": { "$ref": "#/$defs/count" }
+      }
+    }
+  }
+}
