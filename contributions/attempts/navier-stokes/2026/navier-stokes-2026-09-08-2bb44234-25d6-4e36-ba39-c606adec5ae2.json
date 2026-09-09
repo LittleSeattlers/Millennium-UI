@@ -1,0 +1,85 @@
+{
+  "schema_version": 2,
+  "attempt_id": "navier-stokes-2026-09-08-2bb44234-25d6-4e36-ba39-c606adec5ae2",
+  "problem": "navier-stokes",
+  "problem_id": "ns",
+  "direction": "blowup",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-08T20:17:40.749Z",
+  "finished_at": "2026-09-08T20:33:24.697Z",
+  "research_task": {
+    "task_id": "community.f38a3c5cff7b44c4",
+    "branch_id": "explore-837471d77d92a684",
+    "mode": "frontier",
+    "kind": "synthesis",
+    "title": "Certify compact-localization residual"
+  },
+  "summary": "A transported compact vector potential analytically localizes the affine-amplified shear correction, cancels its transport defect, and yields a complete Euler residual with arbitrary-order scale-explicit derivative bounds on compact time intervals. Exact polynomial verification remains unresolved because the executed verifier changed its profile state, so confidence is partial-proof.",
+  "value_assessment": {
+    "outcome": "frontier-refinement",
+    "novelty": "The supplied prior slice gave a general residual but no all-order scale bounds or completed independent verification. This attempt reproduces that identity, chooses affine-flow-transported cutoffs so its defect vanishes, expands the force into fixed scaled profiles, and derives every mixed-derivative scale exponent.",
+    "evidence": "Two independent componentwise analytic derivations and an arbitrary-order chain-rule and Bell-polynomial estimate are recorded with the attempt. The failed polynomial run is retained only as a reproducible verifier obstruction.",
+    "falsifier": "A correct immutable exact-rational expansion with a nonzero raw-versus-closed residual coefficient, or a counterexample to the stated mixed-derivative chain rule, would overturn the scoped claim."
+  },
+  "claims": [
+    {
+      "statement": "For the explicitly defined affine strain and transported compact vector potential on Euclidean three-space, the curl correction is divergence-free, agrees with the shear on its moving core, has zero transport defect, and has the three displayed residual components.",
+      "confidence": "partial-proof",
+      "evidence_summary": "A perturbation expansion and a separate raw-coordinate expansion agree algebraically; scaled differentiation gives the closed profiles.",
+      "verification_method": "Audit both derivations and rerun the coefficient comparison using immutable exact-rational polynomials."
+    },
+    {
+      "statement": "On each compact time interval, every mixed spatial and time derivative of the displayed residual obeys the recorded scale-explicit estimate with Bell-polynomial time constants.",
+      "confidence": "partial-proof",
+      "evidence_summary": "Spatial chain rules expose all localization powers and Faà di Bruno in accumulated strain gives arbitrary time order.",
+      "verification_method": "Verify time orders one and two directly, then audit the Bell-polynomial induction."
+    }
+  ],
+  "limitations": [
+    "The exact symbolic verification required by the parent did not complete successfully.",
+    "The affine background remains nondecaying and infinite-energy; only the correction and residual are compactly supported.",
+    "Viscosity would add an unexpanded Laplacian correction.",
+    "No finite-time breakdown or Navier--Stokes regularity conclusion is established."
+  ],
+  "failed_approaches": [
+    "The stateful terminating-decimal polynomial verifier produced a nonzero transport defect and raw-component mismatch after diagnostics showed a profile coefficient changing from one to two. Its output cannot certify or falsify the analytic formula."
+  ],
+  "next_actions": [
+    "Implement an immutable exact-rational comparison and require zero transport defect before residual comparison.",
+    "Directly audit the arbitrary-time derivative formula at orders one and two."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Immutable exact-rational residual verification",
+      "objective": "Recompute the raw Euler residual and closed transported-cutoff formula coefficientwise without mutable polynomial state.",
+      "rationale": "The current executable check is invalidated by observed profile-state mutation, while exact verification is required for promotion.",
+      "success_criteria": "Zero transport defect and exact equality of all three components for two nontrivial profiles and two rational parameter sets.",
+      "useful_failure_criteria": "A minimal exact monomial counterexample identifying the first mismatched coefficient.",
+      "verification_method": "Immutable rational polynomial dictionaries and a separately implemented direct component expansion.",
+      "suggested_minutes": 45,
+      "relationship": "verification"
+    },
+    {
+      "title": "Low-order audit of all-derivative bounds",
+      "objective": "Reproduce mixed derivative formulas at time orders one and two and arbitrary spatial order.",
+      "rationale": "The Bell-polynomial estimate is the principal delta beyond the supplied prior result.",
+      "success_criteria": "Exact agreement including every amplification exponent and localization-scale power.",
+      "useful_failure_criteria": "An explicit derivative order with a corrected exponent or missing lambda derivative.",
+      "verification_method": "Direct chain-rule expansion compared with the Bell-polynomial specialization.",
+      "suggested_minutes": 30,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "navier-stokes-2026-09-08-e9e7bf10-1311-4aea-ba7b-fe1c4f9f4114",
+    "navier-stokes-2026-09-08-f325901f-7e0e-4430-9c04-25d3051a3207",
+    "navier-stokes-2026-09-05-6f78d273-1ec5-4ab6-9671-83e20180770f",
+    "navier-stokes-2026-09-01-05dc0da4-3027-4047-9cbf-eb88b07d4e50",
+    "navier-stokes-2026-08-31-6d0fb167-9a7d-4147-934f-873a37fd77fe",
+    "navier-stokes-2026-08-31-3dd7a053-c068-437c-9700-d7bfbd0415e5",
+    "navier-stokes-2026-09-01-6ab9399b-9200-4621-ac80-f1a1db0df8b5"
+  ],
+  "review_status": "unreviewed"
+}
