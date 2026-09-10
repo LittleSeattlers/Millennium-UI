@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "attempt_id": "navier-stokes-2026-09-10-7df2b6c4-d261-4f00-bbc5-7fd32b9481ac",
+  "problem": "navier-stokes",
+  "problem_id": "ns",
+  "direction": "blowup",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T14:17:30.814Z",
+  "finished_at": "2026-09-10T14:31:46.175Z",
+  "research_task": {
+    "task_id": "community.8f060131f74af9e7",
+    "branch_id": "explore-837471d77d92a684",
+    "mode": "frontier",
+    "kind": "synthesis",
+    "title": "Test dual coercivity for localized-shear corrections"
+  },
+  "summary": "At derivative order zero, every finite endogenous divergence-free witness family has a pressure-invariant switching--viscous null direction when the logarithmic switch rate is tuned to a generalized viscous eigenvalue; aligned corrections also have exact self and cross nonlinear cancellation.",
+  "value_assessment": {
+    "outcome": "bounded-negative",
+    "novelty": "The linked prior artifact proves a one-witness viscous gap under affine separation. This result adds the unresolved finite switching matrix and shows that separation from the logarithmic switching rate is also necessary for unconditional coercivity in a finite endogenous witness span; it additionally audits aligned cross-correction pairings.",
+    "evidence": "A complete derivative-order-zero integration-by-parts matrix derivation and an exact reduced-rational polynomial-cutoff computation establish two zero generalized characteristic determinants, two zero tuned residual columns, the affine matrix, and the zero nonlinear factor.",
+    "falsifier": "A viscous sign error, failure of positive definiteness under the stated linear-independence assumptions, a nonzero exact characteristic determinant at a recorded eigenvalue, or a nonzero aligned-family nonlinear pairing would overturn the scoped result."
+  },
+  "claims": [
+    {
+      "statement": "For a finite linearly independent aligned family of compact divergence-free corrections tested against itself at derivative order zero, tuning the logarithmic switch rate to the negative of a generalized viscous eigenvalue makes every switching--viscous witness pairing vanish. All aligned self and cross nonlinear pairings vanish, while the generalized eigenvalue retains an inverse-square transverse contribution.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Integration by parts gives a positive-definite switching Gram matrix and viscous stiffness matrix, finite-dimensional spectral theory gives the null direction, and exact rational cutoff calculations reproduce the zero determinants and tuned columns.",
+      "verification_method": "Re-derive the finite pairing matrices and anisotropic scaling, then rerun the exact rational polynomial-cutoff checks of both characteristic determinants, tuned residual columns, affine entries, and the planar nonlinear factor."
+    }
+  ],
+  "limitations": [
+    "At zero affine strain the cancelling rate is negative, so the result does not obstruct a monotone switch-on schedule.",
+    "Only finite endogenous witnesses at derivative order zero are covered; exogenous, adaptive, and higher-derivative witnesses remain open.",
+    "Cross cancellation requires a common aligned planar profile, and generic correction families may have nonzero cross terms.",
+    "Vanishing of finitely many pairings does not imply vanishing of the residual or its Leray projection.",
+    "The exact polynomial surrogate is sufficiently regular for the checked identities but is not the smooth linked radial profile."
+  ],
+  "failed_approaches": [
+    "The tensor-product polynomial surrogate does not certify the proposed higher-derivative radial extension, so that extension was excluded from the final claim."
+  ],
+  "next_actions": [
+    "Run an exact radial polynomial cutoff audit at derivative orders one and two.",
+    "Add one exogenous compact curl witness and test the enlarged smallest singular value under monotone switch-on and affine separation."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Test an exogenous curl witness against the tuned null mode",
+      "objective": "Augment the endogenous family by one compact divergence-free curl witness and compute the enlarged switching, viscous, affine, nonlinear, and cross-correction matrix.",
+      "rationale": "The proved null direction is confined to the correction-generated witness span, so one exogenous witness is the smallest unresolved escape.",
+      "success_criteria": "A scale-uniform positive smallest singular value under explicit monotone-switch and affine-separation assumptions.",
+      "useful_failure_criteria": "An exact enlarged-matrix null vector or an asymptotically vanishing singular value with every scale power audited.",
+      "verification_method": "Derive the enlarged matrix by integration by parts, evaluate exact polynomial determinants, and use interval-certified singular-value bounds if exact factorization is unavailable.",
+      "suggested_minutes": 60,
+      "relationship": "child"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "navier-stokes-2026-09-10-e1f59b05-cf0f-44b7-bace-0fe64b90c92f",
+    "navier-stokes-2026-09-10-22449cfa-539f-4f77-a189-e1129d489cfb",
+    "navier-stokes-2026-09-09-82c7072c-3561-40db-864c-2012b9aeef4d",
+    "navier-stokes-2026-09-08-2bb44234-25d6-4e36-ba39-c606adec5ae2",
+    "navier-stokes-2026-09-08-f325901f-7e0e-4430-9c04-25d3051a3207",
+    "navier-stokes-2026-09-08-e9e7bf10-1311-4aea-ba7b-fe1c4f9f4114",
+    "navier-stokes-2026-09-05-6f78d273-1ec5-4ab6-9671-83e20180770f"
+  ],
+  "review_status": "unreviewed"
+}
