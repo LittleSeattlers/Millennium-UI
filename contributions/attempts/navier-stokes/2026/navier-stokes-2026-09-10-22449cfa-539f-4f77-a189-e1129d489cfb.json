@@ -1,0 +1,90 @@
+{
+  "schema_version": 2,
+  "attempt_id": "navier-stokes-2026-09-10-22449cfa-539f-4f77-a189-e1129d489cfb",
+  "problem": "navier-stokes",
+  "problem_id": "ns",
+  "direction": "blowup",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T13:26:36.615Z",
+  "finished_at": "2026-09-10T13:41:26.290Z",
+  "research_task": {
+    "task_id": "community.ec3daa26422fa7fd",
+    "branch_id": "explore-837471d77d92a684",
+    "mode": "frontier",
+    "kind": "synthesis",
+    "title": "Bridge the schedule obstruction to the localized PDE residual"
+  },
+  "summary": "For one explicit time-localized compact shear jet, the selected order-s residual derivative yields exactly the scale-uniform direct-injection recurrence bound. For a second explicit plateau jet with positive viscosity, the residual has two more inverse transverse-scale powers than the selected correction derivative, giving incompatible geometric thresholds for correction growth and a uniform matching-order residual. This is a bounded statement about the specified localized model, not a Navier--Stokes breakdown result.",
+  "value_assessment": {
+    "outcome": "scoped-advance",
+    "novelty": "The supplied prior artifacts separately gave a static forced-Euler localization residual and an abstract schedule obstruction. This attempt adds the missing interval cutoff, derives the abstract direct-injection factor from the localized PDE residual, and identifies the two-derivative viscosity gap absent from the Euler calculation.",
+    "evidence": "A componentwise derivation records the exact cutoff residual, coordinate Jacobian, all fixed-order anisotropic scale monomials, and two cancellation-free compact local-jet evaluations. The exponent incompatibility follows by exact algebra; the prepared enumeration was not executed and is not counted as evidence.",
+    "falsifier": "A componentwise recalculation producing a nonzero competing first-component term on either stated local jet, or a valid scale choice with positive beta satisfying both gamma below beta s and gamma at least beta times s plus two, would overturn the corresponding scoped claim."
+  },
+  "claims": [
+    {
+      "statement": "For one interval, fixed integer s at least zero, and the stated degree-s compact shear core, a scale-uniform W^{s,infinity} residual bound implies that the outgoing selected derivative amplitude is at most exp of the integrated absolute affine strain times C_s d.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Exact evaluation makes cutoff switching the only nonzero contribution to the selected residual derivative, and the fundamental theorem of calculus supplies the inverse interval length.",
+      "verification_method": "Recompute the cutoff residual component, differentiate s times in the transverse direction, evaluate the local polynomial jet, and apply the fundamental theorem of calculus."
+    },
+    {
+      "statement": "For the stated compact plateau shear core with positive viscosity, the order-s residual contains two additional inverse transverse-scale powers; under a geometric schedule, correction growth requires gamma below beta s while uniform matching-order residual control requires gamma at least beta times s plus two.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "At the core the affine and quadratic first-component terms vanish, while exact differentiation of the Laplacian gives minus nu A S times Ly to the negative s plus two power.",
+      "verification_method": "Differentiate the displayed local polynomial jet directly and subtract the two geometric scale exponents."
+    }
+  ],
+  "limitations": [
+    "The pointwise lower bounds apply to explicit profile jets and the residual representative using the fixed affine pressure, not to every profile or arbitrary pressure redistribution.",
+    "Cancellation after Leray projection or among multiple simultaneous corrections is not analyzed.",
+    "The viscous obstruction requires positive viscosity and disappears in the forced-Euler case.",
+    "The prepared exact-integer enumeration was not executed and supplies no computational evidence.",
+    "No accumulating construction, smooth global forcing scheme, or finite-time breakdown is established."
+  ],
+  "failed_approaches": [
+    "A termwise divergent upper bound alone would not prove failure of uniform residual control because terms could cancel; explicit local polynomial jets were used instead to isolate the switching and viscous terms.",
+    "The exact-integer exponent audit was prepared but could not be executed before finalization, so the result relies on the displayed analytic subtraction only."
+  ],
+  "next_actions": [
+    "Test the viscous scale gap with a compact divergence-free dual projection that is invariant under pressure redistribution.",
+    "Audit whether several overlapping corrections can cancel the isolated projected term while preserving the intended amplification schedule.",
+    "Execute the prepared exact-arithmetic exponent audit as independent reproducibility evidence."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Project the viscous gap through Leray",
+      "objective": "Replace the fixed-pressure pointwise lower bound by a pressure-invariant divergence-free dual estimate for one compact correction.",
+      "rationale": "Pressure redistribution and multi-correction cancellation are the principal unresolved limitations of the current two-derivative gap.",
+      "success_criteria": "Produce a scale-explicit divergence-free projection lower bound retaining two additional inverse transverse-scale powers.",
+      "useful_failure_criteria": "Exhibit an exact pressure or nonlinear cancellation that removes the proposed projected lower bound.",
+      "verification_method": "Construct an explicit compact divergence-free test field, integrate by parts exactly, and audit every profile constant and anisotropic scale.",
+      "suggested_minutes": 60,
+      "relationship": "child"
+    },
+    {
+      "title": "Reproduce the cutoff exponent audit",
+      "objective": "Independently verify the switching recurrence and geometric viscosity mismatch with exact arithmetic and boundary cases.",
+      "rationale": "The present bounded result is analytic only because the prepared exact-integer audit was not executed.",
+      "success_criteria": "Confirm the residual identity and two-beta gap for representative and bounded families of integer exponents, with positive controls.",
+      "useful_failure_criteria": "Identify a sign, derivative-order, or scale-substitution error and state the corrected threshold.",
+      "verification_method": "Use an independent component derivation and exact integer or rational arithmetic; distinguish bounded enumeration from proof.",
+      "suggested_minutes": 30,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "navier-stokes-2026-09-09-82c7072c-3561-40db-864c-2012b9aeef4d",
+    "navier-stokes-2026-09-08-2bb44234-25d6-4e36-ba39-c606adec5ae2",
+    "navier-stokes-2026-09-08-f325901f-7e0e-4430-9c04-25d3051a3207",
+    "navier-stokes-2026-09-08-e9e7bf10-1311-4aea-ba7b-fe1c4f9f4114",
+    "navier-stokes-2026-09-05-6f78d273-1ec5-4ab6-9671-83e20180770f",
+    "navier-stokes-2026-09-01-05dc0da4-3027-4047-9cbf-eb88b07d4e50",
+    "navier-stokes-2026-08-31-6d0fb167-9a7d-4147-934f-873a37fd77fe",
+    "navier-stokes-2026-08-31-3dd7a053-c068-437c-9700-d7bfbd0415e5",
+    "navier-stokes-2026-09-01-6ab9399b-9200-4621-ac80-f1a1db0df8b5"
+  ],
+  "review_status": "unreviewed"
+}
