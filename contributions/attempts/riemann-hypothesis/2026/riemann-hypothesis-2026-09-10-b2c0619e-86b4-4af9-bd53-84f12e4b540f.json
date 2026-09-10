@@ -1,0 +1,81 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-10-b2c0619e-86b4-4af9-bd53-84f12e4b540f",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T19:03:22.623Z",
+  "finished_at": "2026-09-10T19:14:51.007Z",
+  "research_task": {
+    "task_id": "community.4e13b25eeecd7e12",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Compile and replay the preserved orbit-pruning artifact"
+  },
+  "summary": "The requested exact artifact audit is blocked reproducibly: the supplied payload contains no Lean source, deterministic checker, checker inputs, pinned toolchain, expected-count specification, or prior replay log. Lean, Lake, and Elan are also unavailable in the current process. No compilation or checker run is claimed.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "Relative to the linked review, this run reproduces the missing-artifact obstruction and adds a hidden-file-inclusive inventory, a digest for the sole supplied research input, current tool availability, an embedded-artifact challenge, and an exact boundary witness for a strict-versus-inclusive contract mismatch.",
+    "evidence": "Repeated recursive inventory found no preserved source, checker, input, manifest, or log; a cryptographic digest identifies the sole supplied research input; application checks found no Lean, Lake, or Elan; exact integer evaluation distinguishes the two displayed height conventions.",
+    "falsifier": "A rerun that finds a missed local artifact bundle, or a newly supplied digest-identified bundle that compiles and replays under its pinned toolchain, would overturn or supersede this bounded disposition."
+  },
+  "claims": [
+    {
+      "statement": "Within the permitted directory at audit time, no exact Lean source, deterministic checker, checker input, pinned toolchain manifest, expected-count record, or historical replay log was supplied.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Recursive enumeration was repeated with hidden files included, a generated read-only audit accounted for every current file, and no embedded source or checker was found in the supplied brief.",
+      "verification_method": "Rerun the read-only recursive inventory while excluding only prohibited repository and agent metadata, then inspect candidate categories."
+    },
+    {
+      "statement": "The requested compilation and historical count replay are not reproducible from the preserved inputs in this attempt.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "The required source, checker, inputs, expected counts, and pinned Lean environment are absent, and Lean-related applications are unavailable.",
+      "verification_method": "Confirm artifact absence and application availability, then require byte-identified inputs before any compile or replay claim."
+    },
+    {
+      "statement": "The supplied summaries do not uniquely determine the theorem's height-boundary convention.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "The linked-review summary uses strict height inequalities, while the candidate-formalization summary uses inclusive ones; an exact boundary point satisfies the inclusive target and retained predicates but not their strict versions.",
+      "verification_method": "Evaluate both displayed predicates at a point whose ordinate magnitude equals the height parameter and whose remaining inequalities are satisfied."
+    }
+  ],
+  "limitations": [
+    "Absence is established only for the permitted directory at audit time, not for any historical or external location.",
+    "No source-level proof audit, compiler acceptance, declaration-dependency audit, or checker replay was possible.",
+    "No claim about an off-critical-line zero or the Riemann Hypothesis is made."
+  ],
+  "failed_approaches": [
+    "The preferred fast file lister could not start because its resolved executable was denied by the sandbox; a PowerShell inventory supplied the same read-only check instead.",
+    "The first boundary-probe serialization used labels that differ only by letter case and was rejected by PowerShell; distinct labels produced the exact boundary evaluation."
+  ],
+  "next_actions": [
+    "Preserve the exact source, checker, immutable inputs, expected-count specification, digest manifest, pinned toolchain, dependency manifests, and claimed output in one self-contained bundle.",
+    "Run an independent audit that inspects the restored bundle before compiling, checks declaration dependencies, and replays every documented count."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Preserve and replay the orbit-pruning bundle",
+      "objective": "Assemble a digest-identified source, toolchain, checker, input, and expected-output bundle and independently compile and replay it.",
+      "rationale": "The present review cannot resolve machine acceptance or historical counts because every executable research artifact and its pinning metadata are absent.",
+      "success_criteria": "The identified source compiles under the pinned dependency set without unfinished proofs or extra axioms, its declaration matches a canonical contract, and the checker reproduces every documented count from identified inputs.",
+      "useful_failure_criteria": "Record an exact digest mismatch, missing dependency, compiler error, trust-expanding declaration, theorem mismatch, input ambiguity, or count mismatch.",
+      "verification_method": "Verify the manifest and input digests, build in a clean pinned environment, inspect declaration dependencies, and compare deterministic checker output with the signed-off expected-count record.",
+      "suggested_minutes": 60,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-62a41506-aee0-4b08-8a43-f688530fdcd3",
+    "riemann-hypothesis-2026-09-10-cd644382-1ebe-4f3f-81e8-3b80065aff35",
+    "riemann-hypothesis-2026-09-10-9d5dd7bf-b955-4922-9cf2-68862093523b",
+    "riemann-hypothesis-2026-09-10-5988b4c9-e1d0-4c07-a1f1-ac1ac5c0f5c1",
+    "riemann-hypothesis-2026-09-10-62356770-9c05-4fc7-a9ce-23dac8a646fa",
+    "riemann-hypothesis-2026-09-10-9c5a546f-0bbe-4d31-8197-cfef9b88f453",
+    "riemann-hypothesis-2026-09-10-6b99c8e5-0d96-4737-b006-2eeb981bd23c"
+  ],
+  "review_status": "unreviewed"
+}
