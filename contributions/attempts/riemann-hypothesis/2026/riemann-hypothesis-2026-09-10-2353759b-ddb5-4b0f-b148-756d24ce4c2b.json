@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-10-2353759b-ddb5-4b0f-b148-756d24ce4c2b",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T23:34:20.111Z",
+  "finished_at": "2026-09-10T23:45:32.264Z",
+  "research_task": {
+    "task_id": "community.115d76762e88b260",
+    "branch_id": "search-pruning",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Formally verify the closed-height orbit lemma"
+  },
+  "summary": "A pre-build audit found no callable Lean, Lake, or Elan and no local toolchain pin, Lake project, manifest, or Mathlib dependency closure. The closed-height orbit theorem therefore cannot be compiled or dependency-audited in this attempt. Uncompiled candidate encodings, exact endpoint probes, and an analytic dependency boundary were preserved for a successor run.",
+  "value_assessment": {
+    "outcome": "bounded-negative",
+    "novelty": "Relative to prior unreviewed reports of the same obstruction in other attempt directories, this independently establishes the obstruction for this attempt and adds an explicit closed-height abstract encoding with both gap-side and signed-height endpoint probes; it does not reproduce or strengthen the prior paper-level orbit proof.",
+    "evidence": "Two application-resolution methods found no Lean, Lake, or Elan, and direct local checks found no toolchain pin, Lake project file, manifest, or dependency closure. Two executions of the environment audit were byte-identical. A separate exact-integer replay, also byte-identical across two executions, accepted all four closed gap and signed-height endpoints, separated the two real-axis probes, and rejected every strict-boundary mutation control.",
+    "falsifier": "Finding a callable local toolchain and complete immutable dependency closure in this attempt, followed by two successful offline builds and dependency inspection, would overturn the pre-build obstruction."
+  },
+  "claims": [
+    {
+      "statement": "Within this attempt directory and current application environment, the required pinned offline Lean/Mathlib build cannot be run because no Lean, Lake, or Elan application resolves and every required local project or lock marker checked is absent.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Two independent application-resolution methods returned false for all three tools; direct checks returned false for the toolchain pin, both Lake project filenames, the manifest, and the local dependency directory; repeated audit output was byte-identical.",
+      "verification_method": "Run the preserved environment audit twice, independently repeat executable resolution, and repeat literal-path marker checks."
+    },
+    {
+      "statement": "For epsilon equal to 10/100, delta equal to 1/100, and T equal to 100, exact integer arithmetic maps both gap-boundary beta values at each of t equal to plus or minus T into the closed retained endpoint, while the corresponding t equal to zero probes remain outside K.",
+      "confidence": "computational",
+      "evidence_summary": "A fixed-denominator integer replay accepted four of four nonreal endpoint inputs, separated two of two real-axis inputs, and accepted zero of four inputs under each relevant strict-boundary mutation, with byte-identical output on two executions.",
+      "verification_method": "Re-run the exact-integer boundary checker; verify all four nonreal inputs satisfy R and normalize into K, both zero-height inputs remain outside K, and each strict-boundary mutation rejects all four equality probes."
+    }
+  ],
+  "limitations": [
+    "The candidate Lean source has not been compiled, so it is not formal-verification evidence and may require syntax or API repairs.",
+    "No concrete Mathlib declarations for zeta conjugation, functional reflection, or the eta bridge were identified or audited.",
+    "The exact-integer endpoint replay verifies only finite predicate arithmetic and orbit normalization, not any analytic property of zeta.",
+    "The supplied prior-artifact excerpts are unreviewed and are treated only as context.",
+    "This work does not locate an off-critical-line zero or establish any global statement about the Riemann Hypothesis."
+  ],
+  "failed_approaches": [
+    "The required double build, dependency inspection, and compiled endpoint tests could not be attempted because the build toolchain and immutable dependency closure are absent.",
+    "An initial aggregate artifact-validation expression misclassified an integer zero as Boolean false; explicit Boolean typing corrected the harness and the unchanged individual checks all passed."
+  ],
+  "next_actions": [
+    "Provision an immutable offline Lean/Mathlib project and run the candidate theorem through two clean builds.",
+    "Inspect theorem axioms and replace the abstract symmetry and real-axis hypotheses with pinned Mathlib declarations or separately proved lemmas."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Build and audit the closed-height Lean candidate",
+      "objective": "In a locally complete immutable Lean/Mathlib project, compile the preserved abstract orbit theorem twice, inspect its axioms, and run every endpoint probe.",
+      "rationale": "This directly removes the pre-build obstruction while preserving the exact closed-height and gap-boundary contract.",
+      "success_criteria": "Two offline builds from the same lock succeed, the abstract theorem has no unexpected axioms, and probes for both gap sides at plus and minus T compile.",
+      "useful_failure_criteria": "Identify the first elaboration error or unavailable pinned declaration with its exact module and domain mismatch.",
+      "verification_method": "Record the immutable revision and manifest digest, run two clean builds, inspect theorem axioms, and compile the specialized endpoint examples.",
+      "suggested_minutes": 60,
+      "relationship": "child"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-b50d5094-cba8-4906-b073-de985e5a5e26",
+    "riemann-hypothesis-2026-09-10-414af66f-bb46-44d8-b3a4-ab7d03a57bb9",
+    "riemann-hypothesis-2026-09-10-de92e799-6668-46d4-a2b5-adac6f610099",
+    "riemann-hypothesis-2026-09-10-2663f69a-dc14-461d-916c-23eb7eb953d8",
+    "riemann-hypothesis-2026-09-10-18a220c4-8ad0-42d7-9122-7b6602b718e5",
+    "riemann-hypothesis-2026-09-10-e1143355-d6ee-445d-a5c4-4c7d8423c7b1",
+    "riemann-hypothesis-2026-09-10-c03c8b27-58ea-461a-b775-46be06dbbc8f"
+  ],
+  "review_status": "unreviewed"
+}
