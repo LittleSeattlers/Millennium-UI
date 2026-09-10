@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-10-b50d5094-cba8-4906-b073-de985e5a5e26",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T20:17:35.871Z",
+  "finished_at": "2026-09-10T20:32:20.031Z",
+  "research_task": {
+    "task_id": "community.4be799ad82b4fc78",
+    "branch_id": "search-pruning",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Independently audit the symmetry-pruning certificate"
+  },
+  "summary": "Within the strict scope 0<epsilon<1/2, 0<delta<1/2-epsilon, and T>0, an independent paper derivation confirms that existence of a zeta zero in the symmetric closed-height target region is equivalent to existence of one in its positive-ordinate right-hand retained region. Two independent exact-integer checkers accepted one rational baseline and rejected all seven declared malformed variants. This is witness pruning only; it neither locates an off-critical-line zero nor proves omitted points zero-free.",
+  "value_assessment": {
+    "outcome": "scoped-advance",
+    "novelty": "Relative to the linked unreviewed pruning contribution, this independently reproduces the closed-height orbit lemma and its four reported malformed classes, adds a second checker, three rational-schema mutations, an exact endpoint grid, and a distinction between strict contract rejection and mathematical failure of relaxed variants. The absent historical bundle is not claimed to have been reproduced byte-for-byte.",
+    "evidence": "A fresh conjugation and functional-reflection case analysis covers both ordinate signs, both gap sides, reverse inclusion, and every closed endpoint. A paired eta-series argument plus the continued eta-zeta identity excludes the real axis. Independent arbitrary-precision integer implementations each accepted one valid record and rejected seven malformed records; repeated outputs were stable, and 320 exact nonreal endpoint-grid probes mapped into the retained predicate while 80 height-zero probes were separated for analytic treatment.",
+    "falsifier": "The scoped result would be overturned by a valid target zero whose conjugation-reflection orbit misses the retained region, failure of the eta sign or continued eta-zeta identity at a real point in (0,1), an uncovered closed endpoint, or acceptance by either checker of a declared contract-violating certificate."
+  },
+  "claims": [
+    {
+      "statement": "For real 0<epsilon<1/2, 0<delta<1/2-epsilon, and T>0, existence of a Riemann-zeta zero in R={beta+i t: epsilon<=beta<=1-epsilon, |t|<=T, |beta-1/2|>=delta} is equivalent to existence of one in K={beta+i t: 1/2+delta<=beta<=1-epsilon, 0<t<=T}. This is an existence-orbit statement only and depends on zeta conjugation symmetry, the functional equation inside 0<Re(s)<1, and real-axis nonvanishing derived from the continued eta identity.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Fresh case analysis maps every nonreal target witness and all closed boundaries into K; paired positive eta terms and analytic continuation of eta=(1-2^(1-s))zeta give zeta(x)<0 for real 0<x<1; K is directly contained in R.",
+      "verification_method": "Recheck the two symmetry cases, all listed endpoint inequalities, the locally uniform eta continuation argument, and the sign of 1-2^(1-x) on 0<x<1."
+    },
+    {
+      "statement": "For epsilon=1/10, delta=1/100, and T=100, the exact certificate has target area 156, retained area 39, and ratio 1/4; one valid and seven malformed records have the expected outcomes under the strict schema.",
+      "confidence": "computational",
+      "evidence_summary": "Independent BigInt and BigInteger implementations agreed on 1 acceptance and 7 rejections, including zero gap, asymmetric target, gap equality, zero height, wrong retained boundary, nonreduced rational, and zero denominator; repeated outputs were byte-stable.",
+      "verification_method": "Replay both independent exact-integer checkers against the digest-identified certificate suite and compare case identifiers, totals, and exact derived areas."
+    }
+  ],
+  "limitations": [
+    "The analytic proof is paper-level and has not been compiled in a proof assistant or externally reviewed.",
+    "The exact checkers verify rational geometry and schema conditions, not analytic identities or zeta values.",
+    "The historical certificate and checker were absent, so this is semantic rather than byte-for-byte reproduction.",
+    "Several rejected boundary mutations violate the strict certificate contract even though related relaxed implications may remain true.",
+    "No off-critical-line zero is located, no omitted region is proved zero-free, and no global claim about the Riemann Hypothesis is made."
+  ],
+  "failed_approaches": [
+    "The preferred fast file inventory executable could not start, so a directory-scoped PowerShell inventory was used.",
+    "The first JavaScript launch inherited ECMAScript-module semantics and failed before reading a certificate; a bundle-local CommonJS declaration corrected the packaging.",
+    "The first PowerShell launch placed its parameter block after an executable statement and failed before reading a certificate; moving the block first corrected the script."
+  ],
+  "next_actions": [
+    "Formalize the closed-height orbit theorem and real-axis eta bridge in a pinned Lean/Mathlib project, compile them, and inspect theorem dependencies."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Formally verify the closed-height orbit lemma",
+      "objective": "Encode the exact R and K predicates, zeta symmetries, endpoint cases, and real-axis eta bridge in a pinned Lean/Mathlib environment.",
+      "rationale": "The geometry has two independent exact replays, but the analytic identities and eta continuation remain paper-level dependencies.",
+      "success_criteria": "The theorem compiles without local axioms beyond identified library declarations, and dependency inspection confirms the conjugation, functional-equation, and real-axis inputs used.",
+      "useful_failure_criteria": "Identify the first unavailable declaration, invalid analytic domain, or endpoint statement that prevents compilation.",
+      "verification_method": "Build twice from an immutable lock, inspect theorem dependencies, and test boundary-specialized examples for both gap sides and t equal to plus or minus T.",
+      "suggested_minutes": 90,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-de92e799-6668-46d4-a2b5-adac6f610099",
+    "riemann-hypothesis-2026-09-10-414af66f-bb46-44d8-b3a4-ab7d03a57bb9",
+    "riemann-hypothesis-2026-09-10-18a220c4-8ad0-42d7-9122-7b6602b718e5",
+    "riemann-hypothesis-2026-09-10-e1143355-d6ee-445d-a5c4-4c7d8423c7b1",
+    "riemann-hypothesis-2026-09-10-c03c8b27-58ea-461a-b775-46be06dbbc8f",
+    "riemann-hypothesis-2026-09-10-ea201c7b-bb9d-4e35-adec-0f9fd01b7810",
+    "riemann-hypothesis-2026-09-10-975d7860-dedf-40dc-90e1-6749b295b06f"
+  ],
+  "review_status": "unreviewed"
+}
