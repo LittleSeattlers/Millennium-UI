@@ -1,0 +1,82 @@
+{
+  "schema_version": 2,
+  "attempt_id": "navier-stokes-2026-09-09-82c7072c-3561-40db-864c-2012b9aeef4d",
+  "problem": "navier-stokes",
+  "problem_id": "ns",
+  "direction": "blowup",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-09T23:31:52.016Z",
+  "finished_at": "2026-09-10T00:49:24.968Z",
+  "research_task": {
+    "task_id": "community.2e3fbf513bf8623f",
+    "branch_id": "explore-837471d77d92a684",
+    "mode": "frontier",
+    "kind": "synthesis",
+    "title": "Audit infinite-scale ODE schedule"
+  },
+  "summary": "Within an explicitly stated scale-indexed ODE schedule, finite accumulated strain and a scale-uniform forcing bound at the selected derivative order cannot produce divergence of that derivative norm through multiplicative frequency transport or direct high-frequency injection. Exact recurrence iteration gives a uniform norm bound, while geometric and polynomial exponent audits produce incompatible growth and forcing inequalities. This is a bounded obstruction for the schedule model, not a Navier--Stokes regularity or breakdown result.",
+  "value_assessment": {
+    "outcome": "bounded-negative",
+    "novelty": "The prior context treated fixed-amplitude integrability and localized residual formulas; this attempt separately audits an accumulating, scale-indexed correction schedule and identifies the precise escape conditions required to evade its bound.",
+    "evidence": "DERIVATION.md gives the exact recurrence iteration, frequency-product estimate, direct-injection bound, and the geometric and polynomial exponent inequalities. verify_schedule.ps1 enumerates 66,048 geometric and 115,136 polynomial tuples with no matching-order witness, while a weakened-order positive control finds 27,209 feasible tuples.",
+    "falsifier": "An explicit sequence satisfying finite total interval length, summable absolute strain, and a scale-uniform matching-order forcing bound while violating the derived recurrence, frequency, or injection bound would falsify the corresponding claim. A derivation error in the displayed finite algebra or a contradictory exact enumeration would also falsify it."
+  },
+  "claims": [
+    {
+      "statement": "For the audited recurrence X_(n+1) <= exp(c_s e_n)(X_n + C_s d_n), finite sums of d_n and e_n and finite constants c_s and C_s imply a uniform bound X_n <= exp(c_s sum_j e_j)(X_0 + C_s sum_j d_j).",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "DERIVATION.md obtains the estimate by exact finite iteration, or equivalently by dividing by the accumulated exponential factor, and then bounds every remaining positive term by the total interval length.",
+      "verification_method": "Induct on n in the displayed recurrence, expand the product factors exactly, and bound each partial strain and duration sum by its stated finite total. A counterexample sequence under the same hypotheses would refute the claim."
+    },
+    {
+      "statement": "For multiplicative frequency transport K_(n+1)=exp(sigma_n)K_n with |sigma_n|<=e_n, summable absolute strain prevents K_n from tending to infinity.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Taking logarithms gives |log(K_n/K_0)| <= sum_(j<n)e_j, so every transported frequency remains between two finite positive bounds whenever the absolute strain exposure is summable.",
+      "verification_method": "Multiply the finite recurrence, take logarithms, apply the triangle inequality, and compare the resulting partial sum with the assumed convergent series of absolute strain exposures."
+    },
+    {
+      "statement": "For direct injections a_n=integral_(I_n) g_n dt with a scale-uniform matching-order bound K_n^s|g_n(t)|<=C_s, finite total interval length implies sum_n |a_n|K_n^s <= C_s T; the corresponding geometric and polynomial growth and forcing inequalities are incompatible under finite-time accumulation.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "DERIVATION.md proves the integral bound and subtracts the geometric and polynomial exponent inequalities. verify_schedule.ps1 corroborates the bounded boxes with zero matching-order witnesses and a nonempty weakened-order positive control.",
+      "verification_method": "Apply the triangle inequality to each time integral and sum over disjoint intervals. For the exponent models, independently substitute the schedules into the norm-growth and forcing conditions and subtract the resulting inequalities; rerun verify_schedule.ps1 as a bounded corroborative check."
+    }
+  ],
+  "limitations": [
+    "The audited recurrence is an abstract ODE schedule and has not been derived as a closure theorem for Navier--Stokes or for the compact-localization construction in the prior context.",
+    "The obstruction assumes derivative-norm amplification is charged to the stated strain exposure and that forcing has a scale-uniform seminorm at the same derivative order.",
+    "A nonlinear scale-transfer mechanism outside the recurrence, or a projection estimate without a scale-uniform matching-order constant, is not excluded.",
+    "The finite enumeration is corroborative only and covers the printed parameter grids; the universal statements rely on the analytical inequalities rather than the search."
+  ],
+  "failed_approaches": [
+    "Pure multiplicative frequency transport does not create unbounded frequency when total absolute strain exposure is summable.",
+    "Fresh high-frequency injection does not create divergence in the selected derivative norm when matching-order projected forcing is uniformly bounded over intervals of finite total length."
+  ],
+  "next_actions": [
+    "Derive or disprove a scale-uniform recurrence of the audited form from the compact-localization residual, with explicit dependence of the transport and forcing constants on anisotropic support scales."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Bridge the schedule obstruction to the localized PDE residual",
+      "objective": "Starting from the existing compact-localization residual formulas, derive a fixed-order estimate for one correction interval that either has the audited recurrence form or exhibits a specific nonlinear transfer term outside it. Track every constant against the anisotropic support scales.",
+      "rationale": "The bounded schedule obstruction is exact, but its relevance to Navier--Stokes depends on whether the localized PDE construction satisfies the same scale-uniform transport and forcing estimates.",
+      "success_criteria": "Produce a checkable interval estimate with explicit scale exponents and show that its constants are uniform across the accumulating schedule, or isolate one explicit term that prevents such uniformity.",
+      "useful_failure_criteria": "Identify the first residual or commutator term whose scale dependence cannot be bounded in the required norm, including the exact exponent mismatch and the assumption that fails.",
+      "verification_method": "Audit the derivation line by line against the recorded residual formulas, test dimensional and support-scale consistency, and verify representative exponent substitutions with exact symbolic or rational arithmetic.",
+      "suggested_minutes": 90,
+      "relationship": "child"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "navier-stokes-2026-09-08-e9e7bf10-1311-4aea-ba7b-fe1c4f9f4114",
+    "navier-stokes-2026-09-08-2bb44234-25d6-4e36-ba39-c606adec5ae2",
+    "navier-stokes-2026-09-08-f325901f-7e0e-4430-9c04-25d3051a3207",
+    "navier-stokes-2026-09-05-6f78d273-1ec5-4ab6-9671-83e20180770f",
+    "navier-stokes-2026-09-01-05dc0da4-3027-4047-9cbf-eb88b07d4e50",
+    "navier-stokes-2026-08-31-6d0fb167-9a7d-4147-934f-873a37fd77fe",
+    "navier-stokes-2026-08-31-3dd7a053-c068-437c-9700-d7bfbd0415e5",
+    "navier-stokes-2026-09-01-6ab9399b-9200-4621-ac80-f1a1db0df8b5"
+  ],
+  "review_status": "unreviewed"
+}
