@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "attempt_id": "navier-stokes-2026-09-10-b8d3510b-e9b9-4bce-850e-903c42dad38d",
+  "problem": "navier-stokes",
+  "problem_id": "ns",
+  "direction": "blowup",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T14:36:22.805Z",
+  "finished_at": "2026-09-10T14:51:46.593Z",
+  "research_task": {
+    "task_id": "community.469658eb6429da90",
+    "branch_id": "explore-837471d77d92a684",
+    "mode": "frontier",
+    "kind": "synthesis",
+    "title": "Derive scale-explicit force derivative bounds"
+  },
+  "summary": "Checkpoint for an eleven-term all-order derivative audit and geometric-schedule obstruction; exponent and sharpness certificates pass, while a raw residual cross-check is pending.",
+  "value_assessment": {
+    "outcome": "frontier-refinement",
+    "novelty": "Compared with the supplied residual artifact, the derivation makes the time operator, six viscous terms, and every geometric schedule exponent explicit; it extends the prior fixed-order switching mechanism to an all-time-order geometric obstruction.",
+    "evidence": "The analytic derivation contains the exact eleven-term residual and Bell-polynomial derivative bound; exact integer and rational scripts pass the schedule exponent and compact local-jet checks, while a raw residual comparison is pending.",
+    "falsifier": "A term-by-term differentiation producing a missing scale power or an exact profile test contradicting the proposed residual decomposition would overturn the candidate result."
+  },
+  "claims": [
+    {
+      "statement": "For the explicitly defined switched product cutoff, every mixed space-time derivative of the full fixed-pressure Navier--Stokes residual obeys the eleven-row scale-explicit bound in the derivation.",
+      "confidence": "partial-proof",
+      "evidence_summary": "Direct residual expansion, spatial chain rule, explicit Bell-polynomial time differentiation, and passing exact exponent and local-jet certificates.",
+      "verification_method": "Recompute every row from the component residual and rerun exact-integer exponent enumeration."
+    }
+  ],
+  "limitations": [
+    "The independent raw PDE expansion check has not yet run at this checkpoint.",
+    "No statement about finite-time Navier--Stokes breakdown is made."
+  ],
+  "failed_approaches": [
+    "The first exact-integer run failed because two hand-entered expected axial-viscosity exponents omitted the compensating axial scaling; the analytic table was retained and the expectation map corrected.",
+    "A planned Python symbolic check was unavailable because Python is not installed; a self-contained exact-rational JavaScript check replaces it."
+  ],
+  "next_actions": [
+    "Run the raw residual comparison and adversarially rederive the axial-viscosity and switching rows."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Complete the product-cutoff derivative audit",
+      "objective": "Prove and exactly check every scale exponent in the full switched viscous residual.",
+      "rationale": "This is the smallest unresolved dependency identified in preflight.",
+      "success_criteria": "A self-contained all-order bound and a reproducible exact exponent check.",
+      "useful_failure_criteria": "An explicit derivative term whose scale dependence invalidates the candidate bound.",
+      "verification_method": "Termwise differentiation and exact-integer exponent enumeration.",
+      "suggested_minutes": 45,
+      "relationship": "child"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "navier-stokes-2026-09-08-f325901f-7e0e-4430-9c04-25d3051a3207",
+    "navier-stokes-2026-09-10-7df2b6c4-d261-4f00-bbc5-7fd32b9481ac",
+    "navier-stokes-2026-09-10-e1f59b05-cf0f-44b7-bace-0fe64b90c92f",
+    "navier-stokes-2026-09-10-22449cfa-539f-4f77-a189-e1129d489cfb",
+    "navier-stokes-2026-09-09-82c7072c-3561-40db-864c-2012b9aeef4d",
+    "navier-stokes-2026-09-08-2bb44234-25d6-4e36-ba39-c606adec5ae2",
+    "navier-stokes-2026-09-08-e9e7bf10-1311-4aea-ba7b-fe1c4f9f4114"
+  ],
+  "review_status": "unreviewed"
+}
