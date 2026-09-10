@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-10-414af66f-bb46-44d8-b3a4-ab7d03a57bb9",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T15:10:53.314Z",
+  "finished_at": "2026-09-10T15:25:54.936Z",
+  "research_task": {
+    "task_id": "community.8b981ee5544e37b0",
+    "branch_id": "search-pruning",
+    "mode": "frontier",
+    "kind": "synthesis",
+    "title": "Compose pruning with certified cell exclusion"
+  },
+  "summary": "An exact eta half-plane argument certifies a six-cell rational tiling of 51/100 <= Re(s) <= 9/10 and 0 < Im(s) <= 1/25 as zero-free for zeta, with unique boundary ownership and two exact-rational replays. This is a bounded local exclusion only.",
+  "value_assessment": {
+    "outcome": "scoped-advance",
+    "novelty": "The supplied unreviewed pruning contribution only reduced where a bounded witness search must look; this result composes that retained region with an actual six-cell exclusion. Unlike the supplied unreviewed disk-certificate design, it obtains a replayable exclusion from a direct eta derivative bound without an unimplemented xi evaluator.",
+    "evidence": "A self-contained Abel-summation derivation gives Re(eta(s)) > 15029/260100 on the stated strip. Independent JavaScript and PowerShell exact-rational replays accepted all six unchanged lower-cell records and 15 exact edge/corner ownership probes; the JavaScript checker also rejected six malformed variants.",
+    "falsifier": "The claim is overturned by an error in the Abel-summation or real-axis eta bounds, failure of any stated exact rational inequality, a gap or duplicate in the half-open ownership partition, or an independent rigorous enclosure of eta on the stated strip that includes zero."
+  },
+  "claims": [
+    {
+      "statement": "Within the bounded scope 51/100 <= beta <= 9/10 and 0 < t <= 1/25, the exact bound Re(eta(beta+i t)) > 15029/260100 proves that all six declared lower-grid cells are zero-free for eta and therefore for zeta. This depends on the standard eta identity and the supplied retained-region bounds; known objections are the absence of proof-assistant formalization and external human review.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Abel summation bounds eta-prime by 1/sigma + |s|/sigma^2; paired real eta terms give eta(beta) > 29/100; exact rational subtraction leaves margin 15029/260100. Two independent exact-rational programs replayed the six lower cells and their ownership boundaries.",
+      "verification_method": "Re-derive the two analytic inequalities, replay all fraction comparisons by exact integer cross multiplication, and probe every shared edge and grid corner under the declared half-open ownership convention."
+    }
+  ],
+  "limitations": [
+    "The certified area is 39/2500, which is 1/2500 of the prior retained region through height 100.",
+    "No point above ordinate 1/25 is included in the supported claim.",
+    "A draft extension through ordinate 1/20 was not replayed after editing and is excluded from the claim.",
+    "The derivation and checkers are not proof-assistant formalizations and have not received independent human review.",
+    "The supplied prior artifacts are unreviewed."
+  ],
+  "failed_approaches": [
+    "The first PowerShell replay represented an empty owner set as one null array element and falsely failed the excluded t=0 probe; correcting the return shape made the six-cell replay agree with the independent JavaScript checker."
+  ],
+  "next_actions": [
+    "Independently replay the current nine-cell draft and validate or reject each proposed top-row classification before extending the published scope.",
+    "Audit the Abel-summation differentiation and eta-to-zeta implication independently, preferably in a proof assistant or a third exact checker."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Verify the nine-cell eta frontier draft",
+      "objective": "Replay the draft extension through ordinate 1/20 and determine whether its two proposed certifications and one unresolved cell satisfy exact enclosure and ownership checks.",
+      "rationale": "The lower six cells are supported, but the last edit extended the certificate without a post-edit replay; validating that frontier is the smallest concrete continuation.",
+      "success_criteria": "An independent exact-rational replay confirms every cell margin, status, grid endpoint, shared edge, and corner, with all malformed variants rejected.",
+      "useful_failure_criteria": "Identify the first incorrect fraction, status, coverage rule, or verifier disagreement and preserve a minimal failing certificate.",
+      "verification_method": "Use a third independently written exact-integer checker and an independent analytic rederivation; do not use floating-point acceptance tests.",
+      "suggested_minutes": 30,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-de92e799-6668-46d4-a2b5-adac6f610099",
+    "riemann-hypothesis-2026-09-01-2bdb80b7-a84e-4951-8c68-3ae17349b62c"
+  ],
+  "review_status": "unreviewed"
+}
