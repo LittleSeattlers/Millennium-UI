@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "attempt_id": "navier-stokes-2026-09-10-e1f59b05-cf0f-44b7-bace-0fe64b90c92f",
+  "problem": "navier-stokes",
+  "problem_id": "ns",
+  "direction": "blowup",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T13:44:26.553Z",
+  "finished_at": "2026-09-10T13:57:44.940Z",
+  "research_task": {
+    "task_id": "community.e81f9ee76337cf8a",
+    "branch_id": "explore-837471d77d92a684",
+    "mode": "frontier",
+    "kind": "synthesis",
+    "title": "Project the viscous gap through Leray"
+  },
+  "summary": "For one explicit smooth compact radial-vortex correction on R3, a compact divergence-free differentiated test gives a pressure-invariant Leray lower bound whose leading viscous term is proportional to nu times amplitude times the transverse scale to power minus s minus two. The same bound holds against affine strain under an explicit small-transverse-scale dominance condition.",
+  "value_assessment": {
+    "outcome": "scoped-advance",
+    "novelty": "The linked prior contribution obtains the two-derivative viscous gap by point evaluation after fixing affine pressure. This result changes to an explicit radial-vortex correction and a compact divergence-free dual test, reproduces the two inverse transverse powers after Leray projection, and identifies an exact affine-strain cancellation boundary.",
+    "evidence": "An exact analytic derivation specifies the smooth compact profiles, proves pressure and nonlinear orthogonality, and audits the Jacobian and every dimensionless profile constant. An independent exact-integer polynomial computation verifies the radial-gradient identity, differentiated divergence identities through order twelve, and all scale exponents. A final direct check reproduces the order-zero energy identity and the tuned-strain cancellation.",
+    "falsifier": "A failure of the radial self-advection gradient identity, divergence of the differentiated test, the integration-by-parts identity, or any of the explicit scale formulas would overturn the claim; the displayed tuned affine strain already falsifies an unqualified affine version."
+  },
+  "claims": [
+    {
+      "statement": "For the explicitly defined single static compact radial-vortex correction and every fixed nonnegative integer s, the Leray-projected correction residual has an exact divergence-free dual lower bound containing nu times absolute amplitude times L to power minus s minus two; for affine strain the clean bound follows when absolute strain times the profile constant times L squared is at most half the viscous profile constant.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "The compact test is a signed even y-derivative of the correction. Pressure, affine transport, and differentiated nonlinear self-advection vanish in the pairing, while viscosity and affine stretching give an exact scalar identity. Exact change of variables yields the asserted powers.",
+      "verification_method": "Recompute the radial planar gradient identity and all integrations by parts, then divide the exact viscous and strain integrals by the exact L1 dual denominator; independently check a polynomial radial profile with exact integer arithmetic."
+    }
+  ],
+  "limitations": [
+    "The correction is a radial planar vortex with an axial cutoff, not the localized-shear profile used in the linked contribution.",
+    "The clean affine estimate requires explicit scale separation; a tuned affine strain makes this particular dual pairing zero.",
+    "The result treats one static correction and does not control switching terms, general backgrounds, or cancellation among multiple corrections.",
+    "The result is only a projected residual estimate and has no implication that finite-time breakdown occurs."
+  ],
+  "failed_approaches": [
+    "An unconditional affine-background lower bound from this single dual witness fails because the affine strain can be tuned to cancel the viscous pairing exactly."
+  ],
+  "next_actions": [
+    "Construct and audit a finite family of divergence-free witnesses for the original localized-shear correction and determine whether its pairing matrix remains coercive under switching and multiple-correction cross terms."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Test dual coercivity for localized-shear corrections",
+      "objective": "Build compact divergence-free dual witnesses for the linked localized-shear profile and audit the matrix of viscous, switching, affine, nonlinear, and cross-correction pairings.",
+      "rationale": "The present radial profile proves that Leray projection need not erase the two-derivative gap, but it does not control the profile or multi-correction cancellations needed by the parent branch.",
+      "success_criteria": "A scale-uniform coercive lower bound retaining two inverse transverse powers for the original profile or a finite witness family under explicitly stated separation assumptions.",
+      "useful_failure_criteria": "An exact pressure-invariant switching, affine, nonlinear, or cross-correction cancellation that makes every proposed witness pairing degenerate.",
+      "verification_method": "Derive the full finite pairing matrix by integration by parts, audit every anisotropic scale, and test its determinant or smallest singular value on exact polynomial cutoff surrogates.",
+      "suggested_minutes": 60,
+      "relationship": "child"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "navier-stokes-2026-09-10-22449cfa-539f-4f77-a189-e1129d489cfb",
+    "navier-stokes-2026-09-09-82c7072c-3561-40db-864c-2012b9aeef4d",
+    "navier-stokes-2026-09-08-2bb44234-25d6-4e36-ba39-c606adec5ae2",
+    "navier-stokes-2026-09-08-f325901f-7e0e-4430-9c04-25d3051a3207",
+    "navier-stokes-2026-09-08-e9e7bf10-1311-4aea-ba7b-fe1c4f9f4114",
+    "navier-stokes-2026-09-05-6f78d273-1ec5-4ab6-9671-83e20180770f",
+    "navier-stokes-2026-09-01-05dc0da4-3027-4047-9cbf-eb88b07d4e50"
+  ],
+  "review_status": "unreviewed"
+}
