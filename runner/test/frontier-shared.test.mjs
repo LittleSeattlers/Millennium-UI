@@ -259,7 +259,94 @@ test('an explicitly selected task cannot start below its suggested duration', as
     safeMinutes: 5,
     catalogFile: value.catalogFile,
     leasesFile: value.leasesFile,
-  }), /needs 15 safe minutes, but only 5/i);
+  }), /needs about 15 safe minutes, but only 5/i);
+});
+
+test('completed runs calibrate expected runtime without erasing the task safety ceiling', async (t) => {
+  const value = await fixture();
+  t.after(() => fs.rm(value.root, { recursive: true, force: true }));
+  const task = {
+    ...value.task,
+    kind: 'synthesis',
+    suggestedMinutes: 90,
+  };
+  await fs.writeFile(value.catalogFile, JSON.stringify({ schemaVersion: 1, tasks: [task] }));
+  const attempts = [12, 14, 16].map((elapsedMinutes, index) => ({
+    id: `navier-stokes-completed-synthesis-000${index}`,
+    problemId: 'ns',
+    direction: 'blowup',
+    status: 'completed',
+    startedAt: '2026-09-10T12:00:00.000Z',
+    finishedAt: new Date(Date.parse('2026-09-10T12:00:00.000Z') + elapsedMinutes * 60_000).toISOString(),
+    researchValue: { status: 'accepted', outcome: 'scoped-advance' },
+    researchTask: { taskId: `prior-synthesis-${index}`, branchId: task.branchId, kind: 'synthesis' },
+  }));
+
+  const frontier = await listResearchFrontier({
+    problemId: 'ns',
+    direction: 'blowup',
+    safeMinutes: 20,
+    catalogFile: value.catalogFile,
+    leasesFile: value.leasesFile,
+    attempts,
+  });
+  const calibrated = frontier.tasks.find((candidate) => candidate.id === task.id);
+  assert.equal(calibrated?.estimatedMinutes, 20);
+  assert.equal(calibrated?.suggestedMinutes, 90);
+  assert.equal(calibrated?.timingBasis, 'observed-kind');
+  assert.equal(calibrated?.timingSampleCount, 3);
+  assert.equal(frontier.recommendedTaskId, task.id);
+
+  const prepared = await prepareResearchTask({
+    mode: 'frontier',
+    taskId: task.id,
+    problemId: 'ns',
+    direction: 'blowup',
+    safeMinutes: 20,
+    catalogFile: value.catalogFile,
+    leasesFile: value.leasesFile,
+    attempts,
+  });
+  assert.equal(prepared.estimatedMinutes, 20);
+  assert.equal(prepared.suggestedMinutes, 90);
+});
+
+test('runtime calibration ignores incomplete and untrusted observations', async (t) => {
+  const value = await fixture();
+  t.after(() => fs.rm(value.root, { recursive: true, force: true }));
+  const task = { ...value.task, kind: 'synthesis', suggestedMinutes: 90 };
+  await fs.writeFile(value.catalogFile, JSON.stringify({ schemaVersion: 1, tasks: [task] }));
+  const attempts = [{
+    id: 'navier-stokes-interrupted-synthesis-0001',
+    problemId: 'ns',
+    direction: 'blowup',
+    status: 'interrupted',
+    elapsedSeconds: 10 * 60,
+    researchValue: { status: 'accepted', outcome: 'scoped-advance' },
+    researchTask: { taskId: 'prior-synthesis-interrupted', branchId: task.branchId, kind: 'synthesis' },
+  }, {
+    id: 'navier-stokes-quarantined-synthesis-0001',
+    problemId: 'ns',
+    direction: 'blowup',
+    status: 'completed',
+    elapsedSeconds: 10 * 60,
+    recordSource: 'shared-contribution-quarantined',
+    researchTask: { taskId: 'prior-synthesis-quarantined', branchId: task.branchId, kind: 'synthesis' },
+  }];
+
+  const frontier = await listResearchFrontier({
+    problemId: 'ns',
+    direction: 'blowup',
+    safeMinutes: 20,
+    catalogFile: value.catalogFile,
+    leasesFile: value.leasesFile,
+    attempts,
+  });
+  const uncalibrated = frontier.tasks.find((candidate) => candidate.id === task.id);
+  assert.equal(uncalibrated?.estimatedMinutes, 90);
+  assert.equal(uncalibrated?.timingBasis, 'editorial-plan');
+  assert.equal(uncalibrated?.timingSampleCount, 0);
+  assert.notEqual(frontier.recommendedTaskId, task.id);
 });
 
 test('a new exploration requires the useful-run floor and adopts a sufficient safe duration', async (t) => {

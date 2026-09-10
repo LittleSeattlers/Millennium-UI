@@ -114,10 +114,13 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
     [frontier],
   );
   const taskDependenciesReady = !selectedTask || researchTaskDependenciesReady(selectedTask);
-  const taskFitsAllowance = !selectedTask || selectedTask.suggestedMinutes <= safeMinutes;
+  const estimatedRunMinutes = selectedTask ? researchTaskEstimatedMinutes(selectedTask) : 0;
+  const taskFitsAllowance = !selectedTask || estimatedRunMinutes <= safeMinutes;
   const runMinutes = researchMode === 'explore'
     ? safeMinutes
-    : taskFitsAllowance ? selectedTask?.suggestedMinutes ?? 0 : 0;
+    : taskFitsAllowance && selectedTask
+      ? Math.min(selectedTask.suggestedMinutes, safeMinutes)
+      : 0;
   const quotaRemainingPercent = useMemo(() => {
     const values = (estimate?.windows ?? [])
       .map((window) => window.remainingPercent)
@@ -388,7 +391,7 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
     if (isAvailable(current) && (current?.kind === 'review') === wantsReview) return;
     const next = frontier.tasks.find((task) => task.status === 'available'
       && researchTaskDependenciesReady(task)
-      && task.suggestedMinutes <= safeMinutes
+      && researchTaskEstimatedMinutes(task) <= safeMinutes
       && (task.kind === 'review') === wantsReview);
     setSelectedTaskId(next?.id ?? null);
   }, [frontier, isRunning, researchMode, safeMinutes, selectedTaskId]);
@@ -484,7 +487,7 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
       return;
     }
     if (selectedTask && !taskFitsAllowance) {
-      setError(`This task needs ${selectedTask.suggestedMinutes} safe minutes, but only ${safeMinutes} are currently available.`);
+      setError(`This task needs about ${researchTaskEstimatedMinutes(selectedTask)} safe minutes, but only ${safeMinutes} are currently available.`);
       return;
     }
     if (safeMinutes < minimumUsefulRunMinutes || runMinutes < minimumUsefulRunMinutes) {
@@ -632,7 +635,7 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
   const hasAvailableOversizedTask = frontier?.tasks.some((task) => task.status === 'available'
     && task.kind !== 'review'
     && researchTaskDependenciesReady(task)
-    && task.suggestedMinutes > safeMinutes) ?? false;
+    && researchTaskEstimatedMinutes(task) > safeMinutes) ?? false;
   const consoleProblemName = isRunning
     ? activeAttempt?.problemName ?? problem.name
     : problem.name;
@@ -1103,12 +1106,14 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
                         : safeMinutes < minimumUsefulRunMinutes
                           ? `Need ${usefulMinuteShortfall} more safe min`
                         : selectedTask && !taskFitsAllowance
-                          ? `Needs ${selectedTask.suggestedMinutes} safe min`
+                          ? `Needs ~${researchTaskEstimatedMinutes(selectedTask)} safe min`
                           : runMinutes < minimumUsefulRunMinutes
                             ? 'Choose a task'
-                            : `Start work · ${runMinutes} min`}
+                            : researchMode === 'explore'
+                              ? `Start work · ${runMinutes} min`
+                              : `Start work · ~${estimatedRunMinutes} min`}
                   </button>
-                  <small>Catalog times are editorial budgets, not measured runtime predictions. Runs below {minimumUsefulRunMinutes} minutes are not started. If a longer task does not fit, the connector offers a separate {adaptiveSliceMinutes}-minute preparatory task instead of truncating its parent. The final 4 minutes are reserved for a durable result.</small>
+                  <small>Where matching completed runs exist, the displayed time is a conservative measured estimate. A run may end early and can use up to the lesser of its task ceiling and the current safe allowance. Runs below {minimumUsefulRunMinutes} minutes are not started. If an estimated run does not fit, the connector offers a separate {adaptiveSliceMinutes}-minute preparatory task. The final 4 minutes are reserved for a durable result.</small>
                 </div>
               </div>
             </div>
@@ -1207,7 +1212,7 @@ function ResearchTaskCard({
   const needsMoreTime = task.status === 'available'
     && dependenciesReady
     && Number.isFinite(safeMinutes)
-    && task.suggestedMinutes > Number(safeMinutes);
+    && researchTaskEstimatedMinutes(task) > Number(safeMinutes);
   const isAdaptiveSlice = task.budgetBasis === 'adaptive-slice' || task.id.startsWith(adaptiveSlicePrefix);
   return (
     <span className="research-task-card">
@@ -1218,7 +1223,7 @@ function ResearchTaskCard({
           {!dependenciesReady
             ? `waiting on ${blockedCount}`
             : needsMoreTime
-            ? `needs ${task.suggestedMinutes} min`
+            ? `needs ~${researchTaskEstimatedMinutes(task)} min`
             : selected && task.status === 'available' ? 'selected' : task.status}
         </em>
       </span>
@@ -1420,7 +1425,7 @@ function ResearchTreeTaskNode({
           </span>
           <strong>{task.title}</strong>
           <small>
-            {task.suggestedMinutes} min
+            {researchTaskShortTimeLabel(task)}
             {children.length > 0 ? ` · ${children.length} direct successor${children.length === 1 ? '' : 's'}` : ''}
             {(task.unlockCount ?? 0) > 0 ? ` · unlocks ${task.unlockCount}` : ''}
           </small>
@@ -1527,7 +1532,7 @@ function researchTreeTaskState(task: ResearchTask, safeMinutes: number, selected
   if (!researchTaskDependenciesReady(task)) return { label: `waiting on ${Math.max(1, task.blockedDependencies?.length ?? task.dependencies.length)}`, tone: 'blocked' };
   if (task.status === 'leased') return { label: 'leased', tone: 'leased' };
   if (task.status === 'attempted') return { label: 'complete', tone: 'attempted' };
-  if (task.suggestedMinutes > safeMinutes) return { label: `needs ${task.suggestedMinutes} min`, tone: 'time' };
+  if (researchTaskEstimatedMinutes(task) > safeMinutes) return { label: `needs ~${researchTaskEstimatedMinutes(task)} min`, tone: 'time' };
   if (selected) return { label: 'selected', tone: 'selected' };
   return { label: 'ready', tone: 'available' };
 }
@@ -1687,11 +1692,12 @@ function researchTaskDependenciesReady(task: ResearchTask) {
 }
 
 function researchTaskSelectable(task: ResearchTask, safeMinutes: number) {
+  const estimatedMinutes = researchTaskEstimatedMinutes(task);
   return task.status === 'available'
     && researchTaskDependenciesReady(task)
-    && task.suggestedMinutes >= minimumUsefulRunMinutes
+    && estimatedMinutes >= minimumUsefulRunMinutes
     && safeMinutes >= minimumUsefulRunMinutes
-    && task.suggestedMinutes <= safeMinutes;
+    && estimatedMinutes <= safeMinutes;
 }
 
 function researchTaskUnavailableReason(task: ResearchTask, safeMinutes: number) {
@@ -1701,25 +1707,41 @@ function researchTaskUnavailableReason(task: ResearchTask, safeMinutes: number) 
   }
   if (task.status === 'leased') return 'Claimed by another contributor';
   if (task.status === 'attempted') return 'A durable attempt already exists';
-  if (task.suggestedMinutes < minimumUsefulRunMinutes) return `Below the ${minimumUsefulRunMinutes}-minute useful-work floor`;
-  if (task.suggestedMinutes > safeMinutes) return `Needs ${task.suggestedMinutes} safe minutes`;
+  const estimatedMinutes = researchTaskEstimatedMinutes(task);
+  if (estimatedMinutes < minimumUsefulRunMinutes) return `Below the ${minimumUsefulRunMinutes}-minute useful-work floor`;
+  if (estimatedMinutes > safeMinutes) return `Needs about ${estimatedMinutes} safe minutes`;
   return undefined;
 }
 
 function researchTaskBudgetLabel(task: ResearchTask) {
+  const estimatedMinutes = researchTaskEstimatedMinutes(task);
+  if (task.timingBasis === 'observed-kind' && (task.timingSampleCount ?? 0) > 0) {
+    const samples = task.timingSampleCount ?? 0;
+    return `Estimated ${estimatedMinutes} min from ${samples} completed ${formatTaskKind(task.kind).toLowerCase()} run${samples === 1 ? '' : 's'} · up to ${task.suggestedMinutes} min`;
+  }
   if (task.budgetBasis === 'adaptive-slice' || task.id.startsWith(adaptiveSlicePrefix)) {
-    return `Planned ${task.suggestedMinutes} min · fixed preparatory slice; parent stays open`;
+    return `Fixed ${task.suggestedMinutes} min · preparatory slice; parent stays open`;
   }
   if (task.budgetBasis === 'contributor-plan') {
-    return `Planned ${task.suggestedMinutes} min · contributor estimate`;
+    return `Up to ${task.suggestedMinutes} min · contributor ceiling; no matching completed-run estimate yet`;
   }
   if (task.budgetBasis === 'verification-plan') {
-    return `Planned ${task.suggestedMinutes} min · review budget`;
+    return `Up to ${task.suggestedMinutes} min · review ceiling; no matching completed-run estimate yet`;
   }
   if (task.budgetBasis === 'available-window') {
     return `Allocated ${task.suggestedMinutes} min · current safe window`;
   }
-  return `Planned ${task.suggestedMinutes} min · editorial estimate, not measured`;
+  return `Up to ${task.suggestedMinutes} min · editorial ceiling; no matching completed-run estimate yet`;
+}
+
+function researchTaskEstimatedMinutes(task: ResearchTask) {
+  const estimate = Number(task.estimatedMinutes);
+  return Number.isFinite(estimate) ? estimate : task.suggestedMinutes;
+}
+
+function researchTaskShortTimeLabel(task: ResearchTask) {
+  const estimate = researchTaskEstimatedMinutes(task);
+  return task.timingBasis === 'observed-kind' ? `~${estimate} min` : `${estimate} min`;
 }
 
 function formatClock(seconds: number) {

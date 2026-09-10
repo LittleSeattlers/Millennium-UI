@@ -38,6 +38,8 @@ const MAX_LEASE_MINUTES = 180;
 const ADAPTIVE_SLICE_VERSION = 1;
 const ADAPTIVE_SLICE_MINUTES = MIN_USEFUL_RUN_MINUTES;
 const ADAPTIVE_SLICE_PREFIX = `auto.slice.v${ADAPTIVE_SLICE_VERSION}.`;
+const TIMING_SAMPLE_LIMIT = 40;
+const TIMING_ROUND_MINUTES = 5;
 let leaseQueue = Promise.resolve();
 
 export async function listResearchFrontier({
@@ -144,7 +146,10 @@ export async function prepareResearchTask({
       usefulFailureCriteria: 'A reproducible reason the proposed direction fails, duplicates prior work, or requires a sharper prerequisite.',
       verificationMethod: 'Give an independent derivation, exact check, certificate, or clearly scoped reproduction plan.',
       suggestedMinutes: minutes,
+      estimatedMinutes: minutes,
       budgetBasis: 'available-window',
+      timingBasis: 'available-window',
+      timingSampleCount: 0,
       parentTaskId: null,
       parentContract: null,
       priority: 70,
@@ -195,9 +200,10 @@ export async function prepareResearchTask({
     throw new HttpError(409, reason, 'research_task_unavailable');
   }
   if (!taskFitsAllowance(task, minutes)) {
+    const estimate = taskRuntimeMinutes(task);
     throw new HttpError(
       409,
-      `This task needs ${task.suggestedMinutes} safe minutes, but only ${minutes} are currently available.`,
+      `This task needs about ${estimate} safe minutes, but only ${minutes} are currently available.`,
       'insufficient_task_time',
     );
   }
@@ -289,7 +295,7 @@ async function assembleFrontierTasks({
   const sourceTasks = uniqueTasks([
     ...catalog.tasks.filter((task) => task.problemId === selection.problemId && task.direction === selection.direction),
     ...communityTasks(attempts, selection),
-  ]);
+  ]).map((task) => addRuntimeEstimate(task, attempts, selection));
   const unlockCounts = countDirectDependents(sourceTasks);
   const baseTasks = sourceTasks.map((task) => decorateTask(
     { ...task, unlockCount: unlockCounts.get(task.id) ?? 0 },
@@ -302,12 +308,13 @@ async function assembleFrontierTasks({
     ? baseTasks
       .filter((task) => task.kind !== 'review'
         && task.status === 'available'
-        && task.suggestedMinutes > safeMinutes)
+        && taskRuntimeMinutes(task) > safeMinutes)
       .map(adaptiveSliceFor)
       .map((task) => decorateTask(task, { attempted, leases, now }))
     : [];
   const curated = uniqueTasks([...adaptiveSlices, ...baseTasks]);
   const verification = verificationTasks(attempts, selection)
+    .map((task) => addRuntimeEstimate(task, attempts, selection))
     .map((task) => decorateTask(task, { attempted, leases, now }));
   return { curated, verification };
 }
@@ -464,7 +471,10 @@ function adaptiveSliceFor(parent) {
     usefulFailureCriteria: 'An exact ambiguity, coupled dependency, missing theorem, or indivisibility argument showing why a sound smaller task cannot yet be formed, plus the smallest missing information.',
     verificationMethod: 'Compare every derived subclaim with the parent objective and success criteria, check that no assumption, domain, or quantifier was dropped, and independently reproduce the concrete check.',
     suggestedMinutes: ADAPTIVE_SLICE_MINUTES,
+    estimatedMinutes: ADAPTIVE_SLICE_MINUTES,
     budgetBasis: 'adaptive-slice',
+    timingBasis: 'adaptive-slice',
+    timingSampleCount: 0,
     parentTaskId: parent.id,
     parentContract: {
       id: parent.id,
@@ -575,8 +585,9 @@ function decorateTask(task, { attempted, leases, now }) {
 }
 
 function recommendationScore(task, safeMinutes) {
-  const overBudget = Math.max(0, task.suggestedMinutes - safeMinutes);
-  const fit = 24 - Math.abs(task.suggestedMinutes - safeMinutes) * 0.25 - overBudget * 1.5;
+  const runtimeMinutes = taskRuntimeMinutes(task);
+  const overBudget = Math.max(0, runtimeMinutes - safeMinutes);
+  const fit = 24 - Math.abs(runtimeMinutes - safeMinutes) * 0.25 - overBudget * 1.5;
   const verificationBonus = task.kind === 'review' ? 18 : 0;
   const dependencyUnlockBonus = Math.min(4, Number(task.unlockCount) || 0) * 8;
   const accumulatedContextBonus = Math.min(3, task.sourceAttemptIds?.length ?? 0) * 2;
@@ -588,13 +599,13 @@ function recommendationScore(task, safeMinutes) {
 }
 
 function taskFitsAllowance(task, safeMinutes) {
-  return task.suggestedMinutes <= safeMinutes;
+  return taskRuntimeMinutes(task) <= safeMinutes;
 }
 
 function isRunnableTask(task, safeMinutes) {
   return task.status === 'available'
     && task.dependenciesSatisfied !== false
-    && task.suggestedMinutes >= MIN_USEFUL_RUN_MINUTES
+    && taskRuntimeMinutes(task) >= MIN_USEFUL_RUN_MINUTES
     && safeMinutes >= MIN_USEFUL_RUN_MINUTES
     && taskFitsAllowance(task, safeMinutes);
 }
@@ -613,7 +624,10 @@ function publicTask(task) {
     usefulFailureCriteria: task.usefulFailureCriteria,
     verificationMethod: task.verificationMethod,
     suggestedMinutes: task.suggestedMinutes,
+    estimatedMinutes: taskRuntimeMinutes(task),
     budgetBasis: task.budgetBasis,
+    timingBasis: task.timingBasis ?? task.budgetBasis,
+    timingSampleCount: task.timingSampleCount ?? 0,
     parentTaskId: task.parentTaskId,
     parentContract: task.parentContract
       ? { ...task.parentContract, dependencies: [...task.parentContract.dependencies] }
@@ -627,6 +641,69 @@ function publicTask(task) {
     unlockCount: task.unlockCount ?? 0,
     valueContract: { ...task.valueContract },
   };
+}
+
+function addRuntimeEstimate(task, attempts, selection) {
+  if (task.budgetBasis === 'adaptive-slice' || task.budgetBasis === 'available-window') {
+    return {
+      ...task,
+      estimatedMinutes: task.suggestedMinutes,
+      timingBasis: task.budgetBasis,
+      timingSampleCount: 0,
+    };
+  }
+  const samples = completedRuntimeSamples(attempts, selection, task.kind).slice(0, TIMING_SAMPLE_LIMIT);
+  if (samples.length === 0) {
+    return {
+      ...task,
+      estimatedMinutes: task.suggestedMinutes,
+      timingBasis: task.budgetBasis,
+      timingSampleCount: 0,
+    };
+  }
+  const sorted = samples.sort((left, right) => left - right);
+  const upperQuartile = sorted[Math.max(0, Math.ceil(sorted.length * 0.75) - 1)];
+  const uncertaintyMultiplier = sorted.length === 1 ? 1.5 : sorted.length === 2 ? 1.35 : 1.25;
+  const conservativeMinutes = roundUpMinutes(upperQuartile * uncertaintyMultiplier, TIMING_ROUND_MINUTES);
+  return {
+    ...task,
+    estimatedMinutes: Math.min(
+      task.suggestedMinutes,
+      Math.max(MIN_USEFUL_RUN_MINUTES, conservativeMinutes),
+    ),
+    timingBasis: 'observed-kind',
+    timingSampleCount: sorted.length,
+  };
+}
+
+function completedRuntimeSamples(attempts, selection, kind) {
+  return attempts
+    .filter((attempt) => attempt?.problemId === selection.problemId
+      && (attempt?.direction ?? attempt?.routeId) === selection.direction
+      && attempt?.status === 'completed'
+      && attemptHasResearchValue(attempt)
+      && attempt?.researchTask?.kind === kind)
+    .map(attemptElapsedMinutes)
+    .filter((minutes) => Number.isFinite(minutes) && minutes > 0 && minutes <= MAX_LEASE_MINUTES);
+}
+
+function attemptElapsedMinutes(attempt) {
+  const seconds = Number(attempt?.elapsedSeconds);
+  if (Number.isFinite(seconds) && seconds > 0) return seconds / 60;
+  const started = Date.parse(attempt?.startedAt ?? '');
+  const finished = Date.parse(attempt?.finishedAt ?? attempt?.completedAt ?? '');
+  return Number.isFinite(started) && Number.isFinite(finished) && finished > started
+    ? (finished - started) / 60_000
+    : Number.NaN;
+}
+
+function roundUpMinutes(minutes, increment) {
+  return Math.ceil(minutes / increment) * increment;
+}
+
+function taskRuntimeMinutes(task) {
+  const estimate = Number(task?.estimatedMinutes);
+  return Number.isFinite(estimate) ? estimate : task.suggestedMinutes;
 }
 
 function stripTaskState(task) {

@@ -5,6 +5,7 @@ export type TerminalDisposition = 'completed' | 'time-limit' | 'user-stopped' | 
 export type ResearchMode = 'recommended' | 'frontier' | 'explore' | 'verify';
 export type ResearchTaskStatus = 'available' | 'leased' | 'attempted' | 'blocked';
 export type ResearchTaskBudgetBasis = 'editorial-plan' | 'contributor-plan' | 'verification-plan' | 'adaptive-slice' | 'available-window';
+export type ResearchTaskTimingBasis = ResearchTaskBudgetBasis | 'observed-kind';
 export type ResearchTaskKind = 'proof' | 'counterexample-search' | 'computation' | 'formalization' | 'review' | 'synthesis' | 'exploration';
 export type ResearchTaskParentContract = {
   id: string;
@@ -38,7 +39,10 @@ export type ResearchTask = {
   usefulFailureCriteria: string;
   verificationMethod: string;
   suggestedMinutes: number;
+  estimatedMinutes?: number;
   budgetBasis?: ResearchTaskBudgetBasis;
+  timingBasis?: ResearchTaskTimingBasis;
+  timingSampleCount?: number;
   parentTaskId?: string | null;
   parentContract?: ResearchTaskParentContract | null;
   priority: number;
