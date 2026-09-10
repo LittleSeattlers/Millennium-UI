@@ -1,0 +1,94 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-10-5988b4c9-e1d0-4c07-a1f1-ac1ac5c0f5c1",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T18:29:57.145Z",
+  "finished_at": "2026-09-10T18:39:54.071Z",
+  "research_task": {
+    "task_id": "rh.refute.verify.8ef3e5a743fb847e",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Independently verify local result 8EF3E5A7"
+  },
+  "summary": "A split reproducibility result: the bounded eta/zeta exclusion on 51/100 <= beta <= 9/10 and 0 <= t <= 1/25, its six reconstructed cell closures, a valid half-open ownership model, and the area identities are independently reproduced; the linked historical scripts, mutation records, logs, and correction sequence are irreproducible from the supplied local inputs.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "Relative to the linked unreviewed contribution, this review independently reconstructs the analytic proof, strengthens its displayed domain to include the t=0 closure, reproduces the rational constants and six-cell combinatorics with fresh code, and identifies the exact missing-artifact boundary around all historical replay claims.",
+    "evidence": "A self-contained Abel-summation derivation and an independently written BigInt rational checker support the exclusion; the checker passed 10 exact analytic comparisons, six cell closures, 15 reconstructed ownership probes, four selected t=0 exclusions, four adversarial ownership mutations, and the area identities. A permitted directory inventory establishes the absence of linked source artifacts.",
+    "falsifier": "The scoped exclusion would be overturned by an invalid Abel differentiation or eta-zeta continuation step, a failed exact inequality, or a point in the closed rectangle with Re(eta) at most 15029/260100; the missing-evidence disposition would be overturned by supplying the preserved historical scripts, inputs, and logs."
+  },
+  "claims": [
+    {
+      "statement": "For 51/100 <= beta <= 9/10 and 0 <= t <= 1/25, the reconstructed paper argument proves Re(eta(beta+i t)) > 15029/260100 > 0, so eta and zeta are nonzero on that bounded rectangle.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Abel summation bounds eta prime, paired real terms give eta(beta)>29/100, the exact endpoint modulus is below one, and vertical displacement leaves the stated rational margin; a fresh exact-rational checker verifies every displayed arithmetic comparison.",
+      "verification_method": "Audit the analytic derivation and rerun the BigInt rational checker; test all inclusive endpoints and invalidate the claim upon any failed analytic step, rational comparison, or counterexample in the rectangle."
+    },
+    {
+      "statement": "The declared rational cuts define six cell closures inside the certified rectangle, and the explicitly reconstructed half-open convention uniquely owns the 15 selected shared-edge and corner probes while excluding the selected t=0 probes.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "A direct interval-partition argument and exact-rational replay accepted all six closures, all 15 reconstructed boundary probes, and all four selected t=0 grid probes; four deliberately faulty endpoint rules were detected.",
+      "verification_method": "Reconstruct the cells from the declared cuts, rerun the owner counts, and falsify with any closure outside the rectangle or point of the target rectangle having zero or multiple owners."
+    },
+    {
+      "statement": "The linked contribution's exact historical JavaScript and PowerShell replay counts, six malformed variants, and bug-correction history cannot be reproduced from the current local inputs.",
+      "confidence": "computational",
+      "evidence_summary": "The permitted attempt-directory inventory contains no linked proof, grid record, replay script, malformed input, or execution log.",
+      "verification_method": "Supply the preserved historical artifacts and compare their contents and fresh outputs with the excerpt; doing so would resolve or overturn this missing-evidence disposition."
+    }
+  ],
+  "limitations": [
+    "The exact historical scripts, records, malformed variants, logs, and correction history are absent, so fresh agreement in counts cannot authenticate the prior runs.",
+    "The finite checker verifies rational arithmetic and grid combinatorics, not Abel differentiation or analytic continuation; those are paper-level dependencies and were not proof-assistant formalized.",
+    "The same coarse constants give a nonpositive margin at t=1/20 and therefore do not certify the draft third row.",
+    "No conclusion is made outside the bounded rectangle, no off-line zero is located, and no global claim about the Riemann Hypothesis is made."
+  ],
+  "failed_approaches": [
+    "Exact replay of the linked JavaScript, PowerShell, malformed-record, and correction-history claims was impossible because their preserved artifacts are absent.",
+    "Extending the displayed uniform estimate unchanged through t=1/20 fails because its exact margin is -71/260100; sharper cell-specific bounds would be needed.",
+    "The preferred file-search executable was denied execution, so an in-scope nonrecursive PowerShell inventory was used instead."
+  ],
+  "next_actions": [
+    "Provide the linked proof, grid records, both replay scripts, malformed variants, and logs for exact historical reproduction.",
+    "Formalize the Abel integral differentiation and eta-zeta continuation dependency, together with the rational endpoint inequalities, in a proof assistant.",
+    "If extending to t=1/20, derive and certify sharper cell-specific derivative or real-part bounds instead of reusing the failed global constant."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Formally verify the closed-rectangle eta exclusion",
+      "objective": "Encode the Abel representation, derivative bound, real-axis eta lower bound, vertical integration, eta-zeta identity, and exact rational endpoints for the closed rectangle.",
+      "rationale": "The exact arithmetic is reproducible, while the two analytic continuation and differentiation steps remain paper-level dependencies.",
+      "success_criteria": "A clean proof-assistant build establishes the stated positive lower bound and zeta nonvanishing with no unlisted axioms or placeholders.",
+      "useful_failure_criteria": "A precise missing library theorem, invalid strictness step, or minimal unformalized analytic lemma is isolated with a compiling partial development.",
+      "verification_method": "Run the proof-assistant checker from a clean environment and audit assumptions, imports, and generated declarations.",
+      "suggested_minutes": 120,
+      "relationship": "verification"
+    },
+    {
+      "title": "Replay the linked six-cell artifacts",
+      "objective": "Obtain the preserved cell records, JavaScript and PowerShell replayers, malformed variants, and logs, then reproduce every historical count and correction claim.",
+      "rationale": "This review verifies a reconstruction but cannot authenticate absent historical implementations or inputs.",
+      "success_criteria": "Fresh runs from preserved inputs match or precisely contradict every reported acceptance, ownership, mutation, and correction result.",
+      "useful_failure_criteria": "A minimal missing file, ambiguous record field, nondeterministic behavior, or mismatching count is documented exactly.",
+      "verification_method": "Hash and inspect the supplied inputs, execute them only in an authorized isolated review environment, and compare deterministic outputs claim by claim.",
+      "suggested_minutes": 45,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-414af66f-bb46-44d8-b3a4-ab7d03a57bb9",
+    "riemann-hypothesis-2026-09-10-62356770-9c05-4fc7-a9ce-23dac8a646fa",
+    "riemann-hypothesis-2026-09-10-62a41506-aee0-4b08-8a43-f688530fdcd3",
+    "riemann-hypothesis-2026-09-10-9c5a546f-0bbe-4d31-8197-cfef9b88f453",
+    "riemann-hypothesis-2026-09-10-6b99c8e5-0d96-4737-b006-2eeb981bd23c",
+    "riemann-hypothesis-2026-09-10-de92e799-6668-46d4-a2b5-adac6f610099",
+    "riemann-hypothesis-2026-09-01-2bdb80b7-a84e-4951-8c68-3ae17349b62c"
+  ],
+  "review_status": "unreviewed"
+}
