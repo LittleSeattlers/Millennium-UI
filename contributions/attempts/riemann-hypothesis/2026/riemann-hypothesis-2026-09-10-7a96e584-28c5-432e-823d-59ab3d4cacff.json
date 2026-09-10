@@ -1,0 +1,93 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-10-7a96e584-28c5-432e-823d-59ab3d4cacff",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T23:48:05.169Z",
+  "finished_at": "2026-09-10T23:58:56.228Z",
+  "research_task": {
+    "task_id": "community.31d0512e01e52cc0",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Formally verify the closed-rectangle eta exclusion"
+  },
+  "summary": "Exact rational arithmetic for the closed eta rectangle was independently reproduced, including all four corners and a negative height mutation; formal verification was not achieved because the pinned Lean/Mathlib environment is absent and two analytic bridge results remain unformalized.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "Relative to the linked prior contribution, this run reproduces its reported margin 15029/260100 and height-one-twentieth failure, and adds an explicit correction to the bottom-edge strictness wording plus a dependency-separated formalization frontier. It does not strengthen the mathematical rectangle or reproduce a proof-assistant build.",
+    "evidence": "A dependency-free BigInt rational replay passed 24 exact checks; a repeated current-directory environment audit consistently found no Lean, Lake, Elan, or pinned project markers; and the preserved derivation lists the two analytic dependencies separately from the checked arithmetic kernel.",
+    "falsifier": "A replay producing a different reduced margin or corner comparison, an in-scope audit showing that a required pinned tool or project marker was overlooked, or a counterexample to either stated analytic dependency would overturn or narrow this result."
+  },
+  "claims": [
+    {
+      "statement": "Within exact rational arithmetic, the rectangle endpoints imply the derivative constant 15100/2601, vertical allowance 604/2601, and positive margin 15029/260100; at height one twentieth the same calculation gives negative 71/260100.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "A reduced-BigInt checker passed 24 checks covering identities, inequalities, all four corners, strictness propagation, and the deliberate height mutation.",
+      "verification_method": "Replay the dependency-free rational checker and require every recorded exact comparison to pass with zero failures."
+    },
+    {
+      "statement": "Conditional on the Abel representation with justified differentiation and on the continued eta-zeta identity, the documented inequalities give real part of eta strictly greater than 15029/260100 and eta and zeta nonvanishing on 51/100 through 9/10 and height zero through 1/25.",
+      "confidence": "partial-proof",
+      "evidence_summary": "The written derivation isolates both analytic dependencies and reduces all downstream endpoint and strictness steps to the replayed exact arithmetic; the bottom edge is handled using a weak displacement bound and a strict real-axis bound.",
+      "verification_method": "Formalize the two listed analytic dependencies in a pinned proof assistant, compile the downstream theorem, and audit its generated assumptions."
+    },
+    {
+      "statement": "At the recorded checkpoint, the permitted workspace was not ready for a pinned Lean/Mathlib build because Lean, Lake, Elan, and every checked local project marker were absent.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Two current-directory-only audits produced the same negative prerequisite classification; the candidate source scan alone was explicitly not treated as compilation.",
+      "verification_method": "Repeat the preserved environment audit in the same workspace and compare all application and project-marker fields."
+    }
+  ],
+  "limitations": [
+    "No proof-assistant compilation, declaration inspection, or axiom report was produced.",
+    "The Abel integral differentiation theorem and continued eta-zeta identity remain paper-level dependencies.",
+    "The uncompiled Lean candidate may contain elaboration or library-name errors.",
+    "The exact arithmetic replay does not validate complex-analytic continuation or differentiation under an improper integral.",
+    "The result concerns only the stated closed rectangle and makes no global claim about the Riemann Hypothesis."
+  ],
+  "failed_approaches": [
+    "The first exact replay encoded an equality of coarse constants as a strict inequality and stopped; the test was corrected to represent strict input excess explicitly.",
+    "Formal compilation could not begin because the permitted workspace contains neither callable Lean tooling nor a pinned local project."
+  ],
+  "next_actions": [
+    "Compile the preserved downstream kernel in an immutable pinned Lean/Mathlib project and record the first elaboration or dependency failure.",
+    "Formalize the Abel eta integral, its differentiated formula, and the required domination estimate before attempting the eta-zeta continuation bridge."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Formalize the Abel eta bridge",
+      "objective": "In pinned Lean and Mathlib, define the Abel integral for eta on the right half-plane and prove its differentiated integral formula and derivative bound with all measurability and domination hypotheses explicit.",
+      "rationale": "This is the first substantive analytic dependency above the exact rational rectangle kernel and is not supplied by the present attempt.",
+      "success_criteria": "A clean build proves the Abel representation, real-axis lower bound, and derivative estimate, and an axiom report lists no unacknowledged assumptions.",
+      "useful_failure_criteria": "A compiling partial development isolates the first missing library theorem or minimal domination lemma.",
+      "verification_method": "Build from a clean immutable project, inspect exported declarations, and run the proof assistant's axiom reporting command on each theorem.",
+      "suggested_minutes": 120,
+      "relationship": "child"
+    },
+    {
+      "title": "Verify the continued eta-zeta bridge",
+      "objective": "Prove in the same pinned environment that the Abel-defined eta equals the zeta prefactor product throughout the relevant right half-plane and instantiate the closed-rectangle kernel.",
+      "rationale": "The product identity is the remaining analytic dependency needed to turn eta positivity into zeta nonvanishing.",
+      "success_criteria": "The unconditional closed-rectangle theorem compiles and its declaration and axiom audit contain no unlisted hypotheses or placeholders.",
+      "useful_failure_criteria": "The exact continuation or identity-theorem lemma that is missing is isolated with all earlier stages compiling.",
+      "verification_method": "Compile in a clean pinned project, print theorem assumptions, and independently replay the exact endpoint certificate.",
+      "suggested_minutes": 120,
+      "relationship": "child"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-5988b4c9-e1d0-4c07-a1f1-ac1ac5c0f5c1",
+    "riemann-hypothesis-2026-09-10-2663f69a-dc14-461d-916c-23eb7eb953d8",
+    "riemann-hypothesis-2026-09-10-18a220c4-8ad0-42d7-9122-7b6602b718e5",
+    "riemann-hypothesis-2026-09-10-e1143355-d6ee-445d-a5c4-4c7d8423c7b1",
+    "riemann-hypothesis-2026-09-10-c03c8b27-58ea-461a-b775-46be06dbbc8f",
+    "riemann-hypothesis-2026-09-10-ea201c7b-bb9d-4e35-adec-0f9fd01b7810",
+    "riemann-hypothesis-2026-09-10-975d7860-dedf-40dc-90e1-6749b295b06f"
+  ],
+  "review_status": "unreviewed"
+}
