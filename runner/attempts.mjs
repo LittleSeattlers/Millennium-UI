@@ -33,7 +33,11 @@ import {
   saveQuotaSnapshot,
   updateAttemptState,
 } from './storage.mjs';
-import { buildFinalizationPrompt, buildResearchPrompt } from './prompt.mjs';
+import {
+  buildContributionRepairPrompt,
+  buildFinalizationPrompt,
+  buildResearchPrompt,
+} from './prompt.mjs';
 import {
   RESEARCH_MODES,
   leaseResearchTask,
@@ -486,6 +490,19 @@ export class AttemptManager {
           onEvent: emit,
           onRaw: raw,
           onSnapshot: snapshot,
+          validateCompletion: async () => {
+            const candidate = await prepareContribution({
+              ...(await this.get(attempt.id)),
+              status: 'completed',
+              finishedAt: new Date().toISOString(),
+            });
+            if (candidate.publishable && candidate.record) return { valid: true };
+            return {
+              valid: false,
+              reason: candidate.warning,
+              repairPrompt: buildContributionRepairPrompt({ reason: candidate.warning }),
+            };
+          },
         });
         await updateAttemptState(attempt.id, {
           status: 'running',

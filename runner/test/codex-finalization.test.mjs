@@ -75,3 +75,46 @@ test('Codex finalization steer is same-turn, exact, and idempotent', async () =>
   await handle.stop();
   assert.equal((await handle.completion).status, 'interrupted');
 });
+
+test('Codex gets one bounded repair turn when the canonical completion check rejects the draft', async () => {
+  let rpc;
+  let checks = 0;
+  const events = [];
+  const handle = await startCodexRun({
+    attempt: { codePath: 'C:\\attempt' },
+    prompt: 'Research this bounded objective.',
+    effort: 'high',
+    model: 'gpt-5.6-sol',
+    networkAccess: false,
+    onEvent: async (event) => events.push(event),
+    onRaw: async () => {},
+    onSnapshot: async () => {},
+    validateCompletion: async () => {
+      checks += 1;
+      return checks === 1
+        ? { valid: false, reason: 'Missing a bounded successor.', repairPrompt: 'Correct only the proposal.' }
+        : { valid: true };
+    },
+    resolveExecutable: async () => ({ path: 'codex-test' }),
+    createRpc: (options) => {
+      rpc = new FakeRpc(options);
+      return rpc;
+    },
+  });
+
+  await rpc.options.onNotification({
+    method: 'turn/completed',
+    params: { turn: { id: 'turn-1', status: 'completed' } },
+  });
+  const turns = rpc.requests.filter(({ method }) => method === 'turn/start');
+  assert.equal(turns.length, 2);
+  assert.equal(turns[1].params.input[0].text, 'Correct only the proposal.');
+  assert.equal(events.some((event) => event.kind === 'VALUE'), true);
+
+  await rpc.options.onNotification({
+    method: 'turn/completed',
+    params: { turn: { id: 'turn-2', status: 'completed' } },
+  });
+  assert.equal((await handle.completion).status, 'completed');
+  assert.equal(checks, 2);
+});

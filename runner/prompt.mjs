@@ -89,6 +89,7 @@ Durable-work rules:
 - value_assessment must contain exactly outcome (one of scoped-advance, bounded-negative, reproducibility-result, or frontier-refinement), novelty, evidence, and falsifier. Novelty must compare the result with the supplied prior artifacts, or identify the result as the first stored baseline. Evidence must name the derivation, certificate, exact computation, or reproducible observation that supports the result. Falsifier must state what check would overturn the scoped result.
 - Each claims item must contain exactly statement, confidence (one of conjectural, heuristic, computational, partial-proof, or rigorous-within-scope), evidence_summary, and verification_method.
 - Each proposed_tasks item must contain exactly title, objective, rationale, success_criteria, useful_failure_criteria, verification_method, suggested_minutes (15-120), and relationship ("child", "alternative", or "verification"). Include zero to three.
+- A reproducibility-result from a research task whose kind is not review must include at least one proposed_tasks item. Use relationship "verification" when the successor independently rechecks this result; otherwise use "child" or "alternative" when that relationship is more accurate. A relationship label never substitutes for evidence.
 - Each citations item must contain exactly title and a public HTTP(S) url. All other list fields contain concise plain-text strings. Never include names, email addresses, local or absolute paths, credentials, account/quota data, commands, raw logs, hidden reasoning, or source code in this publication proposal.
 - After every material finding, failed approach, corrected assumption, or citation, refresh RESULT.md and CONTRIBUTION.proposed.json, then update WORKLOG.md. Also refresh all three at least every ${checkpointMinutes} minutes and before any risky or long operation. Write each file as a complete replacement so every saved version is coherent. The runner may stop the process at any time.
 - A proposed claim record must state its exact scope, dependencies, evidence summary, verification method, confidence label, and known objections. Never silently promote a candidate to a theorem.
@@ -110,10 +111,25 @@ You have at most ${seconds} seconds. Stop all new research, searches, derivation
 1. Update RESULT.md with these headings: Disposition, Summary, Evidence, Limitations, and Next action. State the strongest supported result, or a precise useful failure if no positive result was established.
 2. Replace CONTRIBUTION.proposed.json with one valid JSON object containing exactly: summary, value_assessment, claims, limitations, failed_approaches, next_actions, proposed_tasks, and citations. value_assessment contains exactly outcome, novelty, evidence, and falsifier.
 3. Share only if the record truthfully contains at least one bounded evidence-bearing claim plus a concrete next action or successor task. A frontier-refinement must include a successor task. Otherwise preserve an honest local RESULT.md and let the runner withhold the record rather than publishing filler.
-4. Keep every unsupported list empty. Do not invent claims, evidence, verification, citations, novelty, or completion. Preserve uncertainty and scope limits explicitly.
-5. Do not inspect anything outside the current working directory and do not begin another line of attack.
+4. A reproducibility-result from a non-review task must include at least one proposed task. Label it "verification" only if it independently rechecks the result; otherwise use the truthful "child" or "alternative" relationship.
+5. Keep every unsupported list empty. Do not invent claims, evidence, verification, citations, novelty, or completion. Preserve uncertainty and scope limits explicitly.
+6. Do not inspect anything outside the current working directory and do not begin another line of attack.
 
 As soon as both files are coherent and durable, end the Codex turn immediately. Do not continue with commentary, verification, or another task.`;
+}
+
+/** Build one bounded repair turn after the trusted contribution validator rejects a completed draft. */
+export function buildContributionRepairPrompt({ reason = 'The structured contribution did not satisfy the canonical contract.' } = {}) {
+  const safeReason = singleLine(reason, 1_200) || 'The structured contribution did not satisfy the canonical contract.';
+  return `The trusted Millennium contribution validator rejected CONTRIBUTION.proposed.json:
+
+${safeReason}
+
+Do not perform new research. Work only from the evidence and result files already present in this directory. Correct CONTRIBUTION.proposed.json so it truthfully satisfies the reported contract error without weakening, promoting, or inventing any claim, evidence, novelty, verification, citation, or completion status.
+
+The canonical value floor requires at least one bounded evidence-bearing claim, at least one explicit limitation, and at least one concrete next action or proposed task. A frontier-refinement requires a proposed task. A reproducibility-result from a non-review task requires at least one proposed task; use relationship "verification" only for an independent recheck, and otherwise keep the truthful "child" or "alternative" relationship.
+
+Replace the JSON file atomically, re-read it to confirm valid JSON and exact required fields, update RESULT.md only if needed for consistency, and then end this repair turn immediately.`;
 }
 
 /** Build the public preflight brief saved beside the attempt's code artifacts. */

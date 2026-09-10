@@ -75,6 +75,29 @@ test('rejects narrative-only output that does not meet the research-value floor'
   assert.throws(() => buildContributionRecord({ attempt: attempt(), proposal: emptyRefinement }), /must propose at least one bounded successor task/);
 });
 
+test('non-review reproducibility work requires a bounded successor but not a misleading relationship label', () => {
+  const reproduction = proposal();
+  reproduction.value_assessment.outcome = 'reproducibility-result';
+  assert.throws(
+    () => buildContributionRecord({ attempt: attempt(), proposal: reproduction }),
+    /leave a bounded successor task/,
+  );
+
+  reproduction.proposed_tasks = [{
+    title: 'Extend the exact diagnostic',
+    objective: 'Apply the independently reproduced diagnostic to the next bounded parameter family.',
+    rationale: 'The current reproduction establishes a baseline that a child calculation can extend.',
+    success_criteria: 'Produce one exact result on the declared larger family with all bounds explicit.',
+    useful_failure_criteria: 'Identify the first term that prevents the reproduced diagnostic from extending.',
+    verification_method: 'Recompute the larger finite family independently with exact arithmetic.',
+    suggested_minutes: 30,
+    relationship: 'child',
+  }];
+  const record = buildContributionRecord({ attempt: attempt(), proposal: reproduction });
+  assert.equal(record.value_assessment.outcome, 'reproducibility-result');
+  assert.equal(record.proposed_tasks[0].relationship, 'child');
+});
+
 test('rejects private paths and unsupported fields', () => {
   const unsafe = proposal();
   unsafe.summary = 'Read C:\\Users\\Somebody\\secret.txt before continuing this bounded research task.';

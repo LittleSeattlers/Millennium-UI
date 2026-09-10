@@ -232,8 +232,8 @@ function assertResearchValue(record) {
   }
   if (record.value_assessment.outcome === 'reproducibility-result'
     && record.research_task.kind !== 'review'
-    && !record.proposed_tasks.some((task) => task.relationship === 'verification')) {
-    fail('a reproducibility-result must come from review work or leave a verification successor');
+    && record.proposed_tasks.length === 0) {
+    fail('a reproducibility-result must come from review work or leave a bounded successor task');
   }
 }
 

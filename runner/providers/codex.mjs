@@ -184,6 +184,7 @@ export async function startCodexRun({
   onEvent,
   onRaw,
   onSnapshot,
+  validateCompletion = null,
   createRpc = (options) => new JsonRpcChild(options),
   resolveExecutable = () => resolveCodexExecutable(CODEX_OVERRIDE),
 }) {
@@ -197,6 +198,8 @@ export async function startCodexRun({
   let finishResolve;
   let quotaRefreshPending = false;
   let finalizationRequest = null;
+  let completionCheckPending = false;
+  let repairTurns = 0;
   let lastUsage = null;
   const completion = new Promise((resolve) => { finishResolve = resolve; });
 
@@ -226,8 +229,7 @@ export async function startCodexRun({
       if (message.method.includes('requestApproval')) return { decision: 'decline' };
       throw new Error('Millennium does not auto-answer provider prompts.');
     },
-    onNotification: (message) => {
-      handleNotification(message).catch((error) => {
+    onNotification: (message) => handleNotification(message).catch((error) => {
         const detail = safeError(error);
         console.error(`Codex notification handling failed: ${detail}`);
         Promise.resolve(onEvent({
@@ -237,8 +239,7 @@ export async function startCodexRun({
           detail,
         })).catch(() => {});
         void rpc.close(250).catch(() => {});
-      });
-    },
+      }),
   });
 
   const refreshQuota = async () => {
@@ -269,26 +270,94 @@ export async function startCodexRun({
     }
   };
 
+  const finishFromTurn = async (turn) => {
+    if (finished) return;
+    try {
+      await onEvent(normalizeCodexNotification({
+        method: 'turn/completed',
+        params: { turn },
+      }, attempt.codePath));
+    } catch (error) {
+      console.error(`Codex completion event could not be persisted: ${safeError(error)}`);
+    }
+    if (finished) return;
+    finished = true;
+    finishResolve({
+      status: turn.status === 'completed' ? 'completed' : turn.status === 'interrupted' ? 'interrupted' : 'failed',
+      error: turn.error?.message ?? null,
+      usage: lastUsage,
+    });
+    setTimeout(() => void rpc.close(), 300).unref?.();
+  };
+
+  const handleCompletedTurn = async (turn) => {
+    if (completionCheckPending || finished) return;
+    completionCheckPending = true;
+    try {
+      if (turn.status === 'completed' && typeof validateCompletion === 'function') {
+        let validation = null;
+        try {
+          validation = await validateCompletion();
+        } catch (error) {
+          await onEvent({
+            kind: 'GUARD',
+            level: 'warning',
+            message: 'The pre-publication check could not run; finalization will retry it.',
+            detail: safeError(error),
+          });
+        }
+        if (validation?.valid === false && repairTurns < 1 && validation.repairPrompt) {
+          repairTurns += 1;
+          await onEvent({
+            kind: 'VALUE',
+            level: 'warning',
+            message: 'Codex is correcting the structured contribution before finalization.',
+            detail: safeError(validation.reason ?? 'The canonical contribution contract rejected the draft.'),
+          });
+          const repair = await rpc.request('turn/start', {
+            threadId,
+            input: [{ type: 'text', text: validation.repairPrompt }],
+            cwd: attempt.codePath,
+            approvalPolicy: 'never',
+            sandboxPolicy: codexWorkspaceWritePolicy(attempt.codePath, networkAccess),
+            model: selectedModel,
+            effort,
+            summary: 'concise',
+          }, 30_000);
+          turnId = repair?.turn?.id ?? turnId;
+          return;
+        }
+      }
+      await finishFromTurn(turn);
+    } catch (error) {
+      await onEvent({
+        kind: 'GUARD',
+        level: 'warning',
+        message: 'The automatic contribution correction could not be completed.',
+        detail: safeError(error),
+      });
+      await finishFromTurn(turn);
+    } finally {
+      completionCheckPending = false;
+    }
+  };
+
   const handleNotification = async (message) => {
     if (message.method === 'account/rateLimits/updated') {
       await refreshQuota();
       return;
     }
-    const event = normalizeCodexNotification(message, attempt.codePath);
-    if (event) await onEvent(event);
+    if (message.method !== 'turn/completed') {
+      const event = normalizeCodexNotification(message, attempt.codePath);
+      if (event) await onEvent(event);
+    }
     if (message.method === 'thread/tokenUsage/updated') {
       lastUsage = numericShape(message.params);
     }
     if (message.method === 'turn/started') turnId = message.params?.turn?.id ?? turnId;
     if (message.method === 'turn/completed') {
-      finished = true;
       const turn = message.params?.turn ?? {};
-      finishResolve({
-        status: turn.status === 'completed' ? 'completed' : turn.status === 'interrupted' ? 'interrupted' : 'failed',
-        error: turn.error?.message ?? null,
-        usage: lastUsage,
-      });
-      setTimeout(() => void rpc.close(), 300).unref?.();
+      await handleCompletedTurn(turn);
     }
   };
 

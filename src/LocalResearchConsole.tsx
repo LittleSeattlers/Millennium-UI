@@ -1560,6 +1560,7 @@ type TerminalTone = 'completed' | 'preserved' | 'caution' | 'failed';
 
 function describeTerminalResult(attempt: AttemptRecord): { label: string; tone: TerminalTone; detail: string } {
   const publication = attempt.publication;
+  const valueGateReason = publication?.warning ?? attempt.researchValue?.reason;
   const structured = publication?.status === 'submitted'
     && publication.contributionSource === 'structured-proposal';
   const withheld = publication?.status === 'withheld';
@@ -1568,7 +1569,7 @@ function describeTerminalResult(attempt: AttemptRecord): { label: string; tone: 
   const sourceNote = structured
     ? 'Its latest valid structured findings were submitted for automatic validation.'
     : withheld
-      ? 'The result did not meet the research-value contract, so it was kept local and the task returned to the frontier.'
+      ? `The result was kept local and the task returned to the frontier.${valueGateReason ? ` Reason: ${valueGateReason}` : ''}`
     : fallback
       ? 'No valid structured research proposal was available, so only a recovery record was submitted.'
       : publication?.status === 'failed'

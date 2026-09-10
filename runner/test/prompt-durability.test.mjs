@@ -1,6 +1,11 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { buildFinalizationPrompt, buildResearchBrief, buildResearchPrompt } from '../prompt.mjs';
+import {
+  buildContributionRepairPrompt,
+  buildFinalizationPrompt,
+  buildResearchBrief,
+  buildResearchPrompt,
+} from '../prompt.mjs';
 
 function promptConfig() {
   return {
@@ -25,6 +30,7 @@ test('research prompt requires an immediately valid rolling result and contribut
   assert.match(prompt, /value_assessment[\s\S]*novelty[\s\S]*evidence[\s\S]*falsifier/);
   assert.match(prompt, /withhold the record from the ledger, and return the task to the frontier/);
   assert.match(prompt, /final research cycle adversarially checking the strongest result/);
+  assert.match(prompt, /reproducibility-result from a research task whose kind is not review must include at least one proposed_tasks item/);
 });
 
 test('a preparatory slice receives the full parent contract and its claim boundary', () => {
@@ -81,4 +87,15 @@ test('finalization prompt stops exploration and requires truthful durable files'
   assert.match(prompt, /bounded evidence-bearing claim plus a concrete next action or successor task/);
   assert.match(prompt, /Do not invent claims, evidence, verification, citations, novelty, or completion/);
   assert.match(prompt, /end the Codex turn immediately/);
+});
+
+test('contribution repair prompt is bounded and preserves truthful relationship semantics', () => {
+  const prompt = buildContributionRepairPrompt({
+    reason: 'A reproducibility result needs a structured successor.',
+  });
+  assert.match(prompt, /Do not perform new research/);
+  assert.match(prompt, /A reproducibility result needs a structured successor/);
+  assert.match(prompt, /without weakening, promoting, or inventing/);
+  assert.match(prompt, /relationship "verification" only for an independent recheck/);
+  assert.match(prompt, /end this repair turn immediately/);
 });
