@@ -1,0 +1,85 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-10-9d5dd7bf-b955-4922-9cf2-68862093523b",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T18:41:26.658Z",
+  "finished_at": "2026-09-10T18:51:17.283Z",
+  "research_task": {
+    "task_id": "rh.refute.verify.920e13d846c2d431",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Independently verify local result 920E13D8"
+  },
+  "summary": "The core conditional disk theorem is independently reproduced: valid point enclosures and a uniform second-derivative bound satisfying the strict Rouche inequality imply exactly one simple zero. A fresh exact-rational semantic and mutation checker passed 12 of 12 cases. The actual xi enclosure layer and all historical artifacts are absent, so no zeta certificate or off-line zero is reproduced.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "Relative to the linked unreviewed design, this review independently proves the simple and order-m implications, adds exact strictness and omitted-remainder adversaries, and separates mathematical soundness from the absent certificate realization. It identifies the claim of being smallest as unsupported and shows that strict closed-disk geometry can be weakened to non-strict tangency for location alone.",
+    "evidence": "An independent Taylor-remainder and Rouche derivation establishes the conditional theorem. A newly written BigInt rational checker passed 12 of 12 semantic, boundary, and mutation cases. Exact polynomial adversaries demonstrate failure under non-strict analytic acceptance or omission of the uniform remainder premise. A bounded local inventory establishes that only the research brief was initially preserved.",
+    "falsifier": "The mathematical claim would be overturned by a holomorphic function and bounds satisfying every stated premise but having total zero multiplicity other than one. The semantic result would be overturned by a failed declared exact-rational case or an arithmetic audit finding. Any failed enclosure replay would overturn an attempted xi specialization."
+  },
+  "claims": [
+    {
+      "statement": "For a function holomorphic near a closed disk, certified bounds U at least the center modulus, L at most the center derivative modulus, and H at least the uniform second-derivative modulus, together with U plus H times r squared over two strictly less than L times r, imply exactly one simple zero in the open disk.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Taylor's integral remainder bounds the difference from the linear comparison on the boundary, and Rouche's theorem transfers the linear function's total zero multiplicity of one.",
+      "verification_method": "Independently rederive the boundary inequality and apply Rouche; falsify by exhibiting a premise-satisfying function with a different zero count."
+    },
+    {
+      "statement": "The excerpt's strict strip, nonreal, and one-sided critical-line disk geometry is sufficient, though not necessary, to turn a certified xi zero in the open disk into an off-critical-line nontrivial zeta zero, conditional on the standard completed-zeta zero correspondence.",
+      "confidence": "partial-proof",
+      "evidence_summary": "Exact extrema on a disk establish sufficiency. An adversarial boundary analysis shows non-strict tangency also suffices for the interior zero, while the analytic zero correspondence remains an explicit dependency not formalized locally.",
+      "verification_method": "Check the rational disk inequalities, distinguish closed-disk tangency from open-disk location, and independently verify the completed-zeta zero correspondence."
+    },
+    {
+      "statement": "The linked historical verifier, five synthetic outcomes, replay schema, and xi enclosure method cannot be reproduced from this attempt's preserved inputs.",
+      "confidence": "computational",
+      "evidence_summary": "The initial directory inventory contained only the research brief, while the excerpt itself says that no candidate or actual enclosure transcript was supplied and that the enclosure engine was not implemented.",
+      "verification_method": "Inventory the permitted attempt directory and compare the available files with every named evidence artifact in the supplied excerpt."
+    }
+  ],
+  "limitations": [
+    "No candidate zero, accepted xi certificate, derivative enclosure, or proof-replay transcript is present.",
+    "The xi enclosure engine is neither implemented nor independently audited in the supplied material.",
+    "The fresh exact checker tests semantic rational comparisons and the excerpt's strict geometry policy only, not complex analysis or xi evaluation.",
+    "The historical specification, scripts, test inputs, logs, and contribution JSON are absent.",
+    "The standard completed-zeta zero correspondence remains a paper-level dependency in this attempt."
+  ],
+  "failed_approaches": [
+    "Historical deterministic reproduction was impossible because the named source artifacts, inputs, and logs were not preserved in the permitted directory.",
+    "The claim that the certificate is smallest could not be supported because no size metric, comparison class, or minimality argument was supplied; boundary analysis also found a weaker sufficient geometry policy.",
+    "An initial objection that geometry tangency defeats the location conclusion was rejected because the certified zero lies in the open disk, whose points remain strictly away from a tangent boundary.",
+    "The preferred file inventory executable could not start due to access denial, so a native directory listing was used."
+  ],
+  "next_actions": [
+    "Implement and audit a rigorous outward enclosure for xi and its derivatives on one declared rational disk.",
+    "Require a complete replay transcript before treating any numerical candidate as satisfying the conditional theorem."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Audit one xi derivative enclosure node",
+      "objective": "Implement a rigorous rational enclosure for xi, xi prime, and a uniform xi second-derivative bound on one fixed rational disk, without claiming that the disk contains a zero.",
+      "rationale": "The absent enclosure layer is the exact unresolved dependency between the verified conditional theorem and any usable zeta certificate.",
+      "success_criteria": "Two independently written evaluators reproduce compatible outward rational bounds and a complete replay transcript for the same disk.",
+      "useful_failure_criteria": "Identify a precise invalid or unjustified quadrature, tail, transcendental, derivative, or modulus-bound step.",
+      "verification_method": "Replay every interval node with independent outward arithmetic and compare final bounds while checking uniformity over the entire disk.",
+      "suggested_minutes": 120,
+      "relationship": "child"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-01-2bdb80b7-a84e-4951-8c68-3ae17349b62c",
+    "riemann-hypothesis-2026-09-10-5988b4c9-e1d0-4c07-a1f1-ac1ac5c0f5c1",
+    "riemann-hypothesis-2026-09-10-62356770-9c05-4fc7-a9ce-23dac8a646fa",
+    "riemann-hypothesis-2026-09-10-62a41506-aee0-4b08-8a43-f688530fdcd3",
+    "riemann-hypothesis-2026-09-10-9c5a546f-0bbe-4d31-8197-cfef9b88f453",
+    "riemann-hypothesis-2026-09-10-6b99c8e5-0d96-4737-b006-2eeb981bd23c",
+    "riemann-hypothesis-2026-09-10-414af66f-bb46-44d8-b3a4-ab7d03a57bb9"
+  ],
+  "review_status": "unreviewed"
+}
