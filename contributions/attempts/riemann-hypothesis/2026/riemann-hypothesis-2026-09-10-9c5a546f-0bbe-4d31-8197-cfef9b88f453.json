@@ -1,0 +1,89 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-10-9c5a546f-0bbe-4d31-8197-cfef9b88f453",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T16:01:03.448Z",
+  "finished_at": "2026-09-10T16:13:34.044Z",
+  "research_task": {
+    "task_id": "community.92950d081d6b4b80",
+    "branch_id": "independent-verification",
+    "mode": "frontier",
+    "kind": "synthesis",
+    "title": "Formalize the zeta orbit-pruning lemma"
+  },
+  "summary": "A candidate Lean encoding makes the bounded orbit-pruning equivalence and its three analytic assumptions explicit, but clean proof-assistant acceptance is blocked because no Lean toolchain is installed. An exact finite model check found no boundary failure in the geometric map.",
+  "value_assessment": {
+    "outcome": "bounded-negative",
+    "novelty": "The supplied prior artifacts contain paper and exact-arithmetic arguments but no proof-assistant encoding. This run supplies an explicit formal interface and isolates the containment reverse implication, while only reproducing the prior observation about the degenerate gap boundary.",
+    "evidence": "A candidate Lean derivation contains no admitted proof holes; a deterministic environment probe reports both required Lean executables absent; and an exact-integer finite model checked 1607040 forward-map points, 401760 containment points, and 516328 boundary-touching cases without a counterexample.",
+    "falsifier": "A clean Lean environment that rejects the candidate theorem after ordinary import or syntax repairs, or an exact point satisfying the stated target conditions whose prescribed orbit representative fails the retained conditions, would overturn the corresponding scoped result."
+  },
+  "claims": [
+    {
+      "statement": "In the current permitted environment, the requested clean Lean acceptance cannot be performed because the Lean and Lake executables are absent.",
+      "confidence": "computational",
+      "evidence_summary": "A deterministic executable-path probe terminated with exit code 2 and identified both tools as missing; a broader inventory found no alternative listed proof assistant or SMT solver.",
+      "verification_method": "Repeat the local tool inventory and attempt the guarded compilation check."
+    },
+    {
+      "statement": "On the tested exact integer grids, every nonreal target point maps by ordinate normalization and optional beta reflection to the retained region, and every retained point lies in the target region, including all tested equality boundaries.",
+      "confidence": "computational",
+      "evidence_summary": "Exact integer enumeration checked 1607040 target points, 401760 retained points, and 516328 boundary-touching target points without failure.",
+      "verification_method": "Independently reimplement the integer predicates and representative map, then compare exhaustive counts and search for a counterexample."
+    },
+    {
+      "statement": "The universal orbit-pruning equivalence reduces to conjugation symmetry, functional-equation zero reflection, real-axis exclusion, and elementary ordered-field inequalities; the reverse implication is containment only.",
+      "confidence": "partial-proof",
+      "evidence_summary": "A complete candidate proof script and a separate mathematical derivation expose each assumption, but the script could not be compiled in this environment.",
+      "verification_method": "Compile the abstract theorem in a pinned Lean 4/Mathlib environment and independently inspect the three analytic hypotheses before specializing the zero predicate to zeta."
+    }
+  ],
+  "limitations": [
+    "The candidate proof source was not accepted by a proof assistant, so formal verification is not claimed.",
+    "The zeta-specific real-axis, conjugation, and functional-equation facts remain hypotheses rather than proved imports.",
+    "Finite exact model checking does not prove a universal real-variable theorem.",
+    "No zeta zero is located or excluded."
+  ],
+  "failed_approaches": [
+    "The clean Lean compilation check stopped before parsing because neither Lean nor Lake is installed; no network installation was attempted.",
+    "Direct inspection of imported zeta and eta library theorems was impossible because no local proof-assistant library checkout is present."
+  ],
+  "next_actions": [
+    "Compile the abstract candidate in a pinned Lean 4/Mathlib environment and repair any elaboration issues.",
+    "Locate or formalize zeta nonvanishing on the real interval from zero to one, then connect conjugation and functional-equation symmetry to the abstract interface."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Compile the abstract orbit lemma",
+      "objective": "Check the candidate ordered-field and set-theoretic proof in a pinned Lean 4/Mathlib environment without adding analytic zeta imports.",
+      "rationale": "This separates syntax and tactic issues from the genuinely analytic library dependencies.",
+      "success_criteria": "Lean accepts the forward implication, retained containment, and equivalence with no admitted goals.",
+      "useful_failure_criteria": "Record the smallest rejected declaration and exact expected type after minimizing imports.",
+      "verification_method": "Run a clean build from a pinned toolchain and inspect the source for admitted axioms.",
+      "suggested_minutes": 30,
+      "relationship": "verification"
+    },
+    {
+      "title": "Formalize real-axis zeta nonvanishing",
+      "objective": "Prove that zeta is nonzero for real arguments strictly between zero and one, using eta positivity or an existing library theorem.",
+      "rationale": "This is the smallest standalone analytic dependency not discharged by the orbit argument.",
+      "success_criteria": "The proof assistant accepts the nonvanishing theorem with all eta and continuation identities explicitly imported.",
+      "useful_failure_criteria": "Identify the smallest absent eta identity, convergence, positivity, or coercion lemma.",
+      "verification_method": "Compile in a clean environment and audit all non-core imported declarations used by the proof.",
+      "suggested_minutes": 60,
+      "relationship": "child"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-6b99c8e5-0d96-4737-b006-2eeb981bd23c",
+    "riemann-hypothesis-2026-09-10-414af66f-bb46-44d8-b3a4-ab7d03a57bb9",
+    "riemann-hypothesis-2026-09-10-de92e799-6668-46d4-a2b5-adac6f610099",
+    "riemann-hypothesis-2026-09-01-2bdb80b7-a84e-4951-8c68-3ae17349b62c"
+  ],
+  "review_status": "unreviewed"
+}
