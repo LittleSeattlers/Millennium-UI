@@ -1,0 +1,75 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-10-975d7860-dedf-40dc-90e1-6749b295b06f",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T19:15:17.564Z",
+  "finished_at": "2026-09-10T19:23:36.195Z",
+  "research_task": {
+    "task_id": "community.7f1398f2b84ab739",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Machine-check real-axis zeta nonvanishing"
+  },
+  "summary": "Bounded negative: a candidate Lean theorem isolates the elementary implication from eta positivity and the eta-zeta product identity to zeta nonvanishing on the open real interval, but no Lean build was possible and neither concrete analytic premise was machine-checked.",
+  "value_assessment": {
+    "outcome": "bounded-negative",
+    "novelty": "This reproduces, rather than contradicts, the prior real-axis attempts' missing-toolchain observation. Relative to the supplied excerpts, it adds a preserved candidate source whose interface separates the elementary implication from eta positivity and the continued eta-zeta identity; it does not add proof-assistant acceptance.",
+    "evidence": "A reproducible environment script found no project manifest and no Lean, Lake, or Elan application. A direct derivation isolates the implication, a textual source audit found no unfinished-proof declaration patterns, and an exact semantic regression checker passed nine adversarial probes.",
+    "falsifier": "A runnable pinned toolchain would overturn the environment obstruction; a countermodel satisfying positivity and the correctly oriented pointwise identity while zeta vanishes would overturn the abstract implication."
+  },
+  "claims": [
+    {
+      "statement": "Within the permitted workspace and current process environment, the requested pinned Lean/Mathlib build cannot be run because no Lean project pin or manifest is present and Lean, Lake, and Elan do not resolve as applications.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Recursive filename inspection found no standard Lean or Lake project files, and three application-resolution checks returned missing.",
+      "verification_method": "Repeat the workspace manifest inventory and application-resolution checks in the same permitted directory."
+    },
+    {
+      "statement": "For arbitrary complex-valued eta, zeta, and factor functions on the reals, eta real-part positivity and the product identity eta equals factor times zeta on zero less than x less than one imply zeta nonvanishing there; no factor sign premise is required.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "A direct contradiction proof substitutes a hypothetical zeta zero into the identity and contradicts strict positivity of eta's real part. Nine exact adversarial probes passed; candidate Lean syntax records the derivation but was not compiled.",
+      "verification_method": "Check the algebraic substitution and countermodels independently, then compile the candidate in a pinned Lean/Mathlib environment and inspect its axiom output."
+    }
+  ],
+  "limitations": [
+    "The observation is environment-level, not a Lean compilation failure or proof-assistant verification.",
+    "No claim is yet made about whether a particular Mathlib version contains eta positivity or the eta-zeta continuation identity.",
+    "The candidate theorem leaves eta, zeta, and the factor abstract and therefore does not itself prove the concrete Riemann-zeta target.",
+    "No global claim about the Riemann Hypothesis is made."
+  ],
+  "failed_approaches": [
+    "Direct Lean compilation was unavailable because no Lean, Lake, or Elan application resolved and no pinned project was present.",
+    "Mathlib declaration discovery could not proceed because no permitted local Mathlib source tree or runnable toolchain was available."
+  ],
+  "next_actions": [
+    "Replay the candidate in a pinned Mathlib environment and identify checked declarations or separate proofs for eta positivity and the continued eta-zeta identity."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Replay the real-axis kernel in pinned Mathlib",
+      "objective": "Compile the preserved algebraic kernel and replace its abstract eta and identity assumptions with checked Mathlib declarations or separately proved lemmas.",
+      "rationale": "The current environment has neither a pin nor callable Lean tooling, so only a fresh pinned replay can supply proof-assistant acceptance.",
+      "success_criteria": "A clean Lake build of the exact quantified real-axis theorem with no sorry declarations, plus checked declaration dependencies.",
+      "useful_failure_criteria": "A minimal compiling file that names and isolates the first analytic declaration absent from the pinned Mathlib version.",
+      "verification_method": "Record the Lean version, Mathlib revision, source digest, Lake build output, and declaration dependency audit.",
+      "suggested_minutes": 45,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-cd644382-1ebe-4f3f-81e8-3b80065aff35",
+    "riemann-hypothesis-2026-09-10-b2c0619e-86b4-4af9-bd53-84f12e4b540f",
+    "riemann-hypothesis-2026-09-10-9d5dd7bf-b955-4922-9cf2-68862093523b",
+    "riemann-hypothesis-2026-09-10-5988b4c9-e1d0-4c07-a1f1-ac1ac5c0f5c1",
+    "riemann-hypothesis-2026-09-10-62356770-9c05-4fc7-a9ce-23dac8a646fa",
+    "riemann-hypothesis-2026-09-10-62a41506-aee0-4b08-8a43-f688530fdcd3",
+    "riemann-hypothesis-2026-09-10-9c5a546f-0bbe-4d31-8197-cfef9b88f453"
+  ],
+  "review_status": "unreviewed"
+}
