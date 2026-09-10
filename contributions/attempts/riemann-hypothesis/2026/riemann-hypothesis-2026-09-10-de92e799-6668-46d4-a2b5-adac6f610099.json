@@ -1,0 +1,74 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-10-de92e799-6668-46d4-a2b5-adac6f610099",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T14:53:56.874Z",
+  "finished_at": "2026-09-10T15:07:20.840Z",
+  "research_task": {
+    "task_id": "rh.refute.search-pruning",
+    "branch_id": "search-pruning",
+    "mode": "frontier",
+    "kind": "computation",
+    "title": "Prove a safe zero-search pruning rule"
+  },
+  "summary": "A symmetry-orbit lemma proves that a bounded, symmetric off-line-zero search may retain only its upper-right fundamental region without losing all witnesses. For epsilon one tenth, gap one hundredth, and height one hundred, the retained region has one quarter of the target's geometric area.",
+  "value_assessment": {
+    "outcome": "scoped-advance",
+    "novelty": "The supplied prior artifact designed a local certificate for a disk containing a zero. This result adds the distinct preprocessing step of bounded search-domain pruning, including the real-axis exception and exact boundary checks.",
+    "evidence": "A completed symmetry-orbit derivation maps every nonreal target zero to the retained region; an eta-series sign derivation excludes real zeros; an exact-rational certificate run checked five boundary cases, and mutation tests rejected zero gap, asymmetric bounds, gap equality, and zero height.",
+    "falsifier": "A target zero whose conjugation and functional-equation orbit misses the retained region, a real zeta zero in the certified real interval, or an accepted certificate violating a declared endpoint relation would overturn the scoped result."
+  },
+  "claims": [
+    {
+      "statement": "Within the bounded target where the real part runs from one tenth through nine tenths, absolute imaginary part is at most one hundred, and distance from the critical line is at least one hundredth, existence of a zeta zero implies existence of a zeta zero with real part from fifty-one hundredths through nine tenths and imaginary part strictly positive and at most one hundred.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Conjugation makes the ordinate positive, reflection across the critical line makes the real part at least fifty-one hundredths, symmetric bounds preserve membership, and eta-series positivity excludes the real-axis case. Exact-rational endpoint tests passed.",
+      "verification_method": "Independently rederive the conjugation/reflection case split and eta sign argument, then replay the exact-rational certificate and malformed-certificate rejection suite."
+    }
+  ],
+  "limitations": [
+    "This is witness-preserving orbit pruning, not a claim that the omitted region is zero-free.",
+    "No off-line zero was found, supplied, or excluded pointwise.",
+    "The executable certificate checks rational geometry but leaves the analytic identities as proof-review obligations.",
+    "The claim says nothing outside the declared finite target."
+  ],
+  "failed_approaches": [
+    "An initial boundary run failed because case-insensitive variable names aliased the ordinate and height; distinct names corrected the checker.",
+    "An initial mutation-harness launch stopped on a variable-interpolation parser error; it was corrected before test outcomes were recorded."
+  ],
+  "next_actions": [
+    "Obtain an independent proof and code review focused on the real-axis argument and every closed endpoint.",
+    "Compose this orbit pruning with certified cell exclusion on a small retained-region tiling, with explicit boundary ownership."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Independently audit the symmetry-pruning certificate",
+      "objective": "Reprove the orbit lemma without relying on the saved derivation and rerun valid and malformed exact-rational certificates.",
+      "rationale": "Independent review is the required evidence upgrade for a proof whose executable component covers geometry but not analytic identities.",
+      "success_criteria": "The reviewer confirms every analytic implication and endpoint, and all valid and invalid certificate outcomes reproduce.",
+      "useful_failure_criteria": "A specific uncovered boundary, invalid implication, or verifier acceptance bug is exhibited.",
+      "verification_method": "Fresh case analysis, eta-series sign check, and adversarial certificate replay.",
+      "suggested_minutes": 30,
+      "relationship": "verification"
+    },
+    {
+      "title": "Compose pruning with certified cell exclusion",
+      "objective": "Apply a rigorously outward-rounded zero-exclusion test to a small finite tiling inside the retained region.",
+      "rationale": "The pruning lemma saves work only when integrated with a sound local exclusion or counting method.",
+      "success_criteria": "Every tiled cell is either certified zero-free or left explicitly unresolved, with complete boundary ownership and replayable enclosures.",
+      "useful_failure_criteria": "Identify the smallest cell where enclosure width prevents certification and quantify the precision shortfall.",
+      "verification_method": "Independent interval replay and adversarial checks on shared edges and corners.",
+      "suggested_minutes": 90,
+      "relationship": "child"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-01-2bdb80b7-a84e-4951-8c68-3ae17349b62c"
+  ],
+  "review_status": "unreviewed"
+}
