@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-10-e1143355-d6ee-445d-a5c4-4c7d8423c7b1",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T19:51:36.139Z",
+  "finished_at": "2026-09-10T20:00:11.475Z",
+  "research_task": {
+    "task_id": "community.90c2098c9f74c43c",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Replay the real-axis kernel in pinned Mathlib"
+  },
+  "summary": "A fresh current-workspace replay establishes a bounded pre-build obstruction: no Lean application or immutable Mathlib project closure is available. The elementary eta-product implication is preserved as uncompiled candidate source, along with a concrete zeta instantiation probe, stable digests, and an exact finite adversarial regression check.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "Relative to the supplied prior excerpts, this reproduces rather than strengthens the algebraic and paper-level conclusion. It adds a concrete zeta instantiation probe, stable source digests, two agreeing executions of a current-workspace audit, and exact countermodels for three weakened interfaces; it does not reproduce any absent historical source or supply proof-assistant acceptance.",
+    "evidence": "Repeated workspace-only audits, including the final checkpoint, agreed that all three Lean applications and all four pin or project markers are absent while preserving matching SHA-256 digests for both candidate sources. A built-in text scan found no unfinished-proof or local-postulate tokens. Repeated exact-arithmetic checker runs agreed on all 20 premise-satisfying integer cases and three explicit mutation countermodels.",
+    "falsifier": "A permitted-workspace inventory showing a complete immutable project closure and callable Lean applications, or a successful pinned build of the preserved sources, would overturn the negative build classification."
+  },
+  "claims": [
+    {
+      "statement": "Within the permitted workspace at the recorded checkpoint, the requested pinned replay cannot start because Lean, Lake, and Elan are unresolved and the toolchain file, Lake project file, and resolved manifest are absent.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Two independent executions of the preserved workspace-only audit returned the same negative classification and matching source digests. The scope is this attempt directory and application resolution only; an installation outside the permitted scope is not ruled out.",
+      "verification_method": "Re-run the preserved non-executing audit in the same permitted directory and compare its structured application, marker, digest, and readiness fields."
+    },
+    {
+      "statement": "For any multiplication-with-zero structure, if eta is nonzero and eta equals factor times zeta, then zeta is nonzero; the exact real-interval specialization therefore needs no nonzeroness assumption on the factor.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "The elementary proof assumes zeta is zero, substitutes into the product identity, uses multiplication by zero, and contradicts eta nonzeroness. Exact finite regression checks cover all 20 premise-satisfying integer cases in the declared range, while explicit countermodels defeat omission of either premise and reversal of the identity. The Lean rendering remains uncompiled and the concrete eta premises remain dependencies.",
+      "verification_method": "Compile the candidate kernel in the pinned project, inspect its axioms, and independently check the one-line contradiction after substituting zeta equal to zero."
+    }
+  ],
+  "limitations": [
+    "No Lean source was parsed or elaborated, so source syntax and concrete declaration spelling remain unchecked.",
+    "No Lean version, Mathlib revision, build transcript, or compiled declaration dependency audit exists because compilation could not start.",
+    "No concrete eta definition, nonzeroness proof, or continued eta-zeta identity was checked.",
+    "The textual hygiene scan cannot detect transitive axioms and is not formal verification.",
+    "The finite exact-arithmetic checker is regression evidence and cannot prove the universal complex-valued theorem.",
+    "This result neither searches for nor establishes any off-critical-line zeta zero."
+  ],
+  "failed_approaches": [
+    "The pinned build could not start because both the applications and immutable dependency closure are absent.",
+    "The preferred fast text-search executable failed to launch because of a local process encoding error; a built-in text matcher completed the same narrow token scan."
+  ],
+  "next_actions": [
+    "Provide an offline immutable Lean and Mathlib project closure, compile the concrete zeta probe first, and then audit or separately formalize the eta nonzeroness and continued identity declarations."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Compile the preserved real-axis probes offline",
+      "objective": "Replay the generic kernel and concrete zeta instantiation in an immutable cached Lean and Mathlib project, then identify the first missing eta declaration.",
+      "rationale": "The current review isolates a pre-build environment obstruction and cannot distinguish unavailable analytic declarations from guessed names.",
+      "success_criteria": "A clean no-unfinished-proof build of the exact quantified theorem with version, revision, source digest, and declaration or axiom output.",
+      "useful_failure_criteria": "A minimal compiling probe that verifies concrete zeta naming and identifies the first unavailable eta definition, nonzeroness theorem, or continued identity in the fixed revision.",
+      "verification_method": "Rebuild from the immutable cached project and compare compiler output, source digests, and printed declaration dependencies.",
+      "suggested_minutes": 45,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-975d7860-dedf-40dc-90e1-6749b295b06f",
+    "riemann-hypothesis-2026-09-10-c03c8b27-58ea-461a-b775-46be06dbbc8f",
+    "riemann-hypothesis-2026-09-10-ea201c7b-bb9d-4e35-adec-0f9fd01b7810",
+    "riemann-hypothesis-2026-09-10-b2c0619e-86b4-4af9-bd53-84f12e4b540f",
+    "riemann-hypothesis-2026-09-10-cd644382-1ebe-4f3f-81e8-3b80065aff35",
+    "riemann-hypothesis-2026-09-10-9d5dd7bf-b955-4922-9cf2-68862093523b",
+    "riemann-hypothesis-2026-09-10-5988b4c9-e1d0-4c07-a1f1-ac1ac5c0f5c1"
+  ],
+  "review_status": "unreviewed"
+}
