@@ -1,0 +1,89 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-10-6b99c8e5-0d96-4737-b006-2eeb981bd23c",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T15:45:28.344Z",
+  "finished_at": "2026-09-10T15:58:17.287Z",
+  "research_task": {
+    "task_id": "rh.refute.verify.1e7de5e980733806",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Independently verify local result 1E7DE5E9"
+  },
+  "summary": "Independent review agrees with the bounded witness-preserving pruning equivalence and exactly reproduces the rational area reduction. It leaves the prior implementation's reported executions unresolved because the original artifacts are absent.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "Relative to the supplied unreviewed pruning contribution, this review independently rederives the zero-orbit argument, audits every inclusive boundary type, strengthens the stated implication to an explicit equivalence by observing containment, notes that rationality is unnecessary for the lemma itself, and separates reproduced mathematics from unavailable historical run evidence.",
+    "evidence": "An independent conjugation, functional-equation, and eta-series derivation supports the lemma; a newly written exact-rational reconstructed-certificate replay accepted six boundary probes, reproduced areas 156 and 39, and rejected five malformed variants.",
+    "falsifier": "The scoped result would be overturned by a zeta zero in the stated target region whose conjugation and functional-equation orbit has no representative in the retained region, by a real zeta zero with real part strictly between zero and one, or by an exact failure of a stated inclusive bound or area identity."
+  },
+  "claims": [
+    {
+      "statement": "For parameters satisfying zero less than epsilon less than one half, zero less than delta less than one half minus epsilon, and positive T, the stated symmetric target region contains a zeta zero if and only if the stated positive-ordinate right-half retained region contains a zeta zero.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "The forward implication is independently derived using eta-series positivity to exclude zero ordinate, conjugation for negative ordinate, and functional-equation symmetry for the left half; the reverse implication is direct set containment. Inclusive outer, gap, and height boundaries were audited.",
+      "verification_method": "Recheck eta positivity and its continuation identity on the real interval, then apply the two zero symmetries case by case and verify every defining inequality exactly."
+    },
+    {
+      "statement": "At epsilon one tenth, delta one hundredth, and T equal to one hundred, the target and retained areas are exactly 156 and 39, so the retained area is one quarter of the target area.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Exact rational derivation and an independent reconstructed-certificate replay agree; six boundary probes passed and five malformed variants were rejected.",
+      "verification_method": "Compute the common slab width as thirty-nine hundredths, multiply by the exact heights, and replay the rational equalities without floating-point arithmetic."
+    },
+    {
+      "statement": "The prior attempt's reported original checker, mutation-harness, and implementation-failure runs are not reproducible from the locally supplied evidence.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "The working directory contains the research brief but none of the named original proof, certificate, checker, mutation, adversarial-review, or log artifacts.",
+      "verification_method": "Inventory the files made available to this attempt and distinguish a new independent replay from a replay of the original implementation."
+    }
+  ],
+  "limitations": [
+    "The result is an existence-preserving symmetry reduction, not pointwise zero exclusion in the omitted region.",
+    "No complete search of the retained continuum and no off-line-zero witness are supplied.",
+    "The independent exact-rational replay cannot verify historical claims about unavailable original scripts or logs.",
+    "The strict-contract checker rejects equality in the gap-width condition even though the symmetry implication itself extends to that zero-area boundary case.",
+    "Standard analytic identities are used without proof-assistant formalization, and no network sources were consulted."
+  ],
+  "failed_approaches": [
+    "Direct replay of the prior implementation was impossible because the named certificate, checkers, mutation inputs, and logs were not supplied.",
+    "The preferred fast file-search utility was unavailable in the sandbox, so a read-only directory inventory was used instead."
+  ],
+  "next_actions": [
+    "Acquire the original target-attempt artifacts and replay them byte-for-byte against their documented inputs.",
+    "Formalize the orbit lemma and real-axis eta argument in a proof assistant to remove reliance on prose-level analytic reconstruction."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Replay the original pruning certificate artifacts",
+      "objective": "Verify the original certificate schema, checker output, mutation cases, and reported corrected failures from preserved source files and logs.",
+      "rationale": "This resolves the only material reproducibility gap left by the independent mathematical review.",
+      "success_criteria": "A file-by-file replay reports exact agreement or a precise mismatch for every original execution claim.",
+      "useful_failure_criteria": "Identify a missing input, ambiguous schema, nondeterministic dependency, or concrete output mismatch.",
+      "verification_method": "Run only preserved original inputs in an isolated environment, record hashes and observable outputs, and compare them with the prior report and the independent reconstruction.",
+      "suggested_minutes": 30,
+      "relationship": "verification"
+    },
+    {
+      "title": "Formalize the zeta orbit-pruning lemma",
+      "objective": "Encode the parameter inequalities, zero symmetries, real-axis exclusion, and boundary-preserving set implication in a proof assistant.",
+      "rationale": "A small formal theorem would make the bounded pruning rule mechanically checkable and clarify all analytic dependencies.",
+      "success_criteria": "The proof assistant accepts the exact forward implication and the containment-based reverse implication with all assumptions explicit.",
+      "useful_failure_criteria": "Produce the smallest missing library theorem or unformalized analytic dependency that blocks completion.",
+      "verification_method": "Check the theorem in a clean proof-assistant environment and independently inspect the imported assumptions about zeta, eta, conjugation, and the functional equation.",
+      "suggested_minutes": 60,
+      "relationship": "child"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-de92e799-6668-46d4-a2b5-adac6f610099",
+    "riemann-hypothesis-2026-09-10-414af66f-bb46-44d8-b3a4-ab7d03a57bb9",
+    "riemann-hypothesis-2026-09-01-2bdb80b7-a84e-4951-8c68-3ae17349b62c"
+  ],
+  "review_status": "unreviewed"
+}
