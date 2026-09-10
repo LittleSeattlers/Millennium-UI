@@ -1,0 +1,85 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-10-62a41506-aee0-4b08-8a43-f688530fdcd3",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T16:19:48.937Z",
+  "finished_at": "2026-09-10T16:32:41.701Z",
+  "research_task": {
+    "task_id": "rh.refute.verify.371613da8bcf05c3",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Independently verify local result 371613DA"
+  },
+  "summary": "The abstract orbit-pruning equivalence is independently verified by a direct proof, boundary analysis, exact finite-grid replay, and adversarial mutation; the linked Lean-source properties and historical counts remain irreproducible because their named inputs are absent.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "Relative to the linked unreviewed contribution, this review independently confirms its mathematical core including zero-height and degenerate-gap endpoints, proves that each of its three orbit hypotheses is necessary for arbitrary predicates, and separates that agreement from unresolved machine-source and historical-count claims.",
+    "evidence": "A direct two-direction derivation proves the abstract equivalence; an exact-integer enumeration maps 190944 nonreal target cases and checks 49140 retained cases with zero failures; a strict-boundary mutation produces 46800 failures; exact countermodels test hypothesis necessity.",
+    "falsifier": "An admissible predicate satisfying all three stated hypotheses with a target witness but no retained witness, or a retained point outside the target, would overturn the theorem; provision and successful audit of the exact linked artifacts would overturn the irreproducibility disposition."
+  },
+  "claims": [
+    {
+      "statement": "For real parameters 0<epsilon<=1/2, 0<=delta<=1/2-epsilon, and T>=0, the stated Target-witness and Retained-witness existences are equivalent for every predicate closed under conjugation and functional reflection and excluded on the target real axis, including the endpoint cases T=0, delta=0, and delta=1/2-epsilon.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "A direct sign-and-side case proof constructs a retained orbit representative, and a separate inequality proof establishes reverse containment.",
+      "verification_method": "Check the forward cases, the reverse containment inequalities, and each listed equality boundary against the explicit definitions."
+    },
+    {
+      "statement": "On the declared scaled-integer grid, the corrected independent checker maps 190944 nonreal target points and checks 49140 retained points with zero failures, while a strict lower-gap mutation is rejected with 46800 failures.",
+      "confidence": "computational",
+      "evidence_summary": "Exact integer enumeration covers 3276 admissible parameter tuples, including 702 degenerate-gap tuples and 91520 non-boundary target cases.",
+      "verification_method": "Rerun the default exact enumeration and its strict-gap mutation and compare the deterministic summary counts and exit dispositions."
+    },
+    {
+      "statement": "None of conjugation, functional reflection, or target real-axis exclusion is redundant for the abstract forward implication over arbitrary predicates.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Three explicit finite predicates satisfy the other two hypotheses and have a target witness but no retained witness when the selected hypothesis is removed.",
+      "verification_method": "For each finite predicate, enumerate its points and directly check the two retained hypotheses, target membership, and absence of a retained witness."
+    },
+    {
+      "statement": "The linked claims about exact Lean source contents and historical enumeration counts are not reproducible from the current preserved inputs.",
+      "confidence": "computational",
+      "evidence_summary": "The bounded directory initially contains only the research brief, with none of the named source files or logs; the current command inventory also lacks the surveyed proof-assistant tools.",
+      "verification_method": "Repeat the bounded file inventory and tool lookup, then compare the available inputs with the named evidence in the supplied excerpt."
+    }
+  ],
+  "limitations": [
+    "The direct proof has not received proof-assistant acceptance in this environment.",
+    "The new finite-grid replay supports but does not prove the continuum theorem and is not a replay of the prior undeclared enumeration grid.",
+    "Missing linked source prevents auditing syntax, imports, hidden axioms, and absence of unfinished proof markers.",
+    "The zeta application depends on standard analytic symmetry and real-axis-exclusion facts.",
+    "No off-line zeta zero or global search conclusion is supplied."
+  ],
+  "failed_approaches": [
+    "The first PowerShell replay was invalidated because case-insensitive ordinate-bound and ordinate variable names collided; its zero-failure output was discarded."
+  ],
+  "next_actions": [
+    "Obtain the exact linked source and checker inputs, pin a compatible Lean and Mathlib toolchain, compile without trust-expanding declarations, and replay the historical counts."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Compile and replay the preserved orbit-pruning artifact",
+      "objective": "Audit the exact linked Lean source and deterministic checker under a pinned toolchain and preserved inputs.",
+      "rationale": "The mathematical core is independently supported, but the machine-formalization properties and historical counts are the remaining unresolved dependencies.",
+      "success_criteria": "The exact source compiles without unfinished proofs or added axioms, its theorem statement matches the reviewed contract, and the checker reproduces documented counts from identified inputs.",
+      "useful_failure_criteria": "A precise syntax error, missing dependency, trust-expanding declaration, theorem mismatch, input ambiguity, or count mismatch is documented reproducibly.",
+      "verification_method": "Record source and input digests, toolchain versions, clean compiler output, declaration audit, and deterministic checker summaries.",
+      "suggested_minutes": 45,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-9c5a546f-0bbe-4d31-8197-cfef9b88f453",
+    "riemann-hypothesis-2026-09-10-6b99c8e5-0d96-4737-b006-2eeb981bd23c",
+    "riemann-hypothesis-2026-09-10-414af66f-bb46-44d8-b3a4-ab7d03a57bb9",
+    "riemann-hypothesis-2026-09-10-de92e799-6668-46d4-a2b5-adac6f610099",
+    "riemann-hypothesis-2026-09-01-2bdb80b7-a84e-4951-8c68-3ae17349b62c"
+  ],
+  "review_status": "unreviewed"
+}
