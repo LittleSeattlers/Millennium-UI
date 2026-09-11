@@ -1,0 +1,82 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-10-cd644382-1ebe-4f3f-81e8-3b80065aff35",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T18:53:32.635Z",
+  "finished_at": "2026-09-10T19:02:48.771Z",
+  "research_task": {
+    "task_id": "rh.refute.verify.b7b3d34902689619",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Independently verify local result B7B3D349"
+  },
+  "summary": "The visible mathematical core of linked result B7B3D349 is independently reproduced at paper level: the alternating eta series is positive for real x greater than zero, and the eta-zeta identity implies that zeta is negative and nonzero for 0 < x < 1. A fresh check also finds Lean and Lake unavailable. Historical source-file and output claims are irreproducible because the named artifacts were not supplied.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "Relative to the supplied unreviewed linked attempt, this review reproduces rather than strengthens its real-axis theorem and adds a claim-by-claim separation between independently verified mathematics, a reproduced present-environment obstruction, and unresolved historical artifact claims.",
+    "evidence": "An independent consecutive-pair proof and a second alternating-series-bracketing proof establish eta positivity; an explicit analytic-continuation derivation transfers the result to zeta; a fresh application-only executable check reports Lean and Lake missing with status 2; the structured proposal and three detailed claim records pass local parse and key-set checks.",
+    "falsifier": "A real x with 0 < x < 1 violating the eta lower bound or eta-zeta identity would overturn the mathematical claim; resolving either Lean or Lake as an application in the same process environment would overturn the environment claim."
+  },
+  "claims": [
+    {
+      "statement": "For every real x > 0, the ordinary alternating eta series converges and satisfies eta(x) >= 1 - 2^(-x) > 0.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Every even partial sum is a sum of positive consecutive pairs and is bounded below by its first pair; alternating-series convergence permits passage to the limit. A separate bracketing argument reaches the same bound.",
+      "verification_method": "Independent paper derivation with adversarial checks at x = 0 and x = 1."
+    },
+    {
+      "statement": "For the standard analytically continued Riemann zeta function and every real x with 0 < x < 1, zeta(x) is negative and therefore nonzero.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Eta positivity combines with eta(s) = (1 - 2^(1-s)) zeta(s); the prefactor is negative on the stated interval. The identity is reconstructed from absolute convergence, locally uniform eta convergence, standard meromorphic continuation, pole cancellation, and uniqueness of analytic continuation.",
+      "verification_method": "Paper-level analytic rederivation followed by endpoint and dependency mutation checks; no proof-assistant acceptance is claimed."
+    },
+    {
+      "statement": "In the current review environment, Lean and Lake are not resolvable as applications, preventing a local proof-assistant acceptance check.",
+      "confidence": "computational",
+      "evidence_summary": "A newly authored deterministic application-only lookup reports both tools missing and returns status 2 on repeated execution.",
+      "verification_method": "Fresh executable resolution in the current process environment."
+    }
+  ],
+  "limitations": [
+    "The linked proof, checker, adversarial review, claim records, inventories, locator output, and logs were not supplied, so their historical contents and outputs remain unresolved.",
+    "Only claims visible in the supplied truncated excerpt were reviewed.",
+    "The analytic theorem is paper-level and depends on standard complex-analysis continuation facts; it was not accepted by a proof assistant here.",
+    "No nonreal zero search was performed, and no off-critical-line zero was located."
+  ],
+  "failed_approaches": [
+    "The preferred recursive inventory executable was inaccessible, so a read-only PowerShell inventory was used.",
+    "Historical deterministic replay could not be attempted because the reported script, inputs, and logs were absent."
+  ],
+  "next_actions": [
+    "Formalize the minimal nonvanishing implication and eta positivity in Lean 4 with explicit library dependencies when a toolchain is available.",
+    "Obtain the linked attempt's preserved files and logs, then rerun its exact checker and compare outputs byte-for-byte or claim-by-claim."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Machine-check real-axis zeta nonvanishing",
+      "objective": "Compile a Lean 4/Mathlib proof that eta positivity and the eta-zeta identity imply zeta nonvanishing for every real x with 0 < x < 1.",
+      "rationale": "The paper proof is independently reproduced, but the linked result's requested proof-assistant acceptance remains unavailable and historically irreproducible.",
+      "success_criteria": "A clean build with the exact theorem statement, no sorry declarations, and every analytic dependency identified by a checked library theorem or separately proved lemma.",
+      "useful_failure_criteria": "A minimal compiling file that isolates one unavailable library theorem or one precise formalization obstruction.",
+      "verification_method": "Run Lean and Lake in a pinned Mathlib environment and independently inspect the theorem assumptions and build output.",
+      "suggested_minutes": 45,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-62356770-9c05-4fc7-a9ce-23dac8a646fa",
+    "riemann-hypothesis-2026-09-10-9d5dd7bf-b955-4922-9cf2-68862093523b",
+    "riemann-hypothesis-2026-09-10-5988b4c9-e1d0-4c07-a1f1-ac1ac5c0f5c1",
+    "riemann-hypothesis-2026-09-10-62a41506-aee0-4b08-8a43-f688530fdcd3",
+    "riemann-hypothesis-2026-09-10-9c5a546f-0bbe-4d31-8197-cfef9b88f453",
+    "riemann-hypothesis-2026-09-10-6b99c8e5-0d96-4737-b006-2eeb981bd23c",
+    "riemann-hypothesis-2026-09-10-414af66f-bb46-44d8-b3a4-ab7d03a57bb9"
+  ],
+  "review_status": "unreviewed"
+}
