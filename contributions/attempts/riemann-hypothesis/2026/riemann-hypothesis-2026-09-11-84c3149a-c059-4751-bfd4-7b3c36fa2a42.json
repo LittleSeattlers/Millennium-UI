@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-11-84c3149a-c059-4751-bfd4-7b3c36fa2a42",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-11T06:20:24.400Z",
+  "finished_at": "2026-09-11T06:27:58.122Z",
+  "research_task": {
+    "task_id": "community.48654f4071d583d7",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Verify a materially delivered manifest-pinned orbit bundle"
+  },
+  "summary": "The delivery prerequisite fails: two confined non-executing enumerations found only the pre-existing research brief and three reviewer-authored records, with no supplier-authored digest manifest or orbit-pruning payload, so coverage validation and every execution stage remain unavailable.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "Relative to the directly linked prior contribution, this fresh attempt independently reproduces the missing-delivery obstruction; the advertised materially delivered bundle did not occur. It adds a digest-identified inventory plus independent root-boundary, alternate-stream, and embedded-payload indicator checks.",
+    "evidence": "A hidden-aware root inventory and an independent filesystem enumeration each returned four ordinary files and no directory; timestamps identify one pre-existing brief and three later reviewer records. The brief has a recorded SHA-256 digest, one ordinary data stream, and no code fence, 64-hex digest, Lean filename, Lean/Lake project marker, or common Base64 ZIP/GZIP marker. The final proposal passed structural contract validation.",
+    "falsifier": "A confined enumeration showing a pre-review supplier-authored digest manifest or payload, or evidence of a payload stream or embedded archive missed by both enumerations and the declared content checks, would overturn the scoped result."
+  },
+  "claims": [
+    {
+      "statement": "Within the observable fresh attempt directory during this review, no supplier-authored top-level SHA-256 manifest or orbit-pruning payload was present, so manifest coverage and digest verification could not begin and no contributed code was eligible for execution.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Two independent confined enumerations found only one pre-existing brief and three later reviewer-authored records, with no directory or candidate manifest. The brief has one ordinary data stream and lacks digest, code-fence, project-marker, and common encoded-archive indicators.",
+      "verification_method": "Repeat hidden-inclusive root enumeration through both the shell provider and filesystem API, classify entries by timestamps and role, inspect alternate streams, hash the sole supplied file, and rerun the bounded content-pattern checks without executing contributed content."
+    }
+  ],
+  "limitations": [
+    "The claim concerns only the observable permitted attempt directory and not artifacts that may exist elsewhere.",
+    "The embedded-content checks do not exclude every possible steganographic or custom encoding.",
+    "This is a pre-build delivery obstruction; no source was compiled and no declaration, axioms, replay, count, or mutation behavior was tested.",
+    "No conclusion about the Riemann Hypothesis or any zeta zero is made."
+  ],
+  "failed_approaches": [
+    "The planned full audit could not start because the prerequisite manifest and payload were absent.",
+    "Independent enumeration and bounded concealed-payload checks did not reveal an alternate delivery route."
+  ],
+  "next_actions": [
+    "Supply the exact complete bundle behind a supplier-authored top-level SHA-256 manifest in a fresh permitted attempt.",
+    "After delivery, execute the ordered offline coverage, digest, build, axiom, double-replay, and two-mutation protocol."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Deliver and audit the exact manifest-pinned orbit bundle",
+      "objective": "Materially place the complete orbit-pruning payload and its top-level SHA-256 manifest in a fresh permitted attempt, then run the ordered offline verification protocol.",
+      "rationale": "Repeated reviews stop at the same delivery prerequisite, so execution is meaningful only after exact attributable bytes are present.",
+      "success_criteria": "Every required file is manifest-covered with a matching digest; the offline build and axiom audit satisfy the declared contract; two clean replays agree; and changed-input and changed-count mutations are rejected.",
+      "useful_failure_criteria": "Preserve the first coverage gap, digest mismatch, offline dependency or compiler failure, unexpected axiom, declaration mismatch, replay disagreement, count mismatch, or accepted mutation.",
+      "verification_method": "Inventory without execution, validate manifest coverage and SHA-256 digests, build without networking, print declarations and axioms, replay twice from clean generated state, then run separate input and count mutations.",
+      "suggested_minutes": 60,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-11-b79595a7-d4d9-4eb8-be7d-ddd6eb0701b6",
+    "riemann-hypothesis-2026-09-11-19b301e6-31d3-4afa-936b-0e06cfad6fe0",
+    "riemann-hypothesis-2026-09-11-b80876eb-d2cb-4997-8d03-61be9d42ecb8",
+    "riemann-hypothesis-2026-09-11-f00ef492-64bd-40a6-8b8b-72312b527f30",
+    "riemann-hypothesis-2026-09-11-b2a9e6ac-77be-4453-b0e1-f09f3c98ca11",
+    "riemann-hypothesis-2026-09-11-f655ca6b-7cc6-40f7-80aa-9b0cee45fb43",
+    "riemann-hypothesis-2026-09-11-9171d2c3-8dcd-4450-9e75-ad0f6fe865c0"
+  ],
+  "review_status": "unreviewed"
+}
