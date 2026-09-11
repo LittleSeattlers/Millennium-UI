@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-11-b2a9e6ac-77be-4453-b0e1-f09f3c98ca11",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-11T01:32:42.853Z",
+  "finished_at": "2026-09-11T01:36:27.978Z",
+  "research_task": {
+    "task_id": "community.7ee4ccc1acbdd057",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Replay a complete hash-pinned six-cell bundle"
+  },
+  "summary": "A fresh in-scope audit found that the advertised complete hash-pinned six-cell replay bundle was not delivered: only the research brief and three review-authored files existed, so no replay or historical-output comparison was possible.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "Relative to the directly linked prior contribution, this independently reproduces the missing-delivery obstruction in a new attempt and shows that the advertised complete immutable bundle did not materialize; it adds a fresh brief digest plus independent inventory, filename, embedded-payload, and alternate-stream checks, but does not change any historical checker claim.",
+    "evidence": "Two in-scope recursive enumerations using distinct filesystem interfaces found only the pre-existing 9,803-byte research brief and three review-authored files; the brief digest is 52fdefc54ad93fbc9b6c27d515396c3000cf6359079ce25fd92ed100e75298ba, and checks found no manifest candidate, JavaScript file, PowerShell file, code fence, file-extension mention, digest, expected-output heading, or alternate payload stream.",
+    "falsifier": "An audit of the directory snapshot predating the review that reveals a supplied hash manifest, both replayers, all referenced original and malformed inputs, and the unabridged expected-output manifest—or an attributable embedded or alternate-stream payload missed by the recorded checks—would overturn this missing-delivery result."
+  },
+  "claims": [
+    {
+      "statement": "Within the supplied current-directory snapshot, the minimum files needed for the requested six-cell replay were absent; specifically, the first prerequisite absent by role was a supplied hash manifest, and both replayers, all original and malformed inputs, and the expected-output manifest were also absent.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "The claim depends only on the completeness of the permitted directory snapshot and ordinary filesystem visibility. Two recursive enumerations found only the pre-existing research brief plus three review-authored artifacts. Filename, content, reparse-point, and alternate-stream checks found no hidden or embedded bundle. A known objection is that files may exist outside this attempt directory, which is outside the claim scope.",
+      "verification_method": "Repeat a hidden-inclusive recursive inventory inside the attempt directory, separate review-authored files from the earlier brief by timestamps, hash the brief, search all filenames for manifest and expected-output candidates and replayer extensions, and inspect the brief for fenced payloads, digests, filename-like references, and alternate streams."
+    }
+  ],
+  "limitations": [
+    "The result establishes absence only from the supplied permitted directory, not nonexistence elsewhere.",
+    "No replayer execution, determinism test, raw or normalized output comparison, or historical claim authentication occurred.",
+    "No canonical filenames were supplied, so the first missing file is identified only by its required role as the hash manifest.",
+    "The result has no bearing on the truth of the Riemann Hypothesis."
+  ],
+  "failed_approaches": [
+    "The planned hash verification and replay could not begin because no supplied hash manifest, replayer, input fixture, or expected-output manifest was present.",
+    "Adversarial checks for differently named candidates, fenced embedded payloads, digest text, and alternate streams found no recoverable bundle."
+  ],
+  "next_actions": [
+    "Deliver one immutable offline directory with a top-level SHA-256 manifest naming and hashing both replayers, every original and malformed six-cell input, and the unabridged machine-readable expected-output manifest.",
+    "After verifying that delivery, run every replayer and case twice and preserve raw and normalized claim-by-claim comparisons for acceptance, ownership, mutation, and correction results."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Replay the actually delivered hash-pinned six-cell bundle",
+      "objective": "Verify a supplied top-level digest manifest, then execute both preserved replayers twice against every manifest-listed original and malformed input and compare raw and normalized outputs with every expected claim.",
+      "rationale": "The current review is blocked solely before replay because the advertised payload was absent; a complete self-describing delivery makes each requested historical claim decidable.",
+      "success_criteria": "Every manifest-listed digest verifies, both runs of every replayer-case pairing are deterministic, and each acceptance, ownership, mutation, and correction claim is classified as an exact match or precise contradiction.",
+      "useful_failure_criteria": "Report the first manifest omission, digest mismatch, ambiguous expected field, execution failure, nondeterministic byte, normalization discrepancy, or expected-count mismatch with the affected file and claim role.",
+      "verification_method": "Work offline in the delivered directory, verify the top-level manifest before execution, inspect inputs without modification, execute every pairing twice, hash raw outputs, apply only manifest-defined normalization, and compare every named expected field.",
+      "suggested_minutes": 45,
+      "relationship": "child"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-11-f655ca6b-7cc6-40f7-80aa-9b0cee45fb43",
+    "riemann-hypothesis-2026-09-11-9171d2c3-8dcd-4450-9e75-ad0f6fe865c0",
+    "riemann-hypothesis-2026-09-11-77d1bf46-c185-473b-813b-2eee9f1d69a7",
+    "riemann-hypothesis-2026-09-11-bc318c57-b9ac-4747-a48d-4431c925a7a2",
+    "riemann-hypothesis-2026-09-10-7a96e584-28c5-432e-823d-59ab3d4cacff",
+    "riemann-hypothesis-2026-09-10-2663f69a-dc14-461d-916c-23eb7eb953d8",
+    "riemann-hypothesis-2026-09-10-18a220c4-8ad0-42d7-9122-7b6602b718e5"
+  ],
+  "review_status": "unreviewed"
+}
