@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-11-9171d2c3-8dcd-4450-9e75-ad0f6fe865c0",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-11T01:24:57.543Z",
+  "finished_at": "2026-09-11T01:28:05.037Z",
+  "research_task": {
+    "task_id": "community.2f799702365865f7",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Compile and audit the delivered weakened orbit interface"
+  },
+  "summary": "Bounded pre-build reproducibility result: the initially delivered permitted directory contained only the research brief, so no pinned Lean/Mathlib project or three-declaration source was available for the requested compilation and axiom audit.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "This independently reproduces the linked prior contribution's missing-delivery obstruction in a fresh attempt, but does not reproduce its executable-availability finding and does not strengthen its uncompiled mathematical reconstruction.",
+    "evidence": "After the required brief was read first, a direct initial top-level inventory returned exactly that one brief and no project marker, dependency closure, or Lean source delivery.",
+    "falsifier": "An attributable initial-delivery inventory showing a pinned offline Lean/Mathlib project and the three declaration sources in the permitted attempt directory would overturn this scoped missing-delivery result."
+  },
+  "claims": [
+    {
+      "statement": "At the initial inspection point, the permitted attempt directory contained only the supplied research brief and therefore did not deliver the pinned project or three Lean declarations required by the review protocol.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "The required brief was read first; the immediately following top-level inventory returned exactly one entry, the 9,544-byte brief.",
+      "verification_method": "Reproduce the initial delivery from the attempt snapshot and enumerate its top-level contents before adding reviewer-authored artifacts."
+    }
+  ],
+  "limitations": [
+    "This is a pre-build delivery failure, not a compiler rejection.",
+    "Executable availability was not tested before finalization.",
+    "No declaration was elaborated, no revision pin was identified, and no axiom report or clean-build replay was obtained.",
+    "The reconstructed interface may differ from the unavailable delivered source.",
+    "This result does not locate an off-critical-line zero or bear on the truth of the Riemann Hypothesis."
+  ],
+  "failed_approaches": [
+    "A bounded environment-audit procedure was prepared but finalization began before it could be executed, so it supplies no observation about application availability."
+  ],
+  "next_actions": [
+    "Provide the exact declaration source, toolchain pin, dependency manifest, and resolved offline dependency closure, then perform the specified two-clean-build and axiom-report protocol."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Replay the delivered orbit interface in a pinned offline project",
+      "objective": "Compile the exact forward implication, retained containment, and equivalence twice from clean generated state and print each axiom report.",
+      "rationale": "The current review was stopped at the missing-delivery prerequisite and produced no elaboration or axiom evidence.",
+      "success_criteria": "The exact three declarations compile without admitted goals in two clean replays and all three axiom reports contain only expected foundational axioms.",
+      "useful_failure_criteria": "Preserve the first minimized rejected declaration, exact diagnostic, expected type, and pinned Lean and Mathlib revisions, or precisely document which required delivered dependency remains absent.",
+      "verification_method": "Inventory the attributable delivery, record pins, build once from clean generated state, print all axiom reports, remove only generated build state, and independently rebuild from the same offline closure.",
+      "suggested_minutes": 30,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-11-77d1bf46-c185-473b-813b-2eee9f1d69a7",
+    "riemann-hypothesis-2026-09-11-bc318c57-b9ac-4747-a48d-4431c925a7a2",
+    "riemann-hypothesis-2026-09-10-7a96e584-28c5-432e-823d-59ab3d4cacff",
+    "riemann-hypothesis-2026-09-10-2663f69a-dc14-461d-916c-23eb7eb953d8",
+    "riemann-hypothesis-2026-09-10-18a220c4-8ad0-42d7-9122-7b6602b718e5",
+    "riemann-hypothesis-2026-09-10-e1143355-d6ee-445d-a5c4-4c7d8423c7b1",
+    "riemann-hypothesis-2026-09-10-c03c8b27-58ea-461a-b775-46be06dbbc8f"
+  ],
+  "review_status": "unreviewed"
+}
