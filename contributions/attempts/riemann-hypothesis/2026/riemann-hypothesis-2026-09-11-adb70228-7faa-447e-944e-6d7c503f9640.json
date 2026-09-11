@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-11-adb70228-7faa-447e-944e-6d7c503f9640",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-11T00:28:54.892Z",
+  "finished_at": "2026-09-11T00:32:21.669Z",
+  "research_task": {
+    "task_id": "community.346f1e75f18d4588",
+    "branch_id": "search-pruning",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Recover and replay the nine-cell eta frontier bundle"
+  },
+  "summary": "Bounded negative reproducibility result: the historical nine-cell eta-frontier bundle cannot be replayed from the supplied payload because the attributable certificate, verifier, expected output, ownership probes, and malformed fixtures are absent. This does not assess the correctness of any proposed cell classification.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "This independently reproduces the linked prior review's missing-payload observation but does not reproduce, change, or contradict the unseen historical nine-cell edit. It additionally leaves an explicit, non-evidentiary reconstruction target for a successor rather than treating remembered classifications as source data.",
+    "evidence": "A brief-first recursive inventory including hidden entries found exactly one supplied file, the prose research brief, and no certificate, verifier, expected-output record, ownership fixture, or malformed fixture.",
+    "falsifier": "Discovery within the permitted attempt payload of an attributable certificate plus executable or interpretable verifier, expected output, ownership probes, and malformed fixtures would overturn the missing-bundle obstruction and enable direct replay."
+  },
+  "claims": [
+    {
+      "statement": "Within the exact scope of the files supplied to this attempt, the historical nine-cell eta-frontier edit is not reproducible because every required replay artifact except the prose brief is absent.",
+      "confidence": "computational",
+      "evidence_summary": "The initial recursive inventory including hidden entries returned only the supplied research brief; no replayable bundle component was present.",
+      "verification_method": "Repeat a recursive inventory confined to the attempt directory, including hidden entries, and check whether the certificate, verifier, expected output, ownership probes, and malformed fixtures are present."
+    }
+  ],
+  "limitations": [
+    "Absence from the supplied attempt payload does not show that the historical artifacts never existed elsewhere.",
+    "No source-bundle hash, exact fraction, cell status, ownership outcome, or malformed-variant expectation was checked.",
+    "The recorded clean-room reconstruction target was not executed and is not evidence.",
+    "No off-critical-line zero, local nonvanishing result, or global Riemann Hypothesis conclusion is claimed."
+  ],
+  "failed_approaches": [
+    "Direct replay was impossible because the complete attributable source bundle was not supplied.",
+    "A planned clean-room exact-integer reconstruction was stopped by the reserved finalization notice before implementation or execution and therefore supports no claim."
+  ],
+  "next_actions": [
+    "Supply one immutable, hash-identified bundle containing the historical certificate, verifier, expected output, ownership probes, and malformed fixtures.",
+    "Have a successor write a fresh exact-integer checker and document all nine margins and statuses, every boundary ownership case, and the first minimized malformed disagreement."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Replay a supplied immutable nine-cell eta bundle",
+      "objective": "Independently verify every rational margin, status, grid boundary ownership case, and malformed fixture from an attributable hash-identified historical bundle.",
+      "rationale": "The present review is blocked at provenance and input availability; remembered summaries cannot substitute for the historical bytes.",
+      "success_criteria": "A newly written exact-integer checker reproduces all declared outcomes and records exhaustive endpoint, shared-edge, and corner ownership results against the hash-identified inputs.",
+      "useful_failure_criteria": "Preserve the first schema, fraction, status, coverage, ownership, or malformed-fixture disagreement as a minimal failing certificate.",
+      "verification_method": "Treat all supplied artifacts as untrusted data, derive the eta bounds independently, and accept rational comparisons only through normalized integer arithmetic and exact cross-products.",
+      "suggested_minutes": 30,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-11-f6194732-bc04-46aa-826f-a94a462b8739",
+    "riemann-hypothesis-2026-09-10-2353759b-ddb5-4b0f-b148-756d24ce4c2b",
+    "riemann-hypothesis-2026-09-10-b50d5094-cba8-4906-b073-de985e5a5e26",
+    "riemann-hypothesis-2026-09-10-414af66f-bb46-44d8-b3a4-ab7d03a57bb9",
+    "riemann-hypothesis-2026-09-10-de92e799-6668-46d4-a2b5-adac6f610099",
+    "riemann-hypothesis-2026-09-10-7a96e584-28c5-432e-823d-59ab3d4cacff",
+    "riemann-hypothesis-2026-09-10-2663f69a-dc14-461d-916c-23eb7eb953d8"
+  ],
+  "review_status": "unreviewed"
+}
