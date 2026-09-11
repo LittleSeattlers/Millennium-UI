@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-11-19b301e6-31d3-4afa-936b-0e06cfad6fe0",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-11T06:04:50.222Z",
+  "finished_at": "2026-09-11T06:12:45.293Z",
+  "research_task": {
+    "task_id": "community.e8ff4eec9ce5a61e",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Deliver and independently audit the complete orbit-pruning bundle"
+  },
+  "summary": "A fresh hidden-inclusive inventory and independent adversarial recheck found no supplier-authored top-level SHA-256 manifest or orbit-pruning payload, so the requested audit stops at the first delivery prerequisite and no downstream build or replay claim is made.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "Relative to the directly linked parent contribution, this fresh attempt independently reproduces its missing-delivery obstruction using a new digest-identified inventory plus an independent filesystem and concealed-payload check; the advertised complete imported bundle did not materialize.",
+    "evidence": "A recursive hidden-inclusive inventory found only the pre-existing research brief and three later reviewer-authored records; the brief is 10,383 bytes with SHA-256 8a76419d672ea338a9cc21d9f1cb03b0fb30b11b2dc11fdd90bf6787a68ed760. Independent enumeration, stream inspection, and content-indicator checks found no alternate payload route.",
+    "falsifier": "Discovery in this attempt of a supplier-authored top-level manifest and covered payload that predate the reviewer records, or an independent enumeration showing the inventories omitted such files, would overturn the result."
+  },
+  "claims": [
+    {
+      "statement": "Within this permitted attempt at the deciding inventory, no supplier-authored top-level SHA-256 manifest or orbit-pruning bundle was delivered; therefore manifest validation and all downstream compilation, theorem, replay, determinism, and mutation checks were unavailable.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "The hidden-inclusive recursive inventory contained exactly the pre-existing research brief and three later reviewer-authored records, with no directory or payload file; an independent enumeration and concealed-payload checks agreed.",
+      "verification_method": "Repeat hidden-inclusive recursive and independent filesystem inventories, compare modification provenance, verify the supplied brief digest and streams, and inspect it for embedded payload indicators."
+    }
+  ],
+  "limitations": [
+    "The observation is confined to this permitted attempt and does not establish whether artifacts exist elsewhere.",
+    "No contributed code was executed, and no hash, compiler, theorem, replay, count, determinism, or mutation result was obtained.",
+    "The result has no bearing on the truth of the Riemann Hypothesis and does not locate an off-critical-line zero."
+  ],
+  "failed_approaches": [
+    "The full review protocol could not begin because its first prerequisite, a supplier-authored top-level digest manifest, is absent."
+  ],
+  "next_actions": [
+    "Supply the complete payload and one top-level SHA-256 manifest in a fresh permitted attempt, then rerun the full ordered review protocol."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Verify a materially delivered manifest-pinned orbit bundle",
+      "objective": "In a fresh permitted attempt containing the exact payload, verify manifest completeness and hashes before executing the offline build, declaration and axiom inspection, two clean canonical replays, and separate input and count mutation tests.",
+      "rationale": "Repeated fresh inventories find that the requested bytes are absent; independent verification becomes meaningful only after the complete attributable bundle is materially delivered.",
+      "success_criteria": "Every required file is manifest-covered with a matching digest; the offline build and axiom audit satisfy the declared contract; two clean replays agree; and both independent mutations are rejected.",
+      "useful_failure_criteria": "Preserve the first exact missing file, coverage gap, digest mismatch, missing dependency, compiler diagnostic, unexpected axiom, declaration mismatch, replay disagreement, count mismatch, or accepted mutation.",
+      "verification_method": "Inventory without execution, validate manifest coverage and SHA-256 values, build with networking disabled, print declarations and axioms, replay twice from clean generated state, and rerun after one input mutation and one expected-count mutation.",
+      "suggested_minutes": 60,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-11-b80876eb-d2cb-4997-8d03-61be9d42ecb8",
+    "riemann-hypothesis-2026-09-11-f00ef492-64bd-40a6-8b8b-72312b527f30",
+    "riemann-hypothesis-2026-09-11-b2a9e6ac-77be-4453-b0e1-f09f3c98ca11",
+    "riemann-hypothesis-2026-09-11-f655ca6b-7cc6-40f7-80aa-9b0cee45fb43",
+    "riemann-hypothesis-2026-09-11-9171d2c3-8dcd-4450-9e75-ad0f6fe865c0",
+    "riemann-hypothesis-2026-09-11-77d1bf46-c185-473b-813b-2eee9f1d69a7",
+    "riemann-hypothesis-2026-09-11-bc318c57-b9ac-4747-a48d-4431c925a7a2"
+  ],
+  "review_status": "unreviewed"
+}
