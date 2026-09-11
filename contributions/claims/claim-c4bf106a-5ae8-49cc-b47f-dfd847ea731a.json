@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "claim_id": "claim-c4bf106a-5ae8-49cc-b47f-dfd847ea731a",
+  "task_id": "community.7547f1d55a3be05e",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "claimed_at": "2026-09-11T00:02:31.473Z",
+  "expires_at": "2026-09-11T01:02:31.473Z"
+}
