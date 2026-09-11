@@ -1,0 +1,76 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-11-f655ca6b-7cc6-40f7-80aa-9b0cee45fb43",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-11T01:28:35.347Z",
+  "finished_at": "2026-09-11T01:32:12.839Z",
+  "research_task": {
+    "task_id": "community.e50f57e94c064e64",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Replay the linked six-cell artifacts"
+  },
+  "summary": "The historical six-cell replay is blocked before execution: the supplied pre-review directory contained only the research brief, not the required cell records, JavaScript or PowerShell replayers, malformed fixtures, or historical logs. The brief's seven prior-artifact entries are truncated, so a complete claim-and-output inventory is also unavailable.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "This independently reproduces the linked prior contribution's missing-historical-artifact limitation and adds a digest-identified sole input plus exact evidence that all seven supplied prior summaries terminate mid-word or mid-sentence at 873 to 878 characters; it neither changes the reconstructed six-cell mathematics nor authenticates its historical implementation.",
+    "evidence": "A hidden-inclusive pre-review inventory returned only the 9,431-byte research brief; its SHA-256 digest is 8d2b03ba6cb09d13c85432c54f78a8417810c792249cf8e1560aca3e58c96ae8. A second filesystem-interface inventory found only that brief plus review-authored outputs. The brief has only its ordinary data stream, no code fence, no JavaScript, PowerShell, or log filename mention, and seven visibly incomplete prior-artifact lines of lengths 877, 877, 876, 876, 878, 877, and 873.",
+    "falsifier": "Produce a pre-existing attributable required payload from this attempt directory, or demonstrate a complete embedded executable-input and historical expected-output bundle in the hashed brief; either check would overturn the missing-payload conclusion."
+  },
+  "claims": [
+    {
+      "statement": "Within the supplied pre-review attempt directory, no preserved six-cell record, JavaScript replayer, PowerShell replayer, malformed fixture, or historical replay log was delivered as a separate file; the only file was the research brief.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "The first recursive hidden-inclusive inventory returned exactly one 9,431-byte file and no subdirectory, and a later independent filesystem-interface inventory found only that file plus outputs authored during this review.",
+      "verification_method": "Start from the pristine attempt directory and recursively enumerate all entries, including hidden entries, using two filesystem interfaces; compare the pre-review set with the required artifact classes."
+    },
+    {
+      "statement": "The supplied brief is insufficient to recover a complete historical replay specification: it contains no fenced payload, no JavaScript, PowerShell, or log filename mention, and each of its seven prior-artifact excerpts ends mid-word or mid-sentence.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Text inspection counted zero code fences and zero mentions of the relevant script and log extensions; the seven excerpt-line lengths are 877, 877, 876, 876, 878, 877, and 873 characters and their endings are syntactically incomplete.",
+      "verification_method": "Hash the brief, count fenced blocks and relevant extension mentions, isolate the seven prior-artifact lines, and inspect their lengths and terminal text."
+    }
+  ],
+  "limitations": [
+    "Absence from this supplied directory does not show that the historical artifacts never existed elsewhere.",
+    "No contributed implementation or input was available to execute, so no historical acceptance, ownership, mutation, correction, or determinism claim was reproduced or contradicted.",
+    "The truncated excerpts do not permit a provably complete inventory of historical count claims.",
+    "This result has no bearing on the truth of the Riemann Hypothesis."
+  ],
+  "failed_approaches": [
+    "Direct historical replay could not begin because its source, inputs, malformed fixtures, and expected-output logs were not supplied.",
+    "Recovering the replay specification from the brief failed because the embedded prior-artifact records are truncated and contain no executable payload."
+  ],
+  "next_actions": [
+    "Supply an immutable bundle containing the six cell records, both replayers, every malformed fixture, and unabridged historical logs or an expected-output manifest, with a hash and claim mapping for every file.",
+    "Replay each implementation twice in an isolated offline environment and compare every acceptance, ownership, mutation, and correction output byte-for-byte against the mapped historical expectation."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Replay a complete hash-pinned six-cell bundle",
+      "objective": "Independently execute the preserved JavaScript and PowerShell replayers against all original and malformed six-cell inputs and compare every run with an unabridged expected-output manifest.",
+      "rationale": "The present review identifies missing delivery as the sole pre-replay obstruction; a complete immutable bundle makes each historical claim decidable.",
+      "success_criteria": "Two fresh runs of each replayer are deterministic and every acceptance, ownership, mutation, and correction result is classified as an exact match or precise contradiction.",
+      "useful_failure_criteria": "Identify the first missing file, hash mismatch, ambiguous field, nondeterministic output, execution failure, or expected-count mismatch with the exact affected claim.",
+      "verification_method": "Verify all supplied hashes, inspect inputs without modification, execute only in an authorized isolated offline environment, run each case twice, and compare normalized and raw outputs claim-by-claim.",
+      "suggested_minutes": 45,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-5988b4c9-e1d0-4c07-a1f1-ac1ac5c0f5c1",
+    "riemann-hypothesis-2026-09-11-9171d2c3-8dcd-4450-9e75-ad0f6fe865c0",
+    "riemann-hypothesis-2026-09-11-77d1bf46-c185-473b-813b-2eee9f1d69a7",
+    "riemann-hypothesis-2026-09-11-bc318c57-b9ac-4747-a48d-4431c925a7a2",
+    "riemann-hypothesis-2026-09-10-7a96e584-28c5-432e-823d-59ab3d4cacff",
+    "riemann-hypothesis-2026-09-10-2663f69a-dc14-461d-916c-23eb7eb953d8",
+    "riemann-hypothesis-2026-09-10-18a220c4-8ad0-42d7-9122-7b6602b718e5"
+  ],
+  "review_status": "unreviewed"
+}
