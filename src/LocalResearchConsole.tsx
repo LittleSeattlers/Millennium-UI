@@ -49,15 +49,36 @@ const manualResearchModes: Array<{ id: Exclude<ResearchMode, 'recommended'>; lab
 type BusyAction = 'pair' | 'refresh' | 'start' | 'checkpoint' | 'stop' | 'publish' | 'disconnect' | null;
 type ModelSelectionMode = 'auto' | 'manual';
 type AllowanceSelectionMode = 'automatic' | 'manual';
+type HostedCoordination = { ready: boolean; syncedAt?: string | null; error?: string | null } | null;
+type AutomaticRunPlan = {
+  provider: CodexProvider;
+  coordination: NonNullable<HostedCoordination>;
+  estimate: QuotaEstimate;
+  frontier: ResearchFrontier;
+  task: ResearchTask;
+  model: CodexModel;
+  effort: CodexEffort;
+  safeMinutes: number;
+  requestedMinutes: number;
+};
+
+class AutomaticRunStop extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'AutomaticRunStop';
+  }
+}
 
 export function LocalResearchConsole({ problem, route }: { problem: Problem; route: Route }) {
   const connectInFlight = useRef(false);
   const startInFlight = useRef(false);
+  const automaticRunRequested = useRef(false);
+  const automaticRunInFlight = useRef(false);
   const [launchTicket, setLaunchTicket] = useState<ConnectorLaunch | null>(null);
   const [client, setClient] = useState<LocalCodexClient | null>(null);
   const [sessionExpiresAt, setSessionExpiresAt] = useState<string | null>(null);
   const [provider, setProvider] = useState<CodexProvider | null>(null);
-  const [coordination, setCoordination] = useState<{ ready: boolean; syncedAt?: string | null; error?: string | null } | null>(null);
+  const [coordination, setCoordination] = useState<HostedCoordination>(null);
   const [advancedOpen, setAdvancedOpen] = useState(false);
   const [allowanceSelectionMode, setAllowanceSelectionMode] = useState<AllowanceSelectionMode>('automatic');
   const [manualRiskMode, setManualRiskMode] = useState<RiskMode>('balanced');
@@ -76,6 +97,8 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
   const [approvedObjective, setApprovedObjective] = useState<string | null>(null);
   const [events, setEvents] = useState<RunnerEvent[]>([]);
   const [busy, setBusy] = useState<BusyAction>(null);
+  const [automaticRunActive, setAutomaticRunActive] = useState(false);
+  const [automaticRunCompleted, setAutomaticRunCompleted] = useState(0);
   const [notice, setNotice] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [now, setNow] = useState(Date.now());
@@ -302,6 +325,15 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
     setSelectedTaskId(null);
     setNewDirection('');
   }, [isRunning, problem.uiSlug, route.id]);
+
+  useEffect(() => {
+    automaticRunRequested.current = false;
+    setAutomaticRunActive(false);
+  }, [problem.uiSlug, route.id]);
+
+  useEffect(() => () => {
+    automaticRunRequested.current = false;
+  }, []);
 
   useEffect(() => {
     if (!client) return undefined;
@@ -533,8 +565,99 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
     }
   }
 
+  async function startAutomaticRun() {
+    if (!client || automaticRunInFlight.current || isRunning || busy !== null) return;
+    automaticRunRequested.current = true;
+    automaticRunInFlight.current = true;
+    setAutomaticRunActive(true);
+    setAutomaticRunCompleted(0);
+    setResearchMode('recommended');
+    setAllowanceSelectionMode('automatic');
+    setModelSelectionMode('auto');
+    setAdvancedOpen(false);
+    setError(null);
+    setNotice('Automatic queue started. Checking the latest quota and shared frontier before each task.');
+    let completed = 0;
+    try {
+      while (automaticRunRequested.current) {
+        setBusy('refresh');
+        const plan = await prepareAutomaticRunPlan({
+          client,
+          problemId: problem.uiSlug,
+          direction: route.id,
+          sessionExpiresAt,
+        });
+        setProvider(plan.provider);
+        setCoordination(plan.coordination);
+        setEstimate(plan.estimate);
+        setLastQuotaWindows(plan.estimate.windows ?? []);
+        setFrontier(plan.frontier);
+        setSelectedTaskId(plan.task.id);
+        setModel(plan.model.model);
+        setEffort(plan.effort);
+        setNow(Date.now());
+        if (!automaticRunRequested.current) break;
+
+        setBusy('start');
+        setEvents([]);
+        const attempt = await client.start({
+          provider: 'codex',
+          problemId: problem.uiSlug,
+          direction: route.id,
+          riskMode: 'balanced',
+          requestedMinutes: plan.requestedMinutes,
+          model: plan.model.model,
+          effort: plan.effort,
+          objective: plan.task.objective,
+          taskMode: 'recommended',
+          taskId: plan.task.id,
+        });
+        setActiveAttempt(attempt);
+        setApprovedObjective(plan.task.objective);
+        setNow(Date.now());
+        setBusy(null);
+        setNotice(`Automatic task ${completed + 1} started. The next task will be selected only after this contribution passes validation.`);
+
+        const finished = await waitForAutomaticAttempt(client, attempt.id, setActiveAttempt);
+        setActiveAttempt(finished);
+        if (!automaticRunRequested.current) {
+          setNotice('Automatic continuation stopped. The current task reached a terminal state and no new task will start.');
+          break;
+        }
+        if (!attemptCanContinueAutomaticRun(finished)) {
+          throw new AutomaticRunStop(automaticRunFailureMessage(finished, completed));
+        }
+        completed += 1;
+        setAutomaticRunCompleted(completed);
+        setNotice(`Automatic task ${completed} produced a validated contribution. Refreshing quota and shared knowledge before continuing…`);
+      }
+    } catch (reason) {
+      if (reason instanceof AutomaticRunStop) {
+        setError(null);
+        setNotice(reason.message);
+      } else {
+        handleClientActionFailure(reason);
+      }
+    } finally {
+      automaticRunRequested.current = false;
+      automaticRunInFlight.current = false;
+      setAutomaticRunActive(false);
+      setBusy(null);
+    }
+  }
+
+  function stopAutomaticRun() {
+    automaticRunRequested.current = false;
+    setAutomaticRunActive(false);
+    setNotice(isRunning
+      ? 'Automatic continuation will stop after the current task finishes. The active task was not interrupted.'
+      : 'Automatic continuation stopped. No new task will start.');
+  }
+
   async function checkpointAndStop() {
     if (!client || !activeAttempt) return;
+    automaticRunRequested.current = false;
+    setAutomaticRunActive(false);
     setBusy('checkpoint');
     setError(null);
     try {
@@ -549,6 +672,8 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
 
   async function stopWork() {
     if (!client || !activeAttempt) return;
+    automaticRunRequested.current = false;
+    setAutomaticRunActive(false);
     setBusy('stop');
     setError(null);
     try {
@@ -578,6 +703,8 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
 
   async function disconnect() {
     if (!client || busy !== null || isRunning) return;
+    automaticRunRequested.current = false;
+    setAutomaticRunActive(false);
     setBusy('disconnect');
     try {
       await client.revoke();
@@ -1095,7 +1222,7 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
                   </div>
                   <button
                     className="start-work-button"
-                    disabled={busy !== null || !provider?.ready || !coordination?.ready || !effectiveModel || !effectiveEffort || estimate?.status !== 'ready' || safeMinutes < minimumUsefulRunMinutes || runMinutes < minimumUsefulRunMinutes || !selectionReady || objective.trim().length < 20}
+                    disabled={automaticRunActive || busy !== null || !provider?.ready || !coordination?.ready || !effectiveModel || !effectiveEffort || estimate?.status !== 'ready' || safeMinutes < minimumUsefulRunMinutes || runMinutes < minimumUsefulRunMinutes || !selectionReady || objective.trim().length < 20}
                     onClick={() => void startWork()}
                     type="button"
                   >
@@ -1113,7 +1240,17 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
                               ? `Start work · ${runMinutes} min`
                               : `Start work · ~${estimatedRunMinutes} min`}
                   </button>
-                  <small>Where matching completed runs exist, the displayed time is a conservative measured estimate. A run may end early and can use up to the lesser of its task ceiling and the current safe allowance. Runs below {minimumUsefulRunMinutes} minutes are not started. If an estimated run does not fit, the connector offers a separate {adaptiveSliceMinutes}-minute preparatory task. The final 4 minutes are reserved for a durable result.</small>
+                  <button
+                    className={`automatic-queue-button${automaticRunActive ? ' active' : ''}`}
+                    disabled={!automaticRunActive && (busy !== null || !provider?.ready || !coordination?.ready || estimate?.status !== 'ready' || safeMinutes < minimumUsefulRunMinutes || !automaticTask)}
+                    onClick={automaticRunActive ? stopAutomaticRun : () => void startAutomaticRun()}
+                    type="button"
+                  >
+                    {automaticRunActive
+                      ? `Stop automatic queue${automaticRunCompleted > 0 ? ` · ${automaticRunCompleted} completed` : ''}`
+                      : 'Run automatic tasks until quota is low'}
+                  </button>
+                  <small>Where matching completed runs exist, the displayed time is a conservative measured estimate. A run may end early and can use up to the lesser of its task ceiling and the current safe allowance. Runs below {minimumUsefulRunMinutes} minutes are not started. If an estimated run does not fit, the connector offers a separate {adaptiveSliceMinutes}-minute preparatory task. The final 4 minutes are reserved for a durable result. Keep this page open for the automatic queue to launch subsequent tasks; stopping the queue does not interrupt its current task.</small>
                 </div>
               </div>
             </div>
@@ -1178,6 +1315,11 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
                   <button disabled={busy !== null} onClick={() => void stopWork()} type="button">
                     {busy === 'stop' ? 'Stopping…' : 'Stop now'}
                   </button>
+                  {automaticRunActive && (
+                    <button className="stop-automatic-action" onClick={stopAutomaticRun} type="button">
+                      Stop after this task{automaticRunCompleted > 0 ? ` · ${automaticRunCompleted} completed` : ''}
+                    </button>
+                  )}
                 </div>
               )}
             </div>
@@ -1196,6 +1338,132 @@ export function LocalResearchConsole({ problem, route }: { problem: Problem; rou
       </section>
     </>
   );
+}
+
+async function prepareAutomaticRunPlan({
+  client,
+  problemId,
+  direction,
+  sessionExpiresAt,
+}: {
+  client: LocalCodexClient;
+  problemId: string;
+  direction: string;
+  sessionExpiresAt: string | null;
+}): Promise<AutomaticRunPlan> {
+  const provider = await retryTransientLocalRequest(() => client.refresh());
+  const state = await retryTransientLocalRequest(() => client.state());
+  const coordination = state.health.coordination ?? { ready: false, error: 'GitHub knowledge sync is not ready.' };
+  if (!provider?.ready) {
+    throw new AutomaticRunStop(provider?.reason ?? 'Automatic queue stopped because Codex is not ready.');
+  }
+  if (!coordination.ready) {
+    throw new AutomaticRunStop(coordination.error ?? 'Automatic queue stopped because GitHub knowledge sync is not ready.');
+  }
+  const models = provider.models?.length ? provider.models : [fallbackModel];
+  let recommendation = recommendCodexConfiguration({
+    models,
+    defaultModel: provider.defaultModel,
+    researchMode: 'recommended',
+    taskKind: null,
+    safeMinutes: 120,
+    quotaRemainingPercent: null,
+  });
+  if (!recommendation) {
+    throw new AutomaticRunStop('Automatic queue stopped because no usable Codex model is available.');
+  }
+
+  for (let pass = 0; pass < 3; pass += 1) {
+    const estimate = await retryTransientLocalRequest(() => client.estimate('balanced', recommendation?.model.model));
+    const safeMinutes = safeMinutesForSession(estimate, sessionExpiresAt);
+    if (estimate.status !== 'ready' || safeMinutes < minimumUsefulRunMinutes) {
+      throw new AutomaticRunStop(`Automatic queue stopped before starting another task. ${estimate.reason}`);
+    }
+    const frontier = await retryTransientLocalRequest(() => client.frontier(problemId, direction, safeMinutes));
+    const task = frontier.tasks.find((candidate) => candidate.id === frontier.recommendedTaskId) ?? null;
+    if (!task || !researchTaskSelectable(task, safeMinutes)) {
+      throw new AutomaticRunStop(`Automatic queue stopped: no automatic task fits the current ${safeMinutes}-minute safe allowance.`);
+    }
+    const finalRecommendation = recommendCodexConfiguration({
+      models,
+      defaultModel: provider.defaultModel,
+      researchMode: 'recommended',
+      taskKind: task.kind,
+      safeMinutes: Math.min(task.suggestedMinutes, safeMinutes),
+      quotaRemainingPercent: minimumRemainingPercentage(estimate.windows ?? []),
+    });
+    if (!finalRecommendation) {
+      throw new AutomaticRunStop('Automatic queue stopped because no usable model and reasoning configuration is available.');
+    }
+    if (finalRecommendation.model.model !== recommendation.model.model) {
+      recommendation = finalRecommendation;
+      continue;
+    }
+    return {
+      provider,
+      coordination,
+      estimate,
+      frontier,
+      task,
+      model: finalRecommendation.model,
+      effort: finalRecommendation.effort,
+      safeMinutes,
+      requestedMinutes: Math.min(task.suggestedMinutes, safeMinutes),
+    };
+  }
+  throw new AutomaticRunStop('Automatic queue stopped because the recommended Codex configuration did not stabilize.');
+}
+
+async function waitForAutomaticAttempt(
+  client: LocalCodexClient,
+  attemptId: string,
+  onUpdate: (attempt: AttemptRecord) => void,
+) {
+  for (;;) {
+    await waitMilliseconds(2_000);
+    const attempt = await retryTransientLocalRequest(() => client.getAttempt(attemptId));
+    onUpdate(attempt);
+    const terminal = terminalStatuses.has(attempt.status);
+    const publicationFinished = attempt.publication?.status !== 'claimed';
+    if (terminal && publicationFinished) return attempt;
+  }
+}
+
+function attemptCanContinueAutomaticRun(attempt: AttemptRecord) {
+  return attempt.status === 'completed'
+    && attempt.terminalDisposition === 'completed'
+    && attempt.researchValue?.status === 'accepted'
+    && attempt.publication?.status === 'submitted'
+    && attempt.publication.contributionSource === 'structured-proposal';
+}
+
+function automaticRunFailureMessage(attempt: AttemptRecord, completed: number) {
+  const prefix = `Automatic queue stopped after ${completed} validated task${completed === 1 ? '' : 's'}`;
+  const reason = attempt.publication?.error
+    ?? attempt.publication?.warning
+    ?? attempt.researchValue?.reason
+    ?? `the latest task ended as ${attempt.terminalDisposition ?? attempt.status}`;
+  return `${prefix}: ${reason}. No new task was started.`;
+}
+
+function safeMinutesForSession(estimate: QuotaEstimate, sessionExpiresAt: string | null) {
+  const quotaMinutes = Math.max(0, Math.floor(estimate.allowedMinutes ?? 0));
+  const expires = Date.parse(sessionExpiresAt ?? '');
+  const sessionMinutes = Number.isFinite(expires)
+    ? Math.max(0, Math.floor((expires - Date.now() - 2 * 60_000) / 60_000))
+    : 0;
+  return Math.min(quotaMinutes, sessionMinutes);
+}
+
+function minimumRemainingPercentage(windows: QuotaWindowEstimate[]) {
+  const values = windows
+    .map((window) => window.remainingPercent)
+    .filter((value): value is number => Number.isFinite(value));
+  return values.length > 0 ? Math.min(...values) : null;
+}
+
+function waitMilliseconds(milliseconds: number) {
+  return new Promise<void>((resolve) => window.setTimeout(resolve, milliseconds));
 }
 
 function ResearchTaskCard({
