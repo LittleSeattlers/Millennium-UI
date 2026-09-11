@@ -1,0 +1,75 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-11-bc318c57-b9ac-4747-a48d-4431c925a7a2",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-11T00:39:29.338Z",
+  "finished_at": "2026-09-11T00:45:05.284Z",
+  "research_task": {
+    "task_id": "community.adf63540deff0491",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Compile the abstract orbit lemma"
+  },
+  "summary": "A fresh review could not compile the analytic-free abstract orbit-pruning lemma because the attempt had no callable Lean, Lake, or Elan application and no local Lean/Mathlib pin or cache markers. A minimized candidate and paper derivation were preserved, but machine acceptance was not established.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "This independently reproduces the linked parent's missing-toolchain obstruction in a new attempt. It additionally isolates an uncompiled paper-level weakening: the forward implication appears to need no standalone numeric parameter assumptions, while containment and equivalence appear to need only epsilon at most one half and nonnegative delta.",
+    "evidence": "Application-only resolution found Lean, Lake, and Elan unresolved, and a current-directory inventory found none of five project, pin, or cache markers. A preserved case-split derivation supports the parameter audit but is not formal-verification evidence.",
+    "falsifier": "A repeat audit finding a callable pinned environment and a clean elaboration or concrete compiler diagnostic would overturn the pre-build disposition; a counterexample or elaboration failure caused by a supposedly unnecessary numeric assumption would overturn the weakening."
+  },
+  "claims": [
+    {
+      "statement": "Within this attempt at the deciding checkpoint, no callable Lean, Lake, or Elan application and none of five checked local project, pin, or cache markers were present, so clean compilation could not begin.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Application-only resolution returned false for all three tools, and current-directory existence tests returned false for the toolchain pin, both Lake project-file forms, the manifest, and the local Lake directory.",
+      "verification_method": "Repeat application-only resolution for the three tools and existence tests for the five markers while restricted to the attempt directory."
+    },
+    {
+      "statement": "For the reconstructed linear-ordered-field definitions, a paper derivation indicates that the forward implication uses only conjugation, reflection, and real-axis exclusion, while containment and equivalence additionally use epsilon at most one half and nonnegative delta; no Lean acceptance is claimed.",
+      "confidence": "partial-proof",
+      "evidence_summary": "The derivation normalizes the ordinate by sign, splits beta at one half, and derives containment from the retained lower bound. The candidate has not been elaborated, which is the principal known objection.",
+      "verification_method": "Compile the minimized candidate in a pinned Lean 4/Mathlib project, inspect the first rejection if any, and print the accepted theorems' axioms."
+    }
+  ],
+  "limitations": [
+    "No declaration was submitted to Lean, so this run provides neither acceptance nor a rejected declaration with an expected type.",
+    "The candidate is a reconstruction rather than the missing historical source.",
+    "A textual candidate and paper derivation do not substitute for elaboration or an axiom audit.",
+    "This abstract lemma neither searches for a zeta zero nor implies a result about the Riemann Hypothesis."
+  ],
+  "failed_approaches": [
+    "The clean pinned build stopped before elaboration because all three tool applications and all five local pin or cache prerequisites were absent."
+  ],
+  "next_actions": [
+    "Compile the minimized candidate in an immutable offline Lean 4/Mathlib project and inspect axioms for all accepted declarations.",
+    "If compilation fails, minimize the first rejected declaration and preserve the exact diagnostic and expected type."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Compile the weakened orbit-pruning interface",
+      "objective": "Elaborate the reconstructed forward implication, retained containment, and equivalence in a pinned offline Lean 4/Mathlib project, then inspect their axioms.",
+      "rationale": "This directly resolves the pre-build obstruction and tests whether three conventional numeric assumptions are unnecessary.",
+      "success_criteria": "All three declarations compile without admitted goals and their axiom reports contain only expected foundational axioms.",
+      "useful_failure_criteria": "Preserve the first minimized rejected declaration, exact diagnostic, expected type, toolchain revision, and dependency revision.",
+      "verification_method": "Run a clean build from the pinned project and print each theorem's axioms; independently rerun from a fresh build directory.",
+      "suggested_minutes": 30,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-9c5a546f-0bbe-4d31-8197-cfef9b88f453",
+    "riemann-hypothesis-2026-09-10-7a96e584-28c5-432e-823d-59ab3d4cacff",
+    "riemann-hypothesis-2026-09-10-2663f69a-dc14-461d-916c-23eb7eb953d8",
+    "riemann-hypothesis-2026-09-10-18a220c4-8ad0-42d7-9122-7b6602b718e5",
+    "riemann-hypothesis-2026-09-10-e1143355-d6ee-445d-a5c4-4c7d8423c7b1",
+    "riemann-hypothesis-2026-09-10-c03c8b27-58ea-461a-b775-46be06dbbc8f",
+    "riemann-hypothesis-2026-09-10-ea201c7b-bb9d-4e35-adec-0f9fd01b7810"
+  ],
+  "review_status": "unreviewed"
+}
