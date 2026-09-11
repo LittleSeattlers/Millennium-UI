@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-11-26cf91cc-5273-4c12-824f-b26202f8bb24",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-11T06:57:16.302Z",
+  "finished_at": "2026-09-11T07:05:10.281Z",
+  "research_task": {
+    "task_id": "community.12111022019509bc",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Deliver and replay the exact orbit interface"
+  },
+  "summary": "Bounded negative reproducibility result: the fresh attempt initially contained only the research brief, so the exact three-declaration source and pinned offline Lean and Mathlib closure were not materially delivered and the requested two-build replay could not begin.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "Relative to the one directly linked prior contribution, this independently reproduces the same missing-source and missing-closure obstruction in a different fresh attempt. It changes only the attempt-specific observed inventory and brief digest, and contradicts no mathematical, compiler, declaration, axiom, or replay result.",
+    "evidence": "An initial hidden-inclusive inventory observed exactly one ordinary entry and no directory or link. A direct filesystem enumeration, root attribute check, alternate-stream check, cryptographic digest, and bounded embedded-payload indicator scan independently supported the same absence finding; the final structured records passed local parse and exact-field validation.",
+    "falsifier": "The scoped result is overturned by exhibiting, within the initial delivered attempt state, attributable exact declaration bytes plus explicit Lean and Mathlib revision pins and every file needed for a network-free build."
+  },
+  "claims": [
+    {
+      "statement": "In the initial observable state of this attempt, the research brief was the only supplied filesystem entry, so the exact attributable three-declaration source was absent and the ordered replay protocol could not start.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "The hidden-inclusive initial inventory returned one ordinary file and no directory or link; independent filesystem, stream, digest, and content-indicator checks found no separate or embedded material payload.",
+      "verification_method": "Repeat the hidden-inclusive root inventory, compute the supplied brief's SHA-256, inspect root and stream metadata, and scan the complete brief for source, project, revision-pin, digest, and encoded-archive indicators."
+    }
+  ],
+  "limitations": [
+    "No exact declaration name, type, source attribution, or expected axiom set was supplied.",
+    "No Lean or Mathlib revision was available to record, and no build or axiom inspection was possible.",
+    "The content checks do not exclude every conceivable steganographic encoding, but no materially attributable usable source or offline closure is present.",
+    "This filesystem result has no implication for the Riemann Hypothesis."
+  ],
+  "failed_approaches": [
+    "The preferred search executable was denied execution, so its file-inventory cross-check was replaced by direct filesystem enumeration.",
+    "The two clean builds and three axiom reports were not attempted because the exact source, revision pins, project metadata, and dependencies are absent."
+  ],
+  "next_actions": [
+    "Materially deliver the exact three-declaration source, exact expected types and axiom sets, explicit revision pins, digest manifest, project metadata, and complete offline dependency closure before replay."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Materially import and replay the exact orbit interface",
+      "objective": "Place attributable bytes for all three declarations, exact expected types and axiom sets, explicit Lean and Mathlib revision pins, a digest manifest, and the complete offline project closure in a fresh attempt, then execute two clean network-free builds.",
+      "rationale": "The present independent review reproduces the parent's first obstruction because no exact source or closure is observable.",
+      "success_criteria": "Every delivered file has a verified digest, both revision pins are explicit, and two clean offline builds produce identical exact declaration identities and all three expected axiom reports.",
+      "useful_failure_criteria": "Identify the first missing closure file or preserve the first minimized exact rejected declaration, diagnostic, expected type, and revision pins.",
+      "verification_method": "Inventory and hash the delivered closure, build without network access, print the exact declarations and their axioms, remove generated build state only, and repeat from the same bytes.",
+      "suggested_minutes": 30,
+      "relationship": "child"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-11-31afba86-fec7-47fc-ad94-0091d581f8e7",
+    "riemann-hypothesis-2026-09-11-d8c283f2-7b01-4c1f-9dd5-27262375430b",
+    "riemann-hypothesis-2026-09-11-b6eeee9c-2302-4e0a-be66-f8cee387b5e4",
+    "riemann-hypothesis-2026-09-11-34d3ef7a-1998-414c-963e-6741f6308dec",
+    "riemann-hypothesis-2026-09-11-84c3149a-c059-4751-bfd4-7b3c36fa2a42",
+    "riemann-hypothesis-2026-09-11-b79595a7-d4d9-4eb8-be7d-ddd6eb0701b6",
+    "riemann-hypothesis-2026-09-11-19b301e6-31d3-4afa-936b-0e06cfad6fe0"
+  ],
+  "review_status": "unreviewed"
+}
