@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-11-34d3ef7a-1998-414c-963e-6741f6308dec",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-11T06:28:27.480Z",
+  "finished_at": "2026-09-11T06:34:09.272Z",
+  "research_task": {
+    "task_id": "community.6e9543a48027d389",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Deliver and audit the exact manifest-pinned orbit bundle"
+  },
+  "summary": "Bounded negative reproducibility result: the fresh permitted attempt had no supplier-authored top-level SHA-256 manifest or orbit-pruning payload at first inventory, so the ordered offline verification protocol stopped before execution.",
+  "value_assessment": {
+    "outcome": "bounded-negative",
+    "novelty": "Relative to the directly linked unreviewed prior contribution, this independently reproduces its missing-delivery obstruction in a fresh attempt with a distinct brief digest. The advertised material delivery did not occur; this changes no payload state and contradicts no mathematical, compiler, replay, or count claim.",
+    "evidence": "A hidden-inclusive non-executing inventory found exactly four ordinary root files and no directories: one pre-existing 9,919-byte brief with SHA-256 61fb0e81bc35ff2f6e0db4b4705894db79b247639e267708f294c41e79ac13f6, followed in time by the three reviewer-authored records. An independent direct-filesystem enumeration agreed; the root was not a reparse point, and the brief had one ordinary data stream and none of the tested embedded-payload markers. The structured record passed exact-key, enum, and task-bound validation.",
+    "falsifier": "An inventory showing a pre-existing ordinary root SHA-256 manifest and its complete payload, followed by successful coverage and digest validation, would overturn this scoped missing-delivery result."
+  },
+  "claims": [
+    {
+      "statement": "Within the observable permitted attempt at first inventory, no supplier-authored ordinary root SHA-256 manifest or orbit-pruning payload was present; therefore the ordered protocol was blocked before contributed-code execution.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "The complete inventory had four ordinary files and no directories. The sole pre-existing item was the brief; the other three were initialized by this review. Independent direct-filesystem enumeration agreed; the root was not a reparse point, and the brief had only its ordinary data stream with none of the tested digest, fence, project-file, or common archive-prefix markers. The claim depends only on confined filesystem visibility and timestamp-based temporal classification. It does not address artifacts elsewhere or assert human identity.",
+      "verification_method": "Read the brief first, initialize the mandated records, enumerate all root and recursive entries including hidden entries without executing them, record type, size, time, and SHA-256, reproduce the enumeration through an independent filesystem API, inspect root and stream metadata, and scan the brief as inert text for specified common payload indicators."
+    }
+  ],
+  "limitations": [
+    "The observation is confined to this permitted attempt and does not show whether a bundle exists elsewhere.",
+    "Timestamp ordering establishes only that the brief predates the review records, not who authored it.",
+    "No build, declaration audit, axiom audit, replay, count comparison, or mutation test was reached.",
+    "The content-marker checks are limited to specified common indicators and are not a general decoder for arbitrary steganographic or encoded data."
+  ],
+  "failed_approaches": [
+    "Manifest coverage and digest validation could not start because no supplied manifest candidate or payload entry appeared in the inventory.",
+    "All execution stages were intentionally withheld because the protocol requires successful inventory and digest validation first.",
+    "An adversarial search for a concealed delivery route found no reparse-point root, alternate brief stream, digest, code fence, project-file marker, or common Base64 archive prefix."
+  ],
+  "next_actions": [
+    "Place the complete attributable manifest-pinned bundle into a new permitted attempt before reviewer records are initialized, then rerun the ordered offline protocol."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Verify a materially imported orbit-pruning bundle",
+      "objective": "In a fresh permitted attempt that already contains the exact attributable payload and top-level SHA-256 manifest, validate every digest and execute the full offline audit in order.",
+      "rationale": "Repeated review attempts are blocked at delivery; exact bytes must precede any meaningful compiler, axiom, replay, or mutation evidence.",
+      "success_criteria": "Every required file is manifest-covered with a matching digest; the offline build and axiom audit meet the declared contract; two clean replays agree; and independent changed-input and changed-count mutations are rejected.",
+      "useful_failure_criteria": "Preserve the first coverage gap, digest mismatch, offline dependency or compiler failure, unexpected axiom, declaration mismatch, replay disagreement, count mismatch, or accepted mutation.",
+      "verification_method": "Inventory without execution, validate manifest coverage and SHA-256 digests, build without networking, print declarations and axioms, replay twice from clean generated state, then separately mutate input and expected count.",
+      "suggested_minutes": 60,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-11-84c3149a-c059-4751-bfd4-7b3c36fa2a42",
+    "riemann-hypothesis-2026-09-11-b79595a7-d4d9-4eb8-be7d-ddd6eb0701b6",
+    "riemann-hypothesis-2026-09-11-19b301e6-31d3-4afa-936b-0e06cfad6fe0",
+    "riemann-hypothesis-2026-09-11-b80876eb-d2cb-4997-8d03-61be9d42ecb8",
+    "riemann-hypothesis-2026-09-11-f00ef492-64bd-40a6-8b8b-72312b527f30",
+    "riemann-hypothesis-2026-09-11-b2a9e6ac-77be-4453-b0e1-f09f3c98ca11",
+    "riemann-hypothesis-2026-09-11-f655ca6b-7cc6-40f7-80aa-9b0cee45fb43"
+  ],
+  "review_status": "unreviewed"
+}
