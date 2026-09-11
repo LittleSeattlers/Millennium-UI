@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-11-b6eeee9c-2302-4e0a-be66-f8cee387b5e4",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-11T06:34:38.142Z",
+  "finished_at": "2026-09-11T06:41:13.812Z",
+  "research_task": {
+    "task_id": "community.a647722862c0a4ea",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Verify a materially imported orbit-pruning bundle"
+  },
+  "summary": "A confined non-executing inventory found no supplier-authored top-level SHA-256 manifest or orbit-pruning payload, so the ordered offline audit stops before integrity validation or execution.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "This fresh attempt independently reproduces the linked parent contribution's missing-delivery obstruction with a new digest-identified inventory and independent boundary checks; the advertised material import did not occur, and no mathematical, compiler, replay, or count claim is reproduced or contradicted.",
+    "evidence": "Hidden-inclusive top-level and recursive inventories found only the pre-existing brief and later-created reviewer records, with no directory or link entry; an independent filesystem enumeration agreed, the root was not a reparse point, and the sole supplied file had only its ordinary data stream and no bounded embedded-payload indicator.",
+    "falsifier": "A confined independent enumeration that finds a supplier-authored manifest or payload entry existing at initial inventory time, or proof that the root redirected to an unenumerated in-scope delivery location at that time, would overturn the scoped absence result."
+  },
+  "claims": [
+    {
+      "statement": "At the initial inventory time, the observable attempt directory contained no supplier-authored ordinary top-level SHA-256 manifest or orbit-pruning payload, so the protocol could not proceed beyond its delivery gate.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Two hidden-inclusive inventory views returned exactly the brief plus three later-created reviewer records and no directory or link entry; an independent filesystem enumeration and boundary checks did not reveal another delivery route.",
+      "verification_method": "Re-enumerate all top-level and recursive entries within the attempt boundary using independent filesystem interfaces, separate supplied from reviewer-authored files by provenance and timestamps, and check root redirection and data streams before executing content."
+    }
+  ],
+  "limitations": [
+    "The claim is limited to observable contents of this permitted attempt directory at initial inventory time and says nothing about artifacts elsewhere.",
+    "Bounded embedded-content indicators do not exclude every imaginable encoding, although an encoded payload without an ordinary root manifest would still fail the declared delivery contract.",
+    "No manifest digest, build, declaration, axiom, replay, count, mutation, Riemann Hypothesis, or off-line-zero claim was tested."
+  ],
+  "failed_approaches": [
+    "The full audit could not begin because its first prerequisite, an attributable top-level digest manifest and payload, was absent."
+  ],
+  "next_actions": [
+    "Materially import the complete attributable manifest-pinned bundle into a fresh permitted attempt before requesting another compiler or replay audit.",
+    "On delivery, independently compare manifest coverage in both directions and compute every SHA-256 digest before executing supplied content."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Deliver the exact manifest-pinned orbit bundle",
+      "objective": "Place the complete attributable orbit-pruning payload and an ordinary top-level SHA-256 manifest into a fresh permitted attempt before reviewer initialization.",
+      "rationale": "Repeated reviews stop at the same missing-delivery gate; exact bytes and complete manifest coverage are prerequisites for every compiler, axiom, replay, count, and mutation claim.",
+      "success_criteria": "A non-executing inventory finds the source, fully materialized offline dependencies and toolchain information, checker, canonical records, expected counts, both mutation fixtures, and a manifest whose coverage and SHA-256 entries all validate.",
+      "useful_failure_criteria": "Preserve the first omitted required file, ambiguous manifest entry, extra uncovered payload file, or digest mismatch.",
+      "verification_method": "Inventory without execution, parse the manifest as data, compare required-file coverage in both directions, and independently compute SHA-256 for every covered file.",
+      "suggested_minutes": 30,
+      "relationship": "child"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-11-34d3ef7a-1998-414c-963e-6741f6308dec",
+    "riemann-hypothesis-2026-09-11-84c3149a-c059-4751-bfd4-7b3c36fa2a42",
+    "riemann-hypothesis-2026-09-11-b79595a7-d4d9-4eb8-be7d-ddd6eb0701b6",
+    "riemann-hypothesis-2026-09-11-19b301e6-31d3-4afa-936b-0e06cfad6fe0",
+    "riemann-hypothesis-2026-09-11-b80876eb-d2cb-4997-8d03-61be9d42ecb8",
+    "riemann-hypothesis-2026-09-11-f00ef492-64bd-40a6-8b8b-72312b527f30",
+    "riemann-hypothesis-2026-09-11-b2a9e6ac-77be-4453-b0e1-f09f3c98ca11"
+  ],
+  "review_status": "unreviewed"
+}
