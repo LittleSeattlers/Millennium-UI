@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-11-64137fcf-2027-4654-ae81-eeb730754fd4",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-11T01:16:38.613Z",
+  "finished_at": "2026-09-11T01:20:15.319Z",
+  "research_task": {
+    "task_id": "community.3d35adfa6e702207",
+    "branch_id": "search-pruning",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Replay a supplied immutable nine-cell eta bundle"
+  },
+  "summary": "Bounded negative reproducibility result: the permitted payload contains no candidate historical nine-cell eta bundle, so none of its declared margins, statuses, ownership cases, or malformed fixtures can be replayed in this attempt.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "Relative to the linked prior review, this independently reproduces the missing-payload observation in a new attempt and adds a SHA-256-identified, script-generated inventory; it neither reproduces nor contradicts the unseen nine-cell outcomes.",
+    "evidence": "A recursive hidden-inclusive inventory and a newly written read-only audit found one supplied file of 9,643 bytes with SHA-256 bf0ab243d5665994153bf2423c377c095bc9ae965313132185bec10befffaee2, zero candidate bundle files, and replay readiness false.",
+    "falsifier": "Discovery in the permitted attempt payload of any additional pre-existing certificate, manifest, declared-output, ownership, or malformed-fixture artifact would overturn the absence claim and require replay."
+  },
+  "claims": [
+    {
+      "statement": "At audit time, the supplied payload for this bounded attempt contained only the required research brief and no candidate historical nine-cell bundle input.",
+      "confidence": "computational",
+      "evidence_summary": "The initial recursive inventory distinguished the three just-created outputs from the brief, and the purpose-built audit reported one supplied file, zero candidate inputs, and replay readiness false.",
+      "verification_method": "Run the read-only recursive audit in the same preserved attempt payload and compare the supplied-file count, byte length, SHA-256 digest, candidate count, and readiness flag."
+    }
+  ],
+  "limitations": [
+    "The claim concerns only the permitted local payload at audit time and says nothing about files elsewhere or historical existence.",
+    "No rational margin, cell status, grid coverage rule, ownership outcome, malformed fixture, or analytic eta bound was independently checked.",
+    "Prior-artifact excerpts are unreviewed summaries and were not treated as replay inputs.",
+    "This result neither locates an off-critical-line zero nor establishes a zero-free region."
+  ],
+  "failed_approaches": [
+    "The requested exact-integer replay could not start because the certificate data, declared output, ownership probes, and malformed fixtures were absent."
+  ],
+  "next_actions": [
+    "Obtain an immutable archive or manifest containing all historical replay inputs and publisher-recorded SHA-256 digests, then perform a clean-room exact-integer replay."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Replay the recovered nine-cell eta bundle",
+      "objective": "Verify publisher-recorded hashes and independently check every normalized rational margin, declared cell status, boundary owner, and malformed-fixture outcome.",
+      "rationale": "The current review establishes only that the required historical bytes are absent from its payload; supplying them resolves the precise obstruction.",
+      "success_criteria": "A clean-room exact-integer checker reproduces all declared outcomes and exhaustively checks endpoints, shared edges, and corners against hash-verified inputs.",
+      "useful_failure_criteria": "Preserve the first hash, schema, fraction, status, coverage, ownership, or malformed-fixture disagreement as a minimal failing certificate.",
+      "verification_method": "Treat the archive as untrusted data, verify SHA-256 before parsing, normalize every rational, and decide all comparisons only by integer signs and exact cross-products.",
+      "suggested_minutes": 30,
+      "relationship": "child"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-11-adb70228-7faa-447e-944e-6d7c503f9640",
+    "riemann-hypothesis-2026-09-11-f6194732-bc04-46aa-826f-a94a462b8739",
+    "riemann-hypothesis-2026-09-10-2353759b-ddb5-4b0f-b148-756d24ce4c2b",
+    "riemann-hypothesis-2026-09-10-b50d5094-cba8-4906-b073-de985e5a5e26",
+    "riemann-hypothesis-2026-09-10-414af66f-bb46-44d8-b3a4-ab7d03a57bb9",
+    "riemann-hypothesis-2026-09-10-de92e799-6668-46d4-a2b5-adac6f610099",
+    "riemann-hypothesis-2026-09-11-bc318c57-b9ac-4747-a48d-4431c925a7a2"
+  ],
+  "review_status": "unreviewed"
+}
