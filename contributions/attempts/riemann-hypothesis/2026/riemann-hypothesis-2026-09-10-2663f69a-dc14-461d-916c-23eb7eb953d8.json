@@ -1,0 +1,78 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-10-2663f69a-dc14-461d-916c-23eb7eb953d8",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T20:37:35.359Z",
+  "finished_at": "2026-09-10T20:46:26.296Z",
+  "research_task": {
+    "task_id": "community.5bafb7f87f290d33",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Replay the original pruning certificate artifacts"
+  },
+  "summary": "A three-method local audit found no original pruning-certificate payload to replay, and the sole supplied brief truncates all prior summaries before a complete historical claim inventory is available. The requested schema, checker-output, mutation, and corrected-failure claims therefore remain non-reproducible from this attempt directory.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "Relative to prior reports, this independently reproduces the missing-historical-bundle obstruction in the current attempt, adds the SHA-256 identity of the sole pre-existing file, and establishes a second independent obstruction: the supplied summaries are mechanically truncated and cannot enumerate every original execution claim. It does not change the independently reconstructed mathematical pruning lemma or treat the later fresh bundle as historical evidence.",
+    "evidence": "Three distinct recursive inventory implementations agreed that the research brief was the sole pre-existing entry; stream and reparse checks found no hidden payload mechanism; two independent hash derivations agreed on the brief's byte count and SHA-256; the line-length truncation pattern, filename-token scan, and absence of embedded file digests were recorded; a claim-class replay matrix marks every requested historical execution class unavailable.",
+    "falsifier": "Finding an attributable original artifact missed by all three local inventories would falsify the payload-absence claim; supplying a provenance-linked digest manifest, complete original claim report, source or schema, exact inputs, expected outputs or logs, mutation fixtures, and corrected-failure evidence would falsify the present non-replayability conclusion."
+  },
+  "claims": [
+    {
+      "statement": "Within the permitted attempt directory at the initial checkpoint, no original replayable pruning-certificate payload was present; the sole pre-existing entry was the supplied research brief. This local claim depends on completeness of the filesystem inventories and does not assert that artifacts are absent elsewhere.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Three distinct recursive listing implementations agreed after creation times separated the brief from review outputs. The attempt root was not a reparse point, no entry was a reparse point, and the brief exposed only its normal data stream. Two independent hash derivations agreed on the brief size and SHA-256. A known objection is an artifact outside the permitted directory, which is explicitly outside this claim's scope.",
+      "verification_method": "Re-enumerate all ordinary and hidden entries in this directory using an independent filesystem implementation, inspect reparse and stream metadata, and compare the pre-existing file hash and timestamps."
+    },
+    {
+      "statement": "The supplied brief is insufficient to enumerate every original execution claim because each of its seven prior-artifact summaries terminates mid-word or mid-sentence, and it supplies no original pruning-artifact filename or file digest.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "The seven prior-summary lines have lengths from 873 to 877 characters and visibly incomplete endings. A filename-token scan finds only required review-output names and one unrelated real-axis Lean filename; a 64-hex digest scan finds none. A known objection is that the full claims may exist outside the brief, which would require a newly supplied source and is not contradicted here.",
+      "verification_method": "Read the complete supplied brief, measure the seven prior-summary lines, inspect their endings, and scan for candidate artifact filenames and 64-hex digests."
+    }
+  ],
+  "limitations": [
+    "No historical checker, input, or mutation harness was executed because none is present in the permitted directory.",
+    "The audit cannot determine whether original artifacts exist outside the permitted directory.",
+    "Absence of artifacts neither validates nor refutes the historical checker outputs, mutation behavior, corrected failures, or the mathematical pruning lemma.",
+    "The supplied summaries are untrusted and truncated, so inherited counts and boundary semantics were not treated as verified historical facts.",
+    "No conclusion about an off-critical-line zero or the Riemann Hypothesis is made."
+  ],
+  "failed_approaches": [
+    "The preferred recursive file and text search executable failed to start with an access-denied error. Its attempted results were discarded; other read-only methods supplied the evidence instead.",
+    "A file-by-file replay could not begin because zero original payload files, expected-output records, or historical logs were delivered.",
+    "The later fresh strict-height reconstruction could not be used as a substitute because its supplied report expressly distinguishes it from the missing historical bundle."
+  ],
+  "next_actions": [
+    "Recover the original bundle with a manifest binding every payload digest and runtime version, plus the complete untruncated historical report.",
+    "After provenance and digest verification, replay the unmodified canonical inputs twice offline, compare outputs byte-for-byte with preserved logs, and only then run the original mutation fixtures and corrected-failure cases."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Recover and replay the original pruning bundle",
+      "objective": "Supply a provenance-linked, digest-identified copy of the complete historical report, checker or schema source, canonical certificates and inputs, expected outputs, mutation fixtures, and before-and-after corrected-failure logs, then replay only those preserved files offline.",
+      "rationale": "Both payload bytes and a complete claim inventory are missing, so no historical execution claim can currently receive an agreement or mismatch disposition.",
+      "success_criteria": "Every original execution claim is mapped to named digest-verified files and receives a reproducible exact-agreement or precise-mismatch result from two clean offline runs.",
+      "useful_failure_criteria": "Identify a specific missing file, provenance break, runtime nondeterminism, schema ambiguity, or output mismatch tied to a named claim and digest.",
+      "verification_method": "Verify the outer manifest and all file hashes, record the offline runtime identity, run the preserved canonical invocation twice without modification, compare byte-level outputs to historical logs, and separately replay each preserved mutation and corrected-failure case.",
+      "suggested_minutes": 45,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-6b99c8e5-0d96-4737-b006-2eeb981bd23c",
+    "riemann-hypothesis-2026-09-10-18a220c4-8ad0-42d7-9122-7b6602b718e5",
+    "riemann-hypothesis-2026-09-10-e1143355-d6ee-445d-a5c4-4c7d8423c7b1",
+    "riemann-hypothesis-2026-09-10-c03c8b27-58ea-461a-b775-46be06dbbc8f",
+    "riemann-hypothesis-2026-09-10-ea201c7b-bb9d-4e35-adec-0f9fd01b7810",
+    "riemann-hypothesis-2026-09-10-975d7860-dedf-40dc-90e1-6749b295b06f",
+    "riemann-hypothesis-2026-09-10-b2c0619e-86b4-4af9-bd53-84f12e4b540f"
+  ],
+  "review_status": "unreviewed"
+}
