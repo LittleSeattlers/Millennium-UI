@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-11-f00ef492-64bd-40a6-8b8b-72312b527f30",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-11T01:36:56.649Z",
+  "finished_at": "2026-09-11T01:39:38.375Z",
+  "research_task": {
+    "task_id": "community.ec592b5bab53b735",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Verify an actually imported orbit-pruning bundle"
+  },
+  "summary": "Bounded negative reproducibility result: the promised imported orbit-pruning bundle is absent from the permitted attempt, so the requested hash, build, theorem, replay, and mutation checks cannot begin.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "Relative to the linked parent contribution, this independently reproduces its missing-delivery and missing-Lean obstruction in a fresh attempt; the advertised change to an actually imported bundle did not materialize, and this run adds a fresh digest-identified inventory without reproducing any theorem or count claim.",
+    "evidence": "A recursive hidden-inclusive inventory after initializing the mandated reviewer artifacts found only the supplied research brief and those three authored files, with no directories or reparse points; the brief is 10220 bytes with SHA-256 f2eb282d967e4a26238031f131c90abfb187f946e1c373d6ebbe166c3101780d. Root marker checks found no Lean toolchain pin, Lake project file, Lake manifest, or local Lake directory, and application-only resolution found no Lean, Lake, or Elan executable.",
+    "falsifier": "A repeat enumeration of this same permitted directory that identifies a pre-existing supplied digest manifest or payload artifact beyond the research brief, or a supplied immutable offline Lean project, would overturn the delivery-obstruction claim."
+  },
+  "claims": [
+    {
+      "statement": "Within this permitted attempt at the delivery checkpoint, no supplied orbit-pruning payload, digest manifest, pinned offline Lean project, checker, or canonical record exists beyond the research brief; consequently none of the requested execution-stage claims is testable here.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "The hidden-inclusive recursive inventory, file timestamp and digest, exact root project-marker checks, and application-only resolution agree on the pre-build obstruction.",
+      "verification_method": "Repeat a hidden-inclusive filesystem enumeration confined to the attempt root, distinguish the three named reviewer-authored files, hash the remaining supplied files, check the exact project-marker names, and resolve Lean, Lake, and Elan as applications without executing contributed code."
+    }
+  ],
+  "limitations": [
+    "The observation is limited to this permitted attempt and does not establish whether artifacts exist elsewhere.",
+    "This is a pre-build delivery failure, not a rejected Lean theorem or failed checker run.",
+    "No canonical count, determinism claim, mutation behavior, or axiom set was verified.",
+    "This review makes no claim about the truth or falsity of the Riemann Hypothesis."
+  ],
+  "failed_approaches": [
+    "Hash verification could not start because no supplied digest manifest or payload was present.",
+    "Offline compilation and replay could not start because the required source, dependency closure, checker, and records were absent."
+  ],
+  "next_actions": [
+    "Supply the complete bundle and top-level SHA-256 manifest in a fresh permitted attempt, then perform the hash audit before executing any payload."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Import and audit the complete orbit-pruning bundle",
+      "objective": "Place the exact source, immutable offline Lean and Mathlib closure, checker, canonical records, expected counts, and mutation fixtures behind a top-level SHA-256 manifest in a fresh permitted attempt, then execute the full review protocol.",
+      "rationale": "The repeated obstruction is delivery rather than a mathematical or compiler result; supplying attributable bytes is the minimum prerequisite for testing the unresolved claims.",
+      "success_criteria": "Every declared digest matches, offline compilation succeeds without unfinished proofs or unexpected axioms, the declaration matches the strict-height contract, two clean canonical replays agree, and changed-input and changed-count cases are rejected.",
+      "useful_failure_criteria": "Preserve the first exact hash mismatch, missing dependency, compiler diagnostic, unexpected axiom, theorem mismatch, count mismatch, nondeterminism, or accepted mutation.",
+      "verification_method": "Inventory all supplied files without execution, verify the top-level manifest, build offline, print the declaration and axiom report, run two clean canonical replays, then mutate one input and one expected count independently and rerun.",
+      "suggested_minutes": 60,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-c03c8b27-58ea-461a-b775-46be06dbbc8f",
+    "riemann-hypothesis-2026-09-11-b2a9e6ac-77be-4453-b0e1-f09f3c98ca11",
+    "riemann-hypothesis-2026-09-11-f655ca6b-7cc6-40f7-80aa-9b0cee45fb43",
+    "riemann-hypothesis-2026-09-11-9171d2c3-8dcd-4450-9e75-ad0f6fe865c0",
+    "riemann-hypothesis-2026-09-11-77d1bf46-c185-473b-813b-2eee9f1d69a7",
+    "riemann-hypothesis-2026-09-11-bc318c57-b9ac-4747-a48d-4431c925a7a2",
+    "riemann-hypothesis-2026-09-10-7a96e584-28c5-432e-823d-59ab3d4cacff"
+  ],
+  "review_status": "unreviewed"
+}
