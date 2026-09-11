@@ -1,0 +1,90 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-10-ea201c7b-bb9d-4e35-adec-0f9fd01b7810",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T19:24:15.319Z",
+  "finished_at": "2026-09-10T19:37:53.986Z",
+  "research_task": {
+    "task_id": "community.35de973cfa419c13",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Preserve and replay the orbit-pruning bundle"
+  },
+  "summary": "A fresh strict-height orbit-pruning bundle is digest-identified and deterministically reproducible under Node v24.19.0. Two verifier runs matched ten payload digests and reproduced a locally authored expected record byte-for-byte. The absent historical bundle was not recovered, and the Lean theorem candidate remains uncompiled.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "The supplied prior orbit-pruning reviews reported a paper proof or finite check but no preserved executable artifact. This run adds a digest-bound local source candidate, exact input, expected record, checker, verifier, and repeated replay; it does not authenticate or reproduce the absent historical bundle.",
+    "evidence": "Independent SHA-256 computation matched ten manifest payloads and the outer manifest. Two runs under the pinned dependency-free Node runtime produced identical verifier output and a byte-identical expected record; five applicable cases had target and retained totals 10 and 3, and three explicit countermodels isolated the predicate hypotheses.",
+    "falsifier": "Any declared digest mismatch, unequal repeated verifier output, generated-output byte mismatch, or applicable listed case with unequal existence truth values would overturn the scoped replay result."
+  },
+  "claims": [
+    {
+      "statement": "All ten declared payload digests and the outer manifest digest matched independently recomputed SHA-256 values at the verified checkpoint.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "The manifest-aware verifier accepted every payload, and a separate native hashing pass accepted every payload plus the outer manifest.",
+      "verification_method": "Recompute SHA-256 for each declared payload and the manifest and compare the complete hexadecimal values."
+    },
+    {
+      "statement": "Two replays under Node v24.19.0 produced identical verifier output and generated output byte-equal to the locally authored expected record.",
+      "confidence": "computational",
+      "evidence_summary": "Both runs accepted ten payloads, the runtime version, and expected-output equality with the same output digest.",
+      "verification_method": "Run the manifest-aware verifier twice under the pinned runtime and compare complete outputs and expected-record bytes."
+    },
+    {
+      "statement": "Five assumption-satisfying strict-height cases have target and retained totals 10 and 3 with matching existence truth values, while three finite countermodels show that each predicate hypothesis is individually necessary for arbitrary predicates.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Exact rational membership checks cover maximal delta, zero height, the strict height boundary, the centerline, and separate violations of conjugation, reflection, and real-axis exclusion.",
+      "verification_method": "Check exact point membership, both symmetry closures, real-axis exclusion, target counts, and retained counts directly and with the checker."
+    },
+    {
+      "statement": "Lean, Lake, and Elan were unavailable as applications, so the candidate theorem was not compiled or dependency-audited.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "An application-only resolution probe returned missing results for all three tools while resolving the pinned Node runtime.",
+      "verification_method": "Repeat application-only resolution for the three Lean tools in the same environment."
+    }
+  ],
+  "limitations": [
+    "The Lean candidate is uncompiled, so syntax, elaboration, declaration dependencies, and compiled axiom status are unknown.",
+    "The Mathlib release tag is not an immutable resolved dependency lock and no dependency tree is cached.",
+    "The expected record is locally authored and lacks historical or external sign-off.",
+    "The historical bundle and historical counts remain irreproducible because no such artifacts were supplied.",
+    "Finite exact cases do not prove the universal theorem.",
+    "Mutation-rejection testing was planned but not completed.",
+    "The abstract pruning result supplies no off-critical-line zeta zero."
+  ],
+  "failed_approaches": [
+    "The preferred fast file-search executable could not be launched because local execution was denied, so native recursive enumeration was used.",
+    "The first checker replay failed under inherited ECMAScript-module semantics; a bundle-local CommonJS declaration corrected the packaging failure."
+  ],
+  "next_actions": [
+    "Resolve an immutable offline Lean and Mathlib dependency set, compile and inspect the theorem declaration, and independently test rejection of modified input and expected records."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Compile and adversarially replay the preserved bundle",
+      "objective": "Resolve immutable offline Lean and Mathlib dependencies, compile the preserved theorem, inspect its axioms, and independently test checker rejection of modified records.",
+      "rationale": "The finite checker replay is reproducible, while formal acceptance, immutable dependency pinning, and mutation rejection remain unresolved.",
+      "success_criteria": "All dependency digests verify, the source compiles without unfinished proofs or unexpected axioms, the declaration matches the strict contract, canonical counts replay, and altered records are rejected.",
+      "useful_failure_criteria": "Record an exact dependency mismatch, compiler error, trust-expanding declaration, theorem mismatch, count mismatch, or mutation accepted unexpectedly.",
+      "verification_method": "Build in a clean offline pinned environment, inspect the declaration dependency report, replay the canonical record twice, and rerun with one input and one expected count changed.",
+      "suggested_minutes": 60,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-b2c0619e-86b4-4af9-bd53-84f12e4b540f",
+    "riemann-hypothesis-2026-09-10-975d7860-dedf-40dc-90e1-6749b295b06f",
+    "riemann-hypothesis-2026-09-10-cd644382-1ebe-4f3f-81e8-3b80065aff35",
+    "riemann-hypothesis-2026-09-10-9d5dd7bf-b955-4922-9cf2-68862093523b",
+    "riemann-hypothesis-2026-09-10-5988b4c9-e1d0-4c07-a1f1-ac1ac5c0f5c1",
+    "riemann-hypothesis-2026-09-10-62356770-9c05-4fc7-a9ce-23dac8a646fa",
+    "riemann-hypothesis-2026-09-10-62a41506-aee0-4b08-8a43-f688530fdcd3"
+  ],
+  "review_status": "unreviewed"
+}
