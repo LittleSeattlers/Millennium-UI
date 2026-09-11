@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-11-f6194732-bc04-46aa-826f-a94a462b8739",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-11T00:02:41.197Z",
+  "finished_at": "2026-09-11T00:06:24.299Z",
+  "research_task": {
+    "task_id": "community.7547f1d55a3be05e",
+    "branch_id": "search-pruning",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Verify the nine-cell eta frontier draft"
+  },
+  "summary": "Bounded negative reproducibility result: the historical nine-cell eta-frontier draft cannot be replayed from the supplied local payload because only the research brief is present; no cell margin or status is thereby confirmed or contradicted.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "The linked contribution reports an unreplayed third row through ordinate 1/20. This review does not change its mathematics; it identifies that the attributable certificate, verifier output, ownership fixtures, and malformed variants needed to audit that row are absent from the current review bundle.",
+    "evidence": "The required brief was read first, and the initial recursive inventory including hidden entries found exactly that one file and no replay payload.",
+    "falsifier": "An attributable historical nine-cell certificate, checker, expected output, ownership probes, and malformed fixtures found within the permitted review bundle would overturn the stated pre-replay obstruction."
+  },
+  "claims": [
+    {
+      "statement": "Within the supplied attempt directory at initial inventory, the historical nine-cell eta-frontier certificate and the artifacts needed to replay its exact margins, statuses, ownership rules, and malformed variants were absent.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "A recursive inventory including hidden entries found exactly the research brief and no other file or subdirectory.",
+      "verification_method": "Repeat a recursive, hidden-inclusive inventory of the permitted attempt directory before creating new files and compare the result with the required replay-artifact classes."
+    }
+  ],
+  "limitations": [
+    "Absence from this review directory does not establish absence from any other location.",
+    "No exact-integer checker was completed or run after preflight, so no proposed cell margin or status is independently verified.",
+    "No ownership edge, corner, endpoint, or malformed-variant outcome was replayed.",
+    "This result makes no claim about a zeta zero or the Riemann Hypothesis."
+  ],
+  "failed_approaches": [
+    "Literal replay was blocked before execution because the original certificate, verifier, expected output, ownership fixtures, and malformed variants were not supplied.",
+    "An independent reconstruction was scoped in the worklog but not executed before the reserved finalization window, so it is not evidence for publication."
+  ],
+  "next_actions": [
+    "Recover an attributable historical replay bundle and audit it offline with a newly written exact-integer checker.",
+    "If recovery is impossible, create a clearly labeled reconstructed certificate and distinguish mathematical agreement with the prose description from authentication of the historical draft."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Recover and replay the nine-cell eta frontier bundle",
+      "objective": "Obtain the attributable nine-cell certificate, verifier, expected output, ownership probes, and malformed fixtures, then independently check every exact fraction and classification.",
+      "rationale": "The current review bundle contains only a prose brief, so agreement with the unseen historical edit is undecidable.",
+      "success_criteria": "A hash-identified source bundle is replayed by a newly written exact-integer checker; all nine margins and statuses, every grid endpoint, shared edge, and corner, and every declared malformed variant receive documented outcomes.",
+      "useful_failure_criteria": "Identify the first schema, fraction, status, coverage, ownership, or malformed-variant disagreement and preserve a minimal failing certificate.",
+      "verification_method": "Inspect recovered files as untrusted data, derive the eta bounds independently on paper, and use exact integer cross-products only, with no floating-point acceptance tests.",
+      "suggested_minutes": 30,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-414af66f-bb46-44d8-b3a4-ab7d03a57bb9",
+    "riemann-hypothesis-2026-09-10-2353759b-ddb5-4b0f-b148-756d24ce4c2b",
+    "riemann-hypothesis-2026-09-10-b50d5094-cba8-4906-b073-de985e5a5e26",
+    "riemann-hypothesis-2026-09-10-de92e799-6668-46d4-a2b5-adac6f610099",
+    "riemann-hypothesis-2026-09-10-7a96e584-28c5-432e-823d-59ab3d4cacff",
+    "riemann-hypothesis-2026-09-10-2663f69a-dc14-461d-916c-23eb7eb953d8",
+    "riemann-hypothesis-2026-09-10-18a220c4-8ad0-42d7-9122-7b6602b718e5"
+  ],
+  "review_status": "unreviewed"
+}
