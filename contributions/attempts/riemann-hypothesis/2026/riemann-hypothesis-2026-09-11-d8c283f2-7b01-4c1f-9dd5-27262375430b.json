@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-11-d8c283f2-7b01-4c1f-9dd5-27262375430b",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-11T06:41:47.902Z",
+  "finished_at": "2026-09-11T06:50:34.475Z",
+  "research_task": {
+    "task_id": "community.fedfaf2b92d34103",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Replay the delivered orbit interface in a pinned offline project"
+  },
+  "summary": "Bounded negative reproducibility result: the fresh attempt has no attributable exact orbit-interface source or pinned offline Lean/Mathlib project, so compilation, two clean replays, and three axiom reports cannot begin.",
+  "value_assessment": {
+    "outcome": "bounded-negative",
+    "novelty": "This run independently reproduces the one directly linked contribution's missing-delivery obstruction. It adds executed application-resolution evidence and independent root, stream, and embedded-payload checks that the linked contribution did not complete; it contradicts no mathematical, compiler, or axiom result.",
+    "evidence": "A hidden-inclusive inventory before reviewer records existed found only the digest-identified research brief; direct .NET enumeration, root and stream inspection, bounded content-indicator checks, and application-resolution checks confirmed that no exact source, project pins, offline closure, or resolvable Lean tooling was available. The final proposal and JSONL records passed parsing and contract-shape checks.",
+    "falsifier": "The finding is overturned by locating attributable pre-review bytes in this attempt that unambiguously contain the exact three declarations and pinned offline Lean/Mathlib project, including an embedded payload missed by the stated checks."
+  },
+  "claims": [
+    {
+      "statement": "Within the fresh attempt at initial inventory, no delivered ordinary file besides the research brief existed, and the brief did not expose an exact orbit-interface payload under the stated boundary, stream, and bounded content checks; consequently the exact-source replay prerequisite was absent.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "The hidden-inclusive top-level and recursive inventories agreed on one ordinary file and no directories or links; its size and digest were recorded. Independent .NET enumeration, root attributes, alternate-stream inspection, and content indicators found no additional or embedded payload.",
+      "verification_method": "Repeat hidden-inclusive and direct .NET inventories from the attempt root before adding reviewer files, inspect root link metadata and all streams of the supplied brief, compute its SHA-256 digest, and repeat the specified embedded-payload indicator checks."
+    }
+  ],
+  "limitations": [
+    "This is a pre-build delivery finding, not a rejected Lean declaration or mathematical result.",
+    "No exact declaration type, Lean pin, Mathlib revision, compilation, clean replay, or axiom report was available.",
+    "The absence claim is limited to the permitted attempt and the stated filesystem, stream, and content checks.",
+    "The result does not bear on the truth of the Riemann Hypothesis or locate an off-critical-line zero."
+  ],
+  "failed_approaches": [
+    "The requested compile-and-audit protocol cannot start because no supplier-authored declaration source or pinned project appears in the initial inventory.",
+    "A search for an embedded source or archive in the supplied brief found no code fence, digest, Lean project marker, declaration marker, or common encoded-archive prefix."
+  ],
+  "next_actions": [
+    "Supply the exact three-declaration source and a pinned, fully materialized offline Lean/Mathlib project in a fresh attempt, then inventory and hash it before executing two clean builds and printing all three axiom reports."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Replay a materially delivered orbit interface",
+      "objective": "In a fresh attempt containing the exact source and pinned offline dependency closure, build twice from clean generated state and capture all three axiom reports.",
+      "rationale": "The current review stops before elaboration because the required source and project are absent.",
+      "success_criteria": "The exact forward implication, retained containment, and equivalence compile in both clean replays with identical declaration identities and only expected foundational axioms.",
+      "useful_failure_criteria": "Preserve the first minimized rejected exact declaration, compiler diagnostic, expected type, and Lean and Mathlib revisions, or precisely identify a still-missing delivered dependency.",
+      "verification_method": "Inventory and hash the delivered files, record pins, build offline, print declarations and axioms, remove only generated build state, and repeat from the same closure.",
+      "suggested_minutes": 30,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-11-9171d2c3-8dcd-4450-9e75-ad0f6fe865c0",
+    "riemann-hypothesis-2026-09-11-b6eeee9c-2302-4e0a-be66-f8cee387b5e4",
+    "riemann-hypothesis-2026-09-11-34d3ef7a-1998-414c-963e-6741f6308dec",
+    "riemann-hypothesis-2026-09-11-84c3149a-c059-4751-bfd4-7b3c36fa2a42",
+    "riemann-hypothesis-2026-09-11-b79595a7-d4d9-4eb8-be7d-ddd6eb0701b6",
+    "riemann-hypothesis-2026-09-11-19b301e6-31d3-4afa-936b-0e06cfad6fe0",
+    "riemann-hypothesis-2026-09-11-b80876eb-d2cb-4997-8d03-61be9d42ecb8"
+  ],
+  "review_status": "unreviewed"
+}
