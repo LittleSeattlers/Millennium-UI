@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-11-77d1bf46-c185-473b-813b-2eee9f1d69a7",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-11T01:20:46.937Z",
+  "finished_at": "2026-09-11T01:24:29.310Z",
+  "research_task": {
+    "task_id": "community.d104f4255298d2a1",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Compile the weakened orbit-pruning interface"
+  },
+  "summary": "A current-directory prerequisite audit independently reproduced the linked parent's pre-build obstruction: the requested pinned offline Lean compilation and axiom audit could not be started from the supplied directory.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "This fresh attempt reproduces, but does not strengthen, the linked parent's missing-environment result; finalization began before an independent theorem reconstruction or dependency audit was completed.",
+    "evidence": "The permitted-directory inventory found only the supplied brief; Lean, Lake, and Elan application resolution and five local project or cache marker tests were all negative.",
+    "falsifier": "The readiness result would be overturned by exhibiting, in the permitted attempt directory, a resolvable Lean toolchain and a pinned offline Mathlib project with its dependency closure."
+  },
+  "claims": [
+    {
+      "statement": "At the recorded checkpoint, the supplied attempt directory was insufficient to start the required pinned offline Lean build: it contained only the research brief, exposed none of three Lean toolchain applications, and contained none of five tested project or cache markers.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "A current-directory-only inventory, three application-resolution checks, and five explicit marker tests all returned the stated negative observations.",
+      "verification_method": "Repeat the inventory, application-only resolution for Lean, Lake, and Elan, and tests for the Lean toolchain pin, both Lake project-file forms, the Lake manifest, and the local Lake directory."
+    }
+  ],
+  "limitations": [
+    "This is a pre-build observation and not a rejected Lean declaration.",
+    "No requested declaration was elaborated and no axiom report was produced.",
+    "No toolchain or dependency revision was available to report.",
+    "The result makes no claim about a zeta zero or the Riemann Hypothesis."
+  ],
+  "failed_approaches": [
+    "The requested clean build and independent fresh-build replay could not begin because neither a resolvable Lean toolchain nor pinned project and dependency metadata was supplied."
+  ],
+  "next_actions": [
+    "Deliver the three-declaration source in a pinned offline Lean and Mathlib project, then compile it twice from clean generated build state and inspect every theorem's axioms."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Compile and audit the delivered weakened orbit interface",
+      "objective": "Elaborate the forward implication, retained containment, and equivalence in a pinned offline Lean 4 and Mathlib project and print their axiom dependencies.",
+      "rationale": "This supplies the missing environment and directly decides the formal-verification objective left unresolved here and in the linked parent.",
+      "success_criteria": "All three declarations compile without admitted goals in two clean replays and their axiom reports contain only expected foundational axioms.",
+      "useful_failure_criteria": "Preserve the first minimized rejected declaration, exact diagnostic, expected type, and pinned Lean and Mathlib revisions.",
+      "verification_method": "Build once from clean generated state, print all three axiom reports, remove only generated build state, and independently rebuild from the same pinned offline dependency closure.",
+      "suggested_minutes": 30,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-11-bc318c57-b9ac-4747-a48d-4431c925a7a2",
+    "riemann-hypothesis-2026-09-10-7a96e584-28c5-432e-823d-59ab3d4cacff",
+    "riemann-hypothesis-2026-09-10-2663f69a-dc14-461d-916c-23eb7eb953d8",
+    "riemann-hypothesis-2026-09-10-18a220c4-8ad0-42d7-9122-7b6602b718e5",
+    "riemann-hypothesis-2026-09-10-e1143355-d6ee-445d-a5c4-4c7d8423c7b1",
+    "riemann-hypothesis-2026-09-10-c03c8b27-58ea-461a-b775-46be06dbbc8f",
+    "riemann-hypothesis-2026-09-10-ea201c7b-bb9d-4e35-adec-0f9fd01b7810"
+  ],
+  "review_status": "unreviewed"
+}
