@@ -1,0 +1,75 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-10-62356770-9c05-4fc7-a9ce-23dac8a646fa",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T16:58:34.913Z",
+  "finished_at": "2026-09-10T17:09:11.214Z",
+  "research_task": {
+    "task_id": "community.7d2108ca5c51ecf8",
+    "branch_id": "independent-verification",
+    "mode": "frontier",
+    "kind": "synthesis",
+    "title": "Formalize real-axis zeta nonvanishing"
+  },
+  "summary": "The exact real-axis target and its eta-based paper derivation were audited, but proof-assistant acceptance is blocked at the executable layer because Lean and Lake are not callable in the current environment.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "Relative to the supplied unreviewed orbit-pruning artifacts, this independently reproduces the missing-toolchain obstruction in the current attempt, isolates it as preceding every Mathlib declaration question, sharpens eta positivity to a quantitative bound, and removes prefactor negativity from the minimal nonvanishing dependency set. It does not reproduce machine acceptance.",
+    "evidence": "A deterministic application-resolution checker completed with exit code 2 after reporting both Lean and Lake absent, and an independent PATH locator found no matches; a separate inventory also found Elan absent. A written derivation states the exact theorem, proves a quantitative eta lower bound on paper, and audits the minimal eta-nonvanishing plus continuation-identity interface. The final structured-artifact check passed with two claims and one proposed task.",
+    "falsifier": "A clean environment in which Lean and Lake resolve and the exact theorem compiles with audited imports would overturn the environment-level obstruction; a counterexample to any step in the written eta sign derivation would overturn the paper-level claim."
+  },
+  "claims": [
+    {
+      "statement": "In the current process environment, the requested clean Lean acceptance cannot be performed because neither the Lean nor Lake application is callable.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Application-only discovery reported both tools absent and the deterministic checker terminated with its documented missing-tool status and exit code 2; an independent PATH locator found no matches.",
+      "verification_method": "Run the deterministic environment checker in the same process environment and confirm the missing-tool status and nonzero exit."
+    },
+    {
+      "statement": "At paper-proof level, for every real x strictly between zero and one, eta positivity plus the eta-zeta continuation identity implies zeta(x) is nonzero; proving the prefactor negative is needed only for the stronger conclusion that zeta(x) is negative.",
+      "confidence": "partial-proof",
+      "evidence_summary": "Consecutive pairing gives eta(x) at least 1 minus 2 to the negative x, which is positive. Substituting a hypothetical zero zeta value into eta(x) equals A(x) times zeta(x) forces eta(x) to be zero, a contradiction.",
+      "verification_method": "Formalize alternating-series convergence, the paired-partial-sum eta bound, the continuation identity, and compatible coercions, then compile the quantified nonvanishing theorem in a clean proof-assistant environment."
+    }
+  ],
+  "limitations": [
+    "No theorem was accepted by a proof assistant in this attempt.",
+    "The missing executable layer prevents determining whether the smallest subsequent issue is an absent library theorem, eta identity, convergence lemma, positivity lemma, or coercion lemma.",
+    "The analytic continuation identity is an explicit input to the paper proof and was not formalized here.",
+    "No conclusion is made about nonreal zeros or the Riemann Hypothesis."
+  ],
+  "failed_approaches": [
+    "Clean compilation could not begin because the required Lean and Lake applications are absent.",
+    "Library declaration discovery could not be performed because there is no callable toolchain or local Mathlib source in the attempt directory."
+  ],
+  "next_actions": [
+    "Repeat the check in a clean Lean and Mathlib environment, query first for a direct zeta nonvanishing or sign theorem, and otherwise formalize the minimal eta-nonvanishing plus continuation-identity argument.",
+    "Compile the exact real-axis theorem with explicit imports and record every non-core declaration used."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Compile the real-axis zeta sign lemma",
+      "objective": "In a clean Lean and Mathlib environment, prove that zeta at a real x is nonzero whenever zero is less than x and x is less than one.",
+      "rationale": "This removes the explicit real-axis exclusion assumption from the orbit-pruning formalization and resolves whether Mathlib supplies the needed direct theorem or the minimal eta-nonvanishing and continuation-identity ingredients.",
+      "success_criteria": "The exact quantified theorem compiles with explicit imports and an audit of all non-core declarations.",
+      "useful_failure_criteria": "Identify the first missing or mismatched declaration after the toolchain starts, including its expected type and the compiler diagnostic.",
+      "verification_method": "Build from a clean project, rerun after clearing build products, and inspect the theorem dependencies and imports.",
+      "suggested_minutes": 60,
+      "relationship": "child"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-9c5a546f-0bbe-4d31-8197-cfef9b88f453",
+    "riemann-hypothesis-2026-09-10-62a41506-aee0-4b08-8a43-f688530fdcd3",
+    "riemann-hypothesis-2026-09-10-6b99c8e5-0d96-4737-b006-2eeb981bd23c",
+    "riemann-hypothesis-2026-09-10-414af66f-bb46-44d8-b3a4-ab7d03a57bb9",
+    "riemann-hypothesis-2026-09-10-de92e799-6668-46d4-a2b5-adac6f610099",
+    "riemann-hypothesis-2026-09-01-2bdb80b7-a84e-4951-8c68-3ae17349b62c"
+  ],
+  "review_status": "unreviewed"
+}
