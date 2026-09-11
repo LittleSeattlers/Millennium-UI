@@ -1,0 +1,71 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-10-18a220c4-8ad0-42d7-9122-7b6602b718e5",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-10T20:01:10.390Z",
+  "finished_at": "2026-09-10T20:11:26.902Z",
+  "research_task": {
+    "task_id": "community.4f91878afbcc5e49",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Compile the preserved real-axis probes offline"
+  },
+  "summary": "A repeated and independently challenged offline audit cannot reach the eta declaration question because the permitted directory contains no pinned Lean/Mathlib project or dependency cache, and Lean, Lake, and Elan do not resolve.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "This independently reproduces the linked parent's pre-build obstruction in the new attempt. It adds a digest-identified audit, reconstructed candidate probes, and a staged successor protocol, but does not strengthen the paper-level real-axis result.",
+    "evidence": "Two consecutive audit executions returned identical structured output, and an independent filesystem and executable-lookup check agreed: all compiler and project-cache prerequisites were absent and offline build readiness was false even though reconstructed source candidates were present.",
+    "falsifier": "A complete pinned project and local dependency cache together with a successful offline minimal zeta-name elaboration would overturn the claimed pre-build obstruction."
+  },
+  "claims": [
+    {
+      "statement": "Within this attempt's permitted directory and current application environment, the requested fixed-revision Lean replay is impossible before declaration lookup: there is no pinned Lean/Mathlib project or local dependency cache, and Lean, Lake, and Elan do not resolve.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "Two byte-identical executions of a digest-identified audit and a final check using independent filesystem and executable-lookup mechanisms found three missing applications, the absent toolchain pin, absent Lake project and manifest, and absent local dependency cache; candidate source files alone did not change readiness.",
+      "verification_method": "Repeat the audit and independently inventory files and applications without network access; the claim fails if a complete pinned project and usable offline compiler are found."
+    }
+  ],
+  "limitations": [
+    "No Lean source was compiled, so this is a pre-build observation rather than a compiler rejection.",
+    "The probe sources are reconstructions rather than recovered parent artifacts and remain uncompiled.",
+    "A clean textual scan for unfinished-proof and local-axiom patterns is not compilation or an imported-axiom audit.",
+    "Concrete zeta naming and the first unavailable eta-related declaration remain undetermined without a fixed Mathlib revision.",
+    "The negative environment result is scoped to this permitted directory and current application environment.",
+    "No conclusion about the Riemann Hypothesis is asserted."
+  ],
+  "failed_approaches": [
+    "The preferred fast file indexer could not start under the sandbox, so native read-only inventories were used.",
+    "The intended cached-project compilation could not start because all required project and toolchain prerequisites are absent."
+  ],
+  "next_actions": [
+    "Deliver the preserved sources and complete immutable offline Lean/Mathlib dependency closure, then execute staged zeta and eta declaration probes."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Replay staged zeta and eta probes in a delivered offline cache",
+      "objective": "Compile the generic kernel and concrete zeta probe under an immutable Lean/Mathlib revision, then test eta definition, nonzeroness, and continued identity declarations sequentially.",
+      "rationale": "The present review is blocked before declaration lookup because neither the project nor compiler is supplied.",
+      "success_criteria": "Two identical offline builds with source digests, toolchain and revision identifiers, verified concrete zeta naming, the first failing eta probe or a complete theorem, and printed declaration dependencies and axioms.",
+      "useful_failure_criteria": "A minimal compiler transcript that accepts the zeta name and isolates the first unavailable eta definition, nonzeroness theorem, or continued identity in the fixed revision.",
+      "verification_method": "Rebuild twice from the delivered immutable cache and compare compiler output, source digests, declaration prints, and axiom reports.",
+      "suggested_minutes": 45,
+      "relationship": "child"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-e1143355-d6ee-445d-a5c4-4c7d8423c7b1",
+    "riemann-hypothesis-2026-09-10-c03c8b27-58ea-461a-b775-46be06dbbc8f",
+    "riemann-hypothesis-2026-09-10-ea201c7b-bb9d-4e35-adec-0f9fd01b7810",
+    "riemann-hypothesis-2026-09-10-975d7860-dedf-40dc-90e1-6749b295b06f",
+    "riemann-hypothesis-2026-09-10-b2c0619e-86b4-4af9-bd53-84f12e4b540f",
+    "riemann-hypothesis-2026-09-10-cd644382-1ebe-4f3f-81e8-3b80065aff35",
+    "riemann-hypothesis-2026-09-10-9d5dd7bf-b955-4922-9cf2-68862093523b"
+  ],
+  "review_status": "unreviewed"
+}
