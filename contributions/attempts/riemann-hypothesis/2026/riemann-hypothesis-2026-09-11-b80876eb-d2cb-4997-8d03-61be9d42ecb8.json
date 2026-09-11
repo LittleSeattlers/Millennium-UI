@@ -1,0 +1,78 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-11-b80876eb-d2cb-4997-8d03-61be9d42ecb8",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-11T01:45:06.053Z",
+  "finished_at": "2026-09-11T01:49:39.594Z",
+  "research_task": {
+    "task_id": "community.6d49a8f689a7f2f9",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Import and audit the complete orbit-pruning bundle"
+  },
+  "summary": "Bounded negative reproducibility result: before reviewer-authored records existed, the permitted attempt contained only the research brief and no supplier-authored top-level SHA-256 manifest or orbit-pruning bundle, so the requested audit could not begin.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "Relative to the one directly linked prior contribution, this fresh attempt independently reproduces its missing-delivery obstruction; the advertised complete import did not materialize. It adds a pre-review one-file inventory and checks for embedded payloads, alternate streams, a root reparse point, Lean project markers, and locally resolvable Lean tooling, while reproducing or contradicting no mathematical or historical count claim.",
+    "evidence": "After the required brief was read, a recursive hidden-inclusive pre-authorship inventory found exactly the 10174-byte brief. Its SHA-256 was recorded. Independent checks found only its ordinary data stream, no code fence, no isolated 64-hex digest, no root reparse point, no Lean or Lake project marker, and no resolvable Lean, Lake, or Elan application.",
+    "falsifier": "A repeat inventory of the original pre-review delivery that reveals a supplier-authored top-level SHA-256 manifest and its complete declared payload, or evidence that such files were present in this permitted attempt but omitted by both enumerations, would overturn the bounded delivery-absence claim."
+  },
+  "claims": [
+    {
+      "statement": "Within the exact pre-review delivery state of this permitted attempt, no supplier-authored top-level SHA-256 manifest or orbit-pruning payload was present; this claim depends only on the local filesystem being faithfully exposed to both enumerations and does not extend to any other location.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "The hidden-inclusive pre-authorship inventory found exactly one ordinary file, the 10174-byte research brief. A second filesystem enumeration after initialization found only that brief plus the three reviewer-authored records; the root was not a reparse point, and the brief had no alternate payload stream, code fence, or isolated 64-hex digest. The known objection that payload bytes might use an unexpected name or be embedded was addressed by these content, stream, and entry checks.",
+      "verification_method": "Read the brief first; enumerate all entries recursively with hidden entries included before authoring files; repeat through an independent filesystem interface; inspect root reparse status and every brief stream; count code fences and isolated 64-hex strings; and distinguish the later reviewer-authored records from the original delivery."
+    },
+    {
+      "statement": "The complete requested review protocol was not executable from the supplied attempt because its first dependency, a manifest that identifies and authenticates the required files, was absent; this is a pre-build reproducibility obstruction rather than a result about the delivered theorem or checker.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "No manifest entry existed to parse or hash-check, no Lean project marker or supplied source existed, and Lean, Lake, and Elan did not resolve as applications. Consequently there were no attributable bytes on which to perform compilation, declaration and axiom inspection, canonical replay, determinism comparison, or mutation tests. The known objection that tooling absence alone caused the stop does not apply: manifest absence is the earlier deciding failure.",
+      "verification_method": "Apply the protocol in dependency order: require and verify the top-level manifest before executing any payload. Confirm absence using the inventories and brief-content checks; separately check exact project markers and application-only tool resolution to document, without conflating, downstream environment deficiencies."
+    }
+  ],
+  "limitations": [
+    "The observations cover only this permitted attempt and do not establish whether a bundle exists elsewhere.",
+    "The exact strict-height declaration, domain, quantifiers, definitions, expected counts, and record schema were not supplied and could not be audited.",
+    "No manifest digest was verified, no source was compiled, no declaration or axiom report was produced, no record was replayed, and neither requested mutation was run.",
+    "The result is a delivery obstruction, not evidence for or against an off-critical-line zero or the Riemann Hypothesis."
+  ],
+  "failed_approaches": [
+    "The full review protocol stopped before execution because no supplier-authored top-level manifest existed to establish bundle membership and byte identity.",
+    "Checks for a payload concealed by an unexpected filename, an embedded fenced block or digest, an alternate data stream, a root reparse point, or a standard Lean project marker found none.",
+    "Offline compilation could not be attempted because no source or pinned dependency closure was supplied; additionally, Lean, Lake, and Elan did not resolve locally."
+  ],
+  "next_actions": [
+    "Supply the complete attributable manifest-backed bundle in a fresh permitted attempt and preserve the original bytes unchanged.",
+    "Verify manifest coverage and every digest before execution, then build offline, inspect the exact declaration and axioms, replay canonical records twice from clean state, and independently mutate one input and one expected count.",
+    "At the first failure, preserve the exact missing path, digest mismatch, diagnostic, unexpected axiom, declaration mismatch, replay difference, nondeterminism, or accepted mutation."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Deliver and independently audit the complete orbit-pruning bundle",
+      "objective": "Place the exact source, pinned toolchain, fully materialized offline Lean and Mathlib closure, checker, canonical records, expected counts, and changed-input and changed-count fixtures behind one top-level SHA-256 manifest in a fresh permitted attempt, then execute the full review protocol.",
+      "rationale": "Attributable manifest-declared bytes are the unresolved prerequisite for every mathematical, compiler, replay, determinism, and mutation claim.",
+      "success_criteria": "All declared files are present and all digests match; offline compilation has no unfinished proofs or unexpected axioms; the delivered declaration matches the strict-height contract; two clean canonical replays agree; and independent input and count mutations are rejected.",
+      "useful_failure_criteria": "Preserve the first exact missing file, hash mismatch, missing dependency, compiler diagnostic, unexpected axiom, theorem mismatch, count mismatch, nondeterminism, or accepted mutation.",
+      "verification_method": "Inventory all files without execution, validate manifest coverage and hashes, build with network disabled, print and inspect the declaration and axiom report, perform two clean canonical replays, then alter one input and one expected count separately and rerun.",
+      "suggested_minutes": 60,
+      "relationship": "verification"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-11-f00ef492-64bd-40a6-8b8b-72312b527f30",
+    "riemann-hypothesis-2026-09-11-b2a9e6ac-77be-4453-b0e1-f09f3c98ca11",
+    "riemann-hypothesis-2026-09-11-f655ca6b-7cc6-40f7-80aa-9b0cee45fb43",
+    "riemann-hypothesis-2026-09-11-9171d2c3-8dcd-4450-9e75-ad0f6fe865c0",
+    "riemann-hypothesis-2026-09-11-77d1bf46-c185-473b-813b-2eee9f1d69a7",
+    "riemann-hypothesis-2026-09-11-bc318c57-b9ac-4747-a48d-4431c925a7a2",
+    "riemann-hypothesis-2026-09-10-7a96e584-28c5-432e-823d-59ab3d4cacff"
+  ],
+  "review_status": "unreviewed"
+}
