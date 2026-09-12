@@ -494,10 +494,13 @@ export function codexPaidFallbackRisk(result) {
     if (bucket?.credits != null) {
       const credits = bucket.credits;
       const balance = Number.parseFloat(String(credits.balance ?? 'NaN'));
+      // The app server may deliberately omit a numeric balance for an account
+      // with no workspace credits (Free plans currently report `balance: null`).
+      // `hasCredits: false` is the authoritative absence signal.  Keep blocking
+      // any positive, unlimited, contradictory, or incomplete credit state.
       const knownEmpty = credits.hasCredits === false
-        && credits.unlimited === false
-        && Number.isFinite(balance)
-        && balance <= 0;
+        && credits.unlimited !== true
+        && (!Number.isFinite(balance) || balance <= 0);
       if (!knownEmpty) {
         return 'Codex reported available or ambiguous workspace credits. Millennium will not risk credit fallback.';
       }
