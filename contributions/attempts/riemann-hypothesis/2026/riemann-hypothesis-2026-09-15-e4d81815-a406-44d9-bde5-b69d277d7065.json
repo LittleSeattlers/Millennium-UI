@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "attempt_id": "riemann-hypothesis-2026-09-15-e4d81815-a406-44d9-bde5-b69d277d7065",
+  "problem": "riemann-hypothesis",
+  "problem_id": "rh",
+  "direction": "refute",
+  "route": "refute-or-search-witness",
+  "status": "completed",
+  "started_at": "2026-09-15T06:55:46.082Z",
+  "finished_at": "2026-09-15T07:02:08.495Z",
+  "research_task": {
+    "task_id": "community.ffe7457716486044",
+    "branch_id": "independent-verification",
+    "mode": "recommended",
+    "kind": "review",
+    "title": "Recover and replay the original pruning bundle"
+  },
+  "summary": "Bounded negative reproducibility result: the observable attempt payload lacks an attributable outer digest manifest and every required historical replay component, so no original pruning execution claim can be mapped to digest-verified files or replayed.",
+  "value_assessment": {
+    "outcome": "reproducibility-result",
+    "novelty": "Independently reproduces the linked prior review's missing-payload obstruction in this directory and adds the current objective's unresolved requirement for a separately identifiable, digest-covered complete historical report and execution-claim inventory.",
+    "evidence": "Hidden-inclusive top-level and recursive inventories, creation-time separation of the brief from reviewer records, local SHA-256 computation, alternate-stream check, and a final independent .NET enumeration establish that no supplied manifest or payload candidate is observable. The brief hash is C71FD48B41D15CBBA1D7AEAB8597E618AC0F9D945D7F44683271290CF980B94F. The finalized contribution and claim record parse as JSON with the required field sets.",
+    "falsifier": "An attributable outer manifest and all required original payload files appearing in this directory, with complete coverage and matching locally computed hashes, would overturn the claimed pre-replay obstruction."
+  },
+  "claims": [
+    {
+      "statement": "Within the observable initial payload of this attempt directory, no supplier-delivered outer digest manifest or required historical pruning replay component is present; therefore no original execution claim can receive an agreement or mismatch disposition from offline replay.",
+      "confidence": "rigorous-within-scope",
+      "evidence_summary": "The only file predating reviewer records is the 10,080-byte research brief with SHA-256 C71FD48B41D15CBBA1D7AEAB8597E618AC0F9D945D7F44683271290CF980B94F. Hidden-inclusive PowerShell and .NET recursive inventories found no supplied directory, manifest, or payload candidate.",
+      "verification_method": "In a fresh copy of this exact attempt state, perform hidden-inclusive top-level and recursive inventories, compare creation times to reviewer records, hash pre-existing files, and verify whether an outer manifest enumerates every required payload file."
+    }
+  ],
+  "limitations": [
+    "The observation is limited to the current attempt directory and does not establish nonexistence elsewhere.",
+    "No contributed code was executed, so no runtime, checker, output, mutation, or corrected-failure behavior was tested.",
+    "This is not evidence for or against the Riemann Hypothesis."
+  ],
+  "failed_approaches": [
+    "Offline replay could not begin because the required attributable manifest and payload bytes were not supplied."
+  ],
+  "next_actions": [
+    "Materially supply the original historical report and complete claim inventory, outer manifest, checker or schema source, canonical inputs, expected outputs, mutation fixtures, and corrected-failure logs with provenance and SHA-256 coverage.",
+    "After coverage and hashes validate, record the offline runtime identity, run the preserved invocation twice from clean generated state, compare bytes to historical logs, and replay every preserved fixture."
+  ],
+  "proposed_tasks": [
+    {
+      "title": "Validate and replay a materially delivered pruning bundle",
+      "objective": "Verify a provenance-linked outer manifest and all covered original pruning-bundle bytes, then perform two clean offline canonical replays and all preserved mutation and corrected-failure replays.",
+      "rationale": "The current result is blocked solely at material delivery and cannot assess any historical execution claim.",
+      "success_criteria": "Every original execution claim is mapped to named digest-verified files and receives a reproducible byte-level agreement or precise mismatch from two clean runs, with each fixture separately replayed.",
+      "useful_failure_criteria": "Identify the first named missing, uncovered, hash-mismatched, ambiguous, nondeterministic, or output-mismatched artifact or claim.",
+      "verification_method": "Verify manifest coverage and SHA-256 hashes before execution, record offline runtime identity, execute only preserved files twice from clean state, compare byte outputs, and replay each preserved fixture.",
+      "suggested_minutes": 45,
+      "relationship": "child"
+    }
+  ],
+  "citations": [],
+  "prior_attempt_ids": [
+    "riemann-hypothesis-2026-09-10-2663f69a-dc14-461d-916c-23eb7eb953d8",
+    "riemann-hypothesis-2026-09-11-26cf91cc-5273-4c12-824f-b26202f8bb24",
+    "riemann-hypothesis-2026-09-11-31afba86-fec7-47fc-ad94-0091d581f8e7",
+    "riemann-hypothesis-2026-09-11-d8c283f2-7b01-4c1f-9dd5-27262375430b",
+    "riemann-hypothesis-2026-09-11-b6eeee9c-2302-4e0a-be66-f8cee387b5e4",
+    "riemann-hypothesis-2026-09-11-34d3ef7a-1998-414c-963e-6741f6308dec",
+    "riemann-hypothesis-2026-09-11-84c3149a-c059-4751-bfd4-7b3c36fa2a42"
+  ],
+  "review_status": "unreviewed"
+}
